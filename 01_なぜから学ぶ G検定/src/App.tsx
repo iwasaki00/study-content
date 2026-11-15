@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import type { Backup, LearningProgress, EvaluationProgress } from "./types";
+import type {
+  Backup,
+  LearningProgress,
+  EvaluationProgress,
+  GeneralizationProgress,
+} from "./types";
 import {
   course,
   lesson,
@@ -12,6 +17,8 @@ import {
 import {
   emptyBackup,
   beginEvaluation,
+  beginGeneralization,
+  completeGeneralization,
   completeEvaluation,
   grade,
   reviewFor,
@@ -37,6 +44,7 @@ import { shippingTrial } from "./data/shippingStory";
 import { EvaluationEpisode } from "./components/EvaluationEpisode";
 import { evaluationQuestions } from "./data/evaluation";
 import { BeginnerGuide } from "./components/BeginnerGuide";
+import { GeneralizationEpisode } from "./components/GeneralizationEpisode";
 const nav = [
   ["⌂", "ホーム"],
   ["▤", "コース"],
@@ -52,7 +60,9 @@ export default function App() {
     [tab, setTab] = useState(0),
     [inLesson, setInLesson] = useState(false),
     [guideOpen, setGuideOpen] = useState(false),
-    [activeLesson, setActiveLesson] = useState<"L003" | "L004">("L003"),
+    [activeLesson, setActiveLesson] = useState<"L003" | "L004" | "L005">(
+      "L003",
+    ),
     [origin, setOrigin] = useState(0),
     [online, setOnline] = useState(navigator.onLine),
     [offlineReady, setOfflineReady] = useState(false),
@@ -139,6 +149,12 @@ export default function App() {
     !!snapshot.evaluation &&
     (!hasLearningRecord(snapshot) ||
       snapshot.evaluation.updatedAt > p.updatedAt);
+  const resumeGeneralization =
+    !!snapshot.generalization &&
+    (!hasLearningRecord(snapshot) ||
+      snapshot.generalization.updatedAt > p.updatedAt) &&
+    (!snapshot.evaluation ||
+      snapshot.generalization.updatedAt > snapshot.evaluation.updatedAt);
   const episodeCount =
     Number(!!p.storySampleAdded) +
     Number(!!p.episode?.grouped) +
@@ -281,6 +297,44 @@ export default function App() {
   function finishEvaluation() {
     if (!ref.current.evaluation?.completed)
       commit(completeEvaluation(ref.current));
+    setInLesson(false);
+    setTab(origin);
+  }
+  function enterGeneralization(restart = false) {
+    const next = beginGeneralization(ref.current, restart);
+    commit({
+      ...next,
+      generalization: {
+        ...next.generalization!,
+        updatedAt: new Date().toISOString(),
+      },
+    });
+    setOrigin(tab);
+    setActiveLesson("L005");
+    setInLesson(true);
+  }
+  function updateGeneralization(change: Partial<GeneralizationProgress>) {
+    const current = ref.current;
+    if (!current.generalization) return;
+    commit({
+      ...current,
+      completions: completionRecords(current),
+      generalization: {
+        ...current.generalization,
+        ...change,
+        updatedAt: new Date().toISOString(),
+      },
+    });
+  }
+  function moveGeneralization(stage: GeneralizationProgress["stage"]) {
+    updateGeneralization({
+      stage,
+      visited: [...new Set([...ref.current.generalization!.visited, stage])],
+    });
+  }
+  function finishGeneralization() {
+    if (!ref.current.generalization?.completed)
+      commit(completeGeneralization(ref.current));
     setInLesson(false);
     setTab(origin);
   }
@@ -743,6 +797,16 @@ export default function App() {
                 <button onClick={() => void load()}>読み込みを再試行</button>
               )}
             </section>
+          ) : inLesson && activeLesson === "L005" && snapshot.generalization ? (
+            <GeneralizationEpisode
+              progress={snapshot.generalization}
+              onMove={moveGeneralization}
+              onPrediction={(prediction) =>
+                updateGeneralization({ prediction })
+              }
+              onFinish={finishGeneralization}
+              onGuide={openGuide}
+            />
           ) : inLesson && activeLesson === "L004" && snapshot.evaluation ? (
             <EvaluationEpisode
               progress={snapshot.evaluation}
@@ -751,6 +815,7 @@ export default function App() {
               onIndex={(questionIndex) => updateEvaluation({ questionIndex })}
               onAnswer={answerEvaluation}
               onFinish={finishEvaluation}
+              onNext={() => enterGeneralization()}
               busy={saving}
               onGuide={openGuide}
             />
@@ -905,11 +970,13 @@ export default function App() {
                         BEGINNER GUIDE <span>第0章から</span>
                       </span>
                       <p className="lesson-number">
-                        {resumeEvaluation
-                          ? "再開する教材：第2話 · モデル評価"
-                          : hasLearningRecord(snapshot)
-                            ? "再開する教材：第1話 · AIの3つの学び方"
-                            : "AIの入り口 · 2つの工場体験"}
+                        {resumeGeneralization
+                          ? "再開する教材：第3話 · どの箱で確かめるか"
+                          : resumeEvaluation
+                            ? "再開する教材：第2話 · モデル評価"
+                            : hasLearningRecord(snapshot)
+                              ? "再開する教材：第1話 · AIの3つの学び方"
+                              : "AIの入り口 · 3つの工場体験"}
                       </p>
                       <h2>
                         まずは、
@@ -924,12 +991,15 @@ export default function App() {
                         <button
                           className="cream"
                           onClick={(event) => {
-                            if (resumeEvaluation) enterEvaluation();
+                            if (resumeGeneralization) enterGeneralization();
+                            else if (resumeEvaluation) enterEvaluation();
                             else if (hasLearningRecord(snapshot)) enter();
                             else openGuide(event);
                           }}
                         >
-                          {hasLearningRecord(snapshot) || snapshot.evaluation
+                          {hasLearningRecord(snapshot) ||
+                          snapshot.evaluation ||
+                          snapshot.generalization
                             ? "続きから学ぶ"
                             : "3分で全体像を見る"}{" "}
                           <span>↗</span>
@@ -939,13 +1009,16 @@ export default function App() {
                           第0章を見る
                         </button>
                         {(hasLearningRecord(snapshot) ||
-                          snapshot.evaluation) && (
+                          snapshot.evaluation ||
+                          snapshot.generalization) && (
                           <button
                             className="hero-revisit"
                             onClick={() =>
-                              resumeEvaluation
-                                ? enterEvaluation(true)
-                                : startOver()
+                              resumeGeneralization
+                                ? enterGeneralization(true)
+                                : resumeEvaluation
+                                  ? enterEvaluation(true)
+                                  : startOver()
                             }
                           >
                             最初から学ぶ
@@ -1056,7 +1129,7 @@ export default function App() {
                     <button onClick={openGuide}>第0章を見る</button>
                   </section>
                   <section className="card">
-                    <span className="tag">公開中 · 2レッスン</span>
+                    <span className="tag">公開中 · 3レッスン</span>
                     <h2>{course.title}</h2>
                     <h3>L003 {lesson.title}</h3>
                     <p>教師あり学習 / 教師なし学習 / 強化学習</p>
@@ -1096,6 +1169,38 @@ export default function App() {
                       </button>
                       {snapshot.evaluation && (
                         <button onClick={() => enterEvaluation(true)}>
+                          最初から学ぶ
+                        </button>
+                      )}
+                    </div>
+                  </section>
+                  <section
+                    className="card generalization-course"
+                    data-lesson="L005"
+                  >
+                    <span className="tag">第3話 · L005 どの箱で確かめるか</span>
+                    <h2>練習では満点。新しい箱では、なぜ間違えた？</h2>
+                    <p>
+                      練習で判定を直してから、初めて見る箱でも確かめます。第2話の「何を数えるか」に続き、今回は「どの箱で確かめるか」を体験します。
+                    </p>
+                    <p>
+                      {snapshot.generalization?.completed
+                        ? "最後まで学習した記録あり"
+                        : snapshot.generalization
+                          ? "途中の場面から再開できます。"
+                          : "予想は任意。答えなくても最後まで進めます。"}
+                    </p>
+                    <div className="controls">
+                      <button
+                        className="primary"
+                        onClick={() => enterGeneralization()}
+                      >
+                        {snapshot.generalization
+                          ? "続きから学ぶ"
+                          : "第3話を始める"}
+                      </button>
+                      {snapshot.generalization && (
+                        <button onClick={() => enterGeneralization(true)}>
                           最初から学ぶ
                         </button>
                       )}
@@ -1290,7 +1395,7 @@ export default function App() {
                 </>
               )}
               <footer className="page-footer">
-                <span>WHY LEARN G · v0.1.7</span>
+                <span>WHY LEARN G · v0.1.8</span>
                 <details>
                   <summary>教材の参照情報</summary>
                   <p>

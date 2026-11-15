@@ -106,6 +106,7 @@ export function EvaluationEpisode({
   onFinish,
   busy,
   onGuide,
+  onNext,
 }: {
   progress: EvaluationProgress;
   attempts: QuestionAttempt[];
@@ -115,6 +116,7 @@ export function EvaluationEpisode({
   onFinish: () => void;
   busy: boolean;
   onGuide: () => void;
+  onNext: () => void;
 }) {
   const heading = useRef<HTMLHeadingElement>(null),
     a = summarizeInspection(sortingA),
@@ -331,6 +333,12 @@ export function EvaluationEpisode({
                 ここで終える
               </button>
             </div>
+            <aside className="episode-next">
+              <p>
+                次は「どの箱で確かめるか」。練習用と、初めて見る箱の成績を比べます。
+              </p>
+              <button onClick={onNext}>第3話を開く</button>
+            </aside>
             {p.completed && (
               <p className="notice">L004を最後まで学習した記録があります。</p>
             )}

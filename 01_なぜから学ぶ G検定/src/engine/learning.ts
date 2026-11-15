@@ -7,7 +7,12 @@ import type {
 } from "../types";
 import { evaluationQuestions } from "../data/evaluation";
 import { newEvaluationProgress, evaluationFinished } from "./evaluation";
-import type { EvaluationProgress } from "../types";
+import type { EvaluationProgress, GeneralizationProgress } from "../types";
+import { generalizationStages } from "../data/generalization";
+import {
+  newGeneralizationProgress,
+  generalizationFinished,
+} from "./generalization";
 import { questions } from "../data/content";
 export const newProgress = (): LearningProgress => ({
   id: "progress-L003",
@@ -227,6 +232,41 @@ export function validateBackup(input: unknown): Backup {
     )
       return fail();
   }
+  if (input.generalization !== undefined) {
+    const g = input.generalization;
+    if (
+      !record(g) ||
+      g.id !== "progress-L005" ||
+      g.lessonId !== "L005" ||
+      !generalizationStages.includes(
+        g.stage as GeneralizationProgress["stage"],
+      ) ||
+      !str(g.sessionId) ||
+      !date(g.updatedAt) ||
+      typeof g.completed !== "boolean" ||
+      ![null, "basic", "refined", "same"].includes(
+        g.prediction as string | null,
+      ) ||
+      !Array.isArray(g.visited) ||
+      !g.visited.every((s) =>
+        generalizationStages.includes(s as GeneralizationProgress["stage"]),
+      ) ||
+      new Set(g.visited).size !== g.visited.length ||
+      !g.visited.includes(g.stage)
+    )
+      return fail();
+    const required = generalizationStages.slice(
+      0,
+      generalizationStages.indexOf(g.stage as GeneralizationProgress["stage"]) +
+        1,
+    );
+    if (
+      !required.every((s) => (g.visited as string[]).includes(s)) ||
+      (g.completed &&
+        !generalizationFinished(g as unknown as GeneralizationProgress))
+    )
+      return fail();
+  }
   if (input.evaluationAttempts !== undefined) {
     if (
       !Array.isArray(input.evaluationAttempts) ||
@@ -302,6 +342,17 @@ export function mergeBackups(current: Backup, incoming: Backup): Backup {
       b.progress.updatedAt > a.progress.updatedAt ? b.progress : a.progress,
     reviews: [...reviews.values()],
     ...mergeEvaluation(a, b),
+    ...(a.generalization || b.generalization
+      ? {
+          generalization: !a.generalization
+            ? b.generalization
+            : !b.generalization
+              ? a.generalization
+              : b.generalization.updatedAt > a.generalization.updatedAt
+                ? b.generalization
+                : a.generalization,
+        }
+      : {}),
   });
 }
 
@@ -338,7 +389,7 @@ function combineCompletions(items: LessonCompletion[]): LessonCompletion[] {
 }
 export function completionRecords(b: Backup): LessonCompletion[] {
   const records = [...(b.completions ?? [])];
-  for (const p of [b.progress, b.evaluation]) {
+  for (const p of [b.progress, b.evaluation, b.generalization]) {
     if (!p?.completed) continue;
     const id = `completion-${p.lessonId}-${p.sessionId}`;
     if (!records.some((c) => c.id === id))
@@ -434,6 +485,29 @@ export function completeLesson(b: Backup): Backup {
     ...b,
     progress: {
       ...b.progress,
+      completed: true,
+      updatedAt: new Date().toISOString(),
+    },
+  };
+  return { ...next, completions: completionRecords(next) };
+}
+
+export function beginGeneralization(b: Backup, restart = false): Backup {
+  if (b.generalization && !restart) return b;
+  return {
+    ...b,
+    completions: completionRecords(b),
+    generalization: newGeneralizationProgress(),
+  };
+}
+export function completeGeneralization(b: Backup): Backup {
+  if (!b.generalization || !generalizationFinished(b.generalization))
+    throw Error("第3話の結末まで確認してください");
+  const next: Backup = {
+    ...b,
+    completions: completionRecords(b),
+    generalization: {
+      ...b.generalization,
       completed: true,
       updatedAt: new Date().toISOString(),
     },

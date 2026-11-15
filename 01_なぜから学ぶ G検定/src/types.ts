@@ -105,7 +105,18 @@ export interface EvaluationProgress {
   updatedAt: string;
   completed: boolean;
 }
+export interface GeneralizationProgress {
+  id: "progress-L005";
+  lessonId: "L005";
+  stage: "intro" | "practice" | "refined" | "comparison" | "ending";
+  visited: GeneralizationProgress["stage"][];
+  prediction: "basic" | "refined" | "same" | null;
+  sessionId: string;
+  updatedAt: string;
+  completed: boolean;
+}
 export interface Backup {
+  generalization?: GeneralizationProgress;
   evaluation?: EvaluationProgress;
   evaluationAttempts?: QuestionAttempt[];
   completions?: LessonCompletion[];
