@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <title>本と箱、つながる学び</title>
+  <ellipse cx="90" cy="155" rx="63" ry="10" fill="#cfdcc4" />
+  <path
+    d="M20 99c24-6 46 1 70 14 24-13 46-20 70-14v45c-24-6-46 1-70 14-24-13-46-20-70-14Z"
+    fill="#fff9e6"
+    stroke="#355b45"
+    stroke-width="4"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M90 113v45M31 112c17-2 33 3 47 10m-47 4c17-2 33 3 47 10m24-14c14-7 30-12 47-10m-47 24c14-7 30-12 47-10"
+    fill="none"
+    stroke="#a5b795"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+  <path
+    d="m61 67 29-15 29 15-29 16Z"
+    fill="#e7bb77"
+    stroke="#6f6648"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+  <path
+    d="m61 67 29 16v31L61 98Z"
+    fill="#c89050"
+    stroke="#6f6648"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+  <path
+    d="m90 83 29-16v31l-29 16Z"
+    fill="#d6a568"
+    stroke="#6f6648"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+  <path d="m79 58 29 15v14l-10 5V78L69 63" fill="#f6e3b3" />
+  <path
+    d="M90 43V28m-37 24L39 40m88 12 14-12"
+    stroke="#6f9370"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+  <circle cx="90" cy="21" r="8" fill="#426d51" />
+  <circle cx="34" cy="35" r="8" fill="#90ad7e" />
+  <circle cx="146" cy="35" r="8" fill="#c3a56b" />
+  <path
+    d="m86 21 3 3 5-6"
+    fill="none"
+    stroke="#f5edcf"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
