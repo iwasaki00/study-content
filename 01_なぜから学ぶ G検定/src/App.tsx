@@ -256,7 +256,11 @@ export default function App() {
     setInLesson(true);
   }
   function enterEvaluation(restart = false) {
-    commit(beginEvaluation(ref.current, restart));
+    const next = beginEvaluation(ref.current, restart);
+    commit({
+      ...next,
+      evaluation: { ...next.evaluation!, updatedAt: new Date().toISOString() },
+    });
     setOrigin(tab);
     setActiveLesson("L004");
     setInLesson(true);
@@ -750,7 +754,7 @@ export default function App() {
               <br />
               理解のはじまり。
             </p>
-            <small>v0.1.7 · この端末に保存</small>
+            <small>v0.1.8 · この端末に保存</small>
           </div>
         </aside>
       )}

@@ -270,7 +270,9 @@ export function GeneralizationEpisode({
               ))}
             </div>
             <Inspector>
-              練習で使った箱とは別の箱だよ。同じロットでも、この2箱は良品だった。練習の成績だけでは、気づけなかったね
+              練習で使った箱とは別の箱だよ。同じロットでも、この
+              {nr.overstopped.length}
+              箱は良品だった。練習の成績だけでは、気づけなかったね
             </Inspector>
             <details className="episode-details">
               <summary>なぜ逆転したのか、詳しく見る</summary>

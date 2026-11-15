@@ -146,7 +146,10 @@ test("resume prediction/result, restart only L005, keep legacy data and round-tr
   await saved(page);
   const selected = await readSnapshot(page);
   await page.reload();
-  await page.getByRole("button", { name: "続きから学ぶ", exact: true }).click();
+  await page
+    .locator(".hero")
+    .getByRole("button", { name: /続きから学ぶ/ })
+    .click();
   await expect(
     page.getByRole("radio", { name: "細かくした判定", exact: true }),
   ).toBeChecked();
@@ -192,13 +195,11 @@ test("resume prediction/result, restart only L005, keep legacy data and round-tr
   await expect(page.locator(".generalization-scores")).toContainText("8/8");
   await back(page);
   await page.getByRole("button", { name: "記録", exact: true }).click();
-  await page
-    .getByLabel("JSONから復元")
-    .setInputFiles({
-      name: "all-three.json",
-      mimeType: "application/json",
-      buffer: Buffer.from(body),
-    });
+  await page.getByLabel("JSONから復元").setInputFiles({
+    name: "all-three.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(body),
+  });
   await page.getByLabel("復元方法").selectOption("replace");
   page.once("dialog", (d) => d.accept());
   await page.getByRole("button", { name: "この内容を復元" }).click();
