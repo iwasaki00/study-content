@@ -209,9 +209,10 @@ test("resume prediction/result, restart only L005, keep legacy data and round-tr
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "どの箱で、確かめた成績？",
   );
-  expect((await readSnapshot(page)).generalization).toEqual(
-    done.generalization,
-  );
+  expect((await readSnapshot(page)).generalization).toEqual({
+    ...done.generalization,
+    updatedAt: expect.any(String),
+  });
 });
 test("L004 ending offers L005 without auto-navigation, and either lesson can resume independently", async ({
   page,
@@ -308,6 +309,13 @@ for (const large of [false, true])
     await check();
     await compare(page);
     await check();
+    if (large)
+      expect(
+        await page
+          .locator(".generalization-scores td")
+          .first()
+          .evaluate((e) => parseFloat(getComputedStyle(e).fontSize)),
+      ).toBeGreaterThanOrEqual(24);
     await shot(page, large ? "reversal-large-text" : "reversal-320");
     await page
       .getByText("なぜ逆転したのか、詳しく見る", { exact: true })

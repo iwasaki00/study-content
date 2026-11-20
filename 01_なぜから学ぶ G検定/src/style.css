@@ -2309,7 +2309,7 @@ select {
 }
 .generalization-picture figcaption {
   margin-top: 0.65rem;
-  color: var(--muted);
+  color: #53665d;
   line-height: 1.65;
 }
 .generalization-headline {
@@ -2413,7 +2413,7 @@ select {
     grid-template-columns: 1fr;
   }
   .generalization-scores {
-    font-size: 0.875rem;
+    font-size: 0.95em;
   }
   .generalization-scores td strong {
     font-size: 1.25rem;

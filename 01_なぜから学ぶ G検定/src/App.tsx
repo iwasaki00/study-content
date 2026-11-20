@@ -259,6 +259,7 @@ export default function App() {
     const next = beginEvaluation(ref.current, restart);
     commit({
       ...next,
+      completions: completionRecords(next),
       evaluation: { ...next.evaluation!, updatedAt: new Date().toISOString() },
     });
     setOrigin(tab);
@@ -308,6 +309,7 @@ export default function App() {
     const next = beginGeneralization(ref.current, restart);
     commit({
       ...next,
+      completions: completionRecords(next),
       generalization: {
         ...next.generalization!,
         updatedAt: new Date().toISOString(),
