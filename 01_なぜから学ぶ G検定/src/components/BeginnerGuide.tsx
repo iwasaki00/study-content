@@ -93,14 +93,20 @@ function DeepDive({
 }
 export function BeginnerGuide({
   onLesson,
+  initialSection,
 }: {
-  onLesson: (lesson: "L003" | "L004") => void;
+  onLesson: (lesson: "L003" | "L004" | "L007") => void;
+  initialSection?: string;
 }) {
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: "instant" });
-  }, []);
+    if (initialSection)
+      document
+        .getElementById(initialSection)
+        ?.scrollIntoView({ block: "start" });
+  }, [initialSection]);
   return (
     <article className="lesson-wrap beginner-guide">
       <p className="eyebrow">BEGINNER GUIDE · 第0章 · 約3分</p>
@@ -179,6 +185,9 @@ export function BeginnerGuide({
             </div>
           </div>
         </div>
+        <button className="guide-deep-entry" onClick={() => onLesson("L007")}>
+          第5話で、写真と層の仕組みを見る
+        </button>
         <p className="guide-note">
           大きな枠の中に小さな枠が入る関係です。すべてのAIが機械学習ではなく、すべての機械学習がディープラーニングでもありません。時代順を表す図ではありません。
         </p>

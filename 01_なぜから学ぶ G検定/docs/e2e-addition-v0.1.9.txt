@@ -1,0 +1,40 @@
+
+> why-learn-g@0.1.9 test:e2e
+> playwright test tests/fairness.spec.ts --reporter=list,./scripts/performance-reporter.mjs
+
+node.exe : [WebServer] (node:14248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+発生場所 行:1 文字:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 18 tests using 1 worker
+
+(node:6940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › tests\fairness.spec.ts:134:1 › 390px: story and four local illustrations, real per-box results, lighting change, fairness and no-quiz completion (3.6s)
+  ok  2 [chromium] › tests\fairness.spec.ts:225:1 › adjusted state resumes from home and returns from related chapter 0 without touching v0.1.8 data (2.2s)
+  ok  3 [chromium] › tests\fairness.spec.ts:261:1 › restart before and after completion is isolated, preserves history and completions, and backup restores L006 (3.4s)
+  ok  4 [chromium] › tests\fairness.spec.ts:318:1 › all four original questions grade correctly, explain every option, retain wrong/retake history, and survive restart (4.4s)
+  ok  5 [chromium] › tests\fairness.spec.ts:370:1 › optional explanations A-E, ordered easy/example/details, numerical model and local sources (3.0s)
+  ok  6 [chromium] › tests\fairness.spec.ts:407:1 › L005 ending offers L006 explicitly and both lessons retain independent resume/restart (2.3s)
+  ok  7 [chromium] › tests\fairness.spec.ts:441:3 › 320px all scenes, images and labels stay inside viewport / enlarged=false (5.9s)
+  ok  8 [chromium] › tests\fairness.spec.ts:441:3 › 320px all scenes, images and labels stay inside viewport / enlarged=true (5.3s)
+  ok  9 [chromium] › tests\fairness.spec.ts:514:1 › offline: all four PNGs, the whole story, optional explanations, completion and reload (3.0s)
+(node:3572) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 10 [webkit-mobile] › tests\fairness.spec.ts:134:1 › 390px: story and four local illustrations, real per-box results, lighting change, fairness and no-quiz completion (6.3s)
+  ok 11 [webkit-mobile] › tests\fairness.spec.ts:225:1 › adjusted state resumes from home and returns from related chapter 0 without touching v0.1.8 data (2.3s)
+  ok 12 [webkit-mobile] › tests\fairness.spec.ts:261:1 › restart before and after completion is isolated, preserves history and completions, and backup restores L006 (3.4s)
+  ok 13 [webkit-mobile] › tests\fairness.spec.ts:318:1 › all four original questions grade correctly, explain every option, retain wrong/retake history, and survive restart (5.5s)
+  ok 14 [webkit-mobile] › tests\fairness.spec.ts:370:1 › optional explanations A-E, ordered easy/example/details, numerical model and local sources (4.3s)
+  ok 15 [webkit-mobile] › tests\fairness.spec.ts:407:1 › L005 ending offers L006 explicitly and both lessons retain independent resume/restart (2.1s)
+  ok 16 [webkit-mobile] › tests\fairness.spec.ts:441:3 › 320px all scenes, images and labels stay inside viewport / enlarged=false (8.2s)
+  ok 17 [webkit-mobile] › tests\fairness.spec.ts:441:3 › 320px all scenes, images and labels stay inside viewport / enlarged=true (10.9s)
+  ok 18 [webkit-mobile] › tests\fairness.spec.ts:514:1 › offline: all four PNGs, the whole story, optional explanations, completion and reload (3.9s)
+
+  18 passed (1.4m)
+Performance evidence: docs/performance-addition-v0.1.9.json

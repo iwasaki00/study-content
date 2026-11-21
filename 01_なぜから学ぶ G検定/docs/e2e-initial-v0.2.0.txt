@@ -1,0 +1,172 @@
+
+> why-learn-g@0.2.0 test:e2e
+> playwright test tests/deep-learning.spec.ts --reporter=list,./scripts/performance-reporter.mjs
+
+node.exe : [WebServer] (node:19960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+発生場所 行:1 文字:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:23056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   1 [chromium] › tests\deep-learning.spec.ts:28:1 › 390px new user: Chapter0 diagram to all seven scenes and optional-free completion (50.6s)
+(node:29880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  2 [chromium] › tests\deep-learning.spec.ts:41:1 › pixel colors derive from actual local PNG and update on keyboard/button selection (1.9s)
+  ok  3 [chromium] › tests\deep-learning.spec.ts:53:1 › network manual steps, auto pause, Chapter0 detour and reload preserve current state (6.6s)
+  ok  4 [chromium] › tests\deep-learning.spec.ts:60:1 › restart, optional-free completion, history, actual backup export and restore keep four old lessons (5.7s)
+  ok  5 [chromium] › tests\deep-learning.spec.ts:70:1 › all five quiz questions and all option explanations, wrong/retake history and restart (8.2s)
+  x   6 [chromium] › tests\deep-learning.spec.ts:84:1 › five optional deep dives close back to same position, and fixed CNN uses real image values (6.6s)
+(node:8860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  7 [chromium] › tests\deep-learning.spec.ts:100:33 › 320px all scenes without overlap/horizontal scroll, enlarged=false (14.9s)
+  ok  8 [chromium] › tests\deep-learning.spec.ts:100:33 › 320px all scenes without overlap/horizontal scroll, enlarged=true (7.6s)
+  ok  9 [chromium] › tests\deep-learning.spec.ts:113:1 › offline main story, all six assets, pixel reading and deep text stay available (4.6s)
+  ok 10 [chromium] › tests\deep-learning.spec.ts:120:1 › course groups, L006 explicit ending link, old resume and home latest L007 resume (2.8s)
+(node:26948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  11 [webkit-mobile] › tests\deep-learning.spec.ts:28:1 › 390px new user: Chapter0 diagram to all seven scenes and optional-free completion (45.5s)
+(node:5488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 12 [webkit-mobile] › tests\deep-learning.spec.ts:41:1 › pixel colors derive from actual local PNG and update on keyboard/button selection (1.9s)
+  ok 13 [webkit-mobile] › tests\deep-learning.spec.ts:53:1 › network manual steps, auto pause, Chapter0 detour and reload preserve current state (5.3s)
+  ok 14 [webkit-mobile] › tests\deep-learning.spec.ts:60:1 › restart, optional-free completion, history, actual backup export and restore keep four old lessons (6.2s)
+  ok 15 [webkit-mobile] › tests\deep-learning.spec.ts:70:1 › all five quiz questions and all option explanations, wrong/retake history and restart (6.5s)
+  x  16 [webkit-mobile] › tests\deep-learning.spec.ts:84:1 › five optional deep dives close back to same position, and fixed CNN uses real image values (5.2s)
+(node:12908) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 17 [webkit-mobile] › tests\deep-learning.spec.ts:100:33 › 320px all scenes without overlap/horizontal scroll, enlarged=false (10.6s)
+  ok 18 [webkit-mobile] › tests\deep-learning.spec.ts:100:33 › 320px all scenes without overlap/horizontal scroll, enlarged=true (12.3s)
+  ok 19 [webkit-mobile] › tests\deep-learning.spec.ts:113:1 › offline main story, all six assets, pixel reading and deep text stay available (13.4s)
+  ok 20 [webkit-mobile] › tests\deep-learning.spec.ts:120:1 › course groups, L006 explicit ending link, old resume and home latest L007 resume (11.3s)
+
+
+  1) [chromium] › tests\deep-learning.spec.ts:28:1 › 390px new user: Chapter0 diagram to all seven scenes and optional-free completion
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '3分で全体像を見る', exact: true })
+
+
+       7 | import {fairnessQuestions} from "../src/data/fairness";
+       8 | import {deepQuestions,deepDives,pixelSource} from "../src/data/deepLearning";
+    >  9 | const click=async(p:Page,name:string)=>p.getByRole("button",{name,exact:true}).click();
+         |                                                                                ^
+      10 | const card=(p:Page)=>p.locator(".deep-course");
+      11 | async function open(p:Page){await click(p,"コース");await card(p).getByRole("button",{name:/第5話を始める|続きから学ぶ/}).click();await saved(p);}
+      12 | async function photos(p:Page){await click(p,"写真を見てみる");await p.getByRole("button",{name:/^猫の写真/}).click();await click(p,"ほかの写真も見てみる");await p.getByRole("button",{name:/^耳が垂れた猫/}).click();await click(p,"AIには写真がどう見えている？");}
+        at click (C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\deep-learning.spec.ts:9:80)
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\deep-learning.spec.ts:30:29
+
+    Error Context: test-results\deep-learning-390px-new-us-616b3-nd-optional-free-completion-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deep-learning-390px-new-us-616b3-nd-optional-free-completion-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deep-learning-390px-new-us-616b3-nd-optional-free-completion-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\deep-learning.spec.ts:84:1 › five optional deep dives close back to same position, and fixed CNN uses real image values
+
+    Error: locator.click: Error: strict mode violation: locator('.deep-dive').filter({ has: getByText('D05：CNN（畳み込みニューラルネットワーク）とは？', { exact: true }) }).locator('summary') resolved to 2 elements:
+        1) <summary>D05：CNN（畳み込みニューラルネットワーク）とは？</summary> aka getByText('D05：CNN（畳み込みニューラルネットワーク）とは？')
+        2) <summary>最初の位置の計算を詳しく見る</summary> aka getByText('最初の位置の計算を詳しく見る')
+
+    Call log:
+      - waiting for locator('.deep-dive').filter({ has: getByText('D05：CNN（畳み込みニューラルネットワーク）とは？', { exact: true }) }).locator('summary')
+
+
+      85 |  await page.setViewportSize({width:390,height:844});await page.goto("/");await open(page);await ending(page);await click(page,"もっと詳しく学ぶ");
+      86 |  for(const item of deepDives){
+    > 87 |   const fold=page.locator(".deep-dive").filter({has:page.getByText(item.id.slice(-3)+"："+item.title,{exact:true})});await fold.locator("summary").click();
+         |                                                                                                                                                   ^
+      88 |   await expect(fold).toContainText(item.detail);
+      89 |   if(item.id==="L007-D05"){
+      90 |    await expect(page.getByTestId("filter-first")).toBeVisible();
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\deep-learning.spec.ts:87:147
+
+    Error Context: test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [webkit-mobile] › tests\deep-learning.spec.ts:28:1 › 390px new user: Chapter0 diagram to all seven scenes and optional-free completion
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '3分で全体像を見る', exact: true })
+
+
+       7 | import {fairnessQuestions} from "../src/data/fairness";
+       8 | import {deepQuestions,deepDives,pixelSource} from "../src/data/deepLearning";
+    >  9 | const click=async(p:Page,name:string)=>p.getByRole("button",{name,exact:true}).click();
+         |                                                                                ^
+      10 | const card=(p:Page)=>p.locator(".deep-course");
+      11 | async function open(p:Page){await click(p,"コース");await card(p).getByRole("button",{name:/第5話を始める|続きから学ぶ/}).click();await saved(p);}
+      12 | async function photos(p:Page){await click(p,"写真を見てみる");await p.getByRole("button",{name:/^猫の写真/}).click();await click(p,"ほかの写真も見てみる");await p.getByRole("button",{name:/^耳が垂れた猫/}).click();await click(p,"AIには写真がどう見えている？");}
+        at click (C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\deep-learning.spec.ts:9:80)
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\deep-learning.spec.ts:30:29
+
+    Error Context: test-results\deep-learning-390px-new-us-616b3-nd-optional-free-completion-webkit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deep-learning-390px-new-us-616b3-nd-optional-free-completion-webkit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deep-learning-390px-new-us-616b3-nd-optional-free-completion-webkit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [webkit-mobile] › tests\deep-learning.spec.ts:84:1 › five optional deep dives close back to same position, and fixed CNN uses real image values
+
+    Error: locator.click: Error: strict mode violation: locator('.deep-dive').filter({ has: getByText('D05：CNN（畳み込みニューラルネットワーク）とは？', { exact: true }) }).locator('summary') resolved to 2 elements:
+        1) <summary>D05：CNN（畳み込みニューラルネットワーク）とは？</summary> aka getByText('D05：CNN（畳み込みニューラルネットワーク）とは？')
+        2) <summary>最初の位置の計算を詳しく見る</summary> aka getByText('最初の位置の計算を詳しく見る')
+
+    Call log:
+      - waiting for locator('.deep-dive').filter({ has: getByText('D05：CNN（畳み込みニューラルネットワーク）とは？', { exact: true }) }).locator('summary')
+
+
+      85 |  await page.setViewportSize({width:390,height:844});await page.goto("/");await open(page);await ending(page);await click(page,"もっと詳しく学ぶ");
+      86 |  for(const item of deepDives){
+    > 87 |   const fold=page.locator(".deep-dive").filter({has:page.getByText(item.id.slice(-3)+"："+item.title,{exact:true})});await fold.locator(":scope > summary").click();
+         |                                                                                                                                                   ^
+      88 |   await expect(fold).toContainText(item.detail);
+      89 |   if(item.id==="L007-D05"){
+      90 |    await expect(page.getByTestId("filter-first")).toBeVisible();
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\deep-learning.spec.ts:87:147
+
+    Error Context: test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-webkit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-webkit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-webkit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › tests\deep-learning.spec.ts:28:1 › 390px new user: Chapter0 diagram to all seven scenes and optional-free completion
+    [chromium] › tests\deep-learning.spec.ts:84:1 › five optional deep dives close back to same position, and fixed CNN uses real image values
+    [webkit-mobile] › tests\deep-learning.spec.ts:28:1 › 390px new user: Chapter0 diagram to all seven scenes and optional-free completion
+    [webkit-mobile] › tests\deep-learning.spec.ts:84:1 › five optional deep dives close back to same position, and fixed CNN uses real image values
+  16 passed (4.2m)
+Performance evidence: docs/performance-addition-v0.2.0.json

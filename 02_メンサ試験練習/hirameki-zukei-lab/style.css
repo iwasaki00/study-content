@@ -126,3 +126,66 @@ footer { font-size:.75rem; gap:14px; flex-wrap:wrap; }
   .layer-a,.layer-b { display:none; }
   .layer-result { opacity:1; }
 }
+
+/* v0.2.0 */
+.adaptive-button { display:block; width:100%; padding:16px; margin-top:12px; border:2px solid #40694b; border-radius:10px; background:#edf2e6; text-align:left; }
+.adaptive-button strong,.adaptive-button span { display:block; }
+.adaptive-button span { margin-top:6px; font-size:.8125rem; }
+.level-filter { display:flex; gap:12px; align-items:center; margin:16px 0; font-size:.875rem; }
+.level-filter select { min-height:44px; padding:8px 32px 8px 12px; border:1px solid #40694b; border-radius:8px; background:#fffef9; font:inherit; }
+.adaptive-note { font-size:.8125rem; padding:8px 0; }
+.recipe-demo { flex-wrap:wrap; gap:4px; }
+.recipe-demo .demo-tile { flex:0 1 65px; min-width:0; border:2px solid #a6b5a3; border-radius:6px; padding:3px; }
+.recipe-demo .demo-tile:last-child { border:3px double #40694b; background:#edf2e6; }
+.debug-reasons { white-space:pre-wrap; overflow-wrap:anywhere; font-size:.75rem; }
+.focus-part-a .part-b,.focus-part-b .part-a { opacity:.12; }
+.focus-part-a .part-a,.focus-part-b .part-b { color:#8c3d19; }
+.focus-paint .kind-moving-flag .grid { opacity:.3; }
+.pair-demo .demo-tile:last-child,.strip-demo .demo-tile:last-child { border-bottom:3px double #40694b; background:#edf2e6; border-radius:5px; }
+.analysis-card { margin:16px 0; padding:16px 12px; border:1px solid #ced9c8; border-radius:10px; background:#fbfcf5; }
+.analysis-card h3 { font-size:1rem; margin-bottom:12px; }
+.analysis-card p { font-size:.875rem; line-height:1.8; margin-top:8px; }
+.analysis-card dl { margin:0; font-size:.875rem; }
+.analysis-card dl>div { padding:8px 0; border-bottom:1px solid #e1e7da; }
+.analysis-card dt { color:#5b7062; }
+.analysis-card dd { margin:3px 0 0; font-weight:600; }
+.weakest-note,.analysis-policy { font-size:.875rem; line-height:1.8; margin-top:18px; padding:12px; background:#edf2e6; border-radius:8px; }
+.analysis-policy summary { cursor:pointer; min-height:44px; padding:8px 0; }
+.legacy-note { border-top:1px solid #d8e1d2; padding-top:8px; }
+.challenge-rules { font-size:.875rem; line-height:1.8; }
+.challenge-hud { display:flex; justify-content:space-between; align-items:center; gap:12px; background:#eef3e8; border:1px solid #cad9c4; border-radius:9px; padding:8px 12px; margin-bottom:7px; }
+.challenge-hud span { font-size:.75rem; margin-right:10px; }
+.countdown { font:700 1.5rem ui-monospace,SFMono-Regular,Consolas,monospace; font-variant-numeric:tabular-nums; }
+.challenge-hud p { font-size:.75rem; line-height:1.6; }
+.time-warning { font-size:.875rem; font-weight:700; color:#8c3d19; }
+.time-warning:not(:empty) { padding:4px 0 8px; }
+.challenge-hud+.time-warning+.progress { margin:9px 0; }
+.challenge-history { margin-top:24px; }
+.challenge-history h3 { font-size:1rem; margin-bottom:10px; }
+.challenge-history p { font-size:.875rem; }
+.history-button { display:block; width:100%; min-height:48px; padding:12px; background:#fffef9; border:1px solid #d5dfcd; border-radius:8px; font-size:.875rem; text-align:left; margin:8px 0; }
+.challenge-score { font-size:1.5rem; font-weight:700; margin:20px 0 10px; }
+.challenge-results article { padding:18px 0; border-top:1px solid #d5dfcd; }
+.challenge-results h3 { font-size:1rem; margin:5px 0; }
+.challenge-results strong { display:block; font-size:1rem; }
+.challenge-results p { font-size:.875rem; margin:6px 0 12px; }
+.challenge-results button { display:block; margin-top:12px; }
+.detail-choices { margin-top:12px; }
+.detail-choices .choice { cursor:default; }
+.kind-moving-flag .active-slot { stroke:#40694b; stroke-width:2.5; stroke-dasharray:3 2; }
+.focus-outer .kind-moving-flag .grid { opacity:.2; }
+.focus-position .outer { opacity:.25; }
+.focus-position .active-slot { stroke:#a4572c; stroke-width:3; }
+.transform-ccw45 .motion-source .outer { animation-name:turn-ccw45; }
+.transform-cw135 .motion-source .outer { animation-name:turn-cw135; }
+.transform-diagonal .motion-source .outer { animation-name:mirror-diagonal; }
+.transform-ccw .whole-rotation { transform-origin:50% 50%; animation:turn-back 2.6s ease-in-out both; }
+@keyframes turn-ccw45 { 0%,15%{transform:rotate(0)}70%,100%{transform:rotate(-45deg)} }
+@keyframes turn-cw135 { 0%,15%{transform:rotate(0)}70%,100%{transform:rotate(135deg)} }
+@keyframes mirror-diagonal { 0%,15%{transform:matrix(1,0,0,1,0,0)}70%,100%{transform:matrix(0,1,1,0,0,0)} }
+@media(prefers-reduced-motion:reduce) {
+  .transform-ccw45 .motion-source .outer { animation:none!important; transform:rotate(-45deg); }
+  .transform-cw135 .motion-source .outer { animation:none!important; transform:rotate(135deg); }
+  .transform-diagonal .motion-source .outer { animation:none!important; transform:matrix(0,1,1,0,0,0); }
+  .transform-ccw .whole-rotation { animation:none!important; transform:rotate(-90deg); }
+}

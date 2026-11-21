@@ -1,0 +1,288 @@
+{
+  "status": "passed",
+  "workers": "Configured single worker; timeout remains 45000ms",
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2768,
+      "screenshotCount": 6,
+      "screenshotMs": 502,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 68
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 83
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 76
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 98
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 82
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 95
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "第1話を演習なしで完了した後、再開して任意演習へ進める",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3009,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2931,
+      "screenshotCount": 6,
+      "screenshotMs": 671,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 101
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 98
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 107
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 133
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 99
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 133
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "第1話を演習なしで完了した後、再開して任意演習へ進める",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2962,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2690,
+      "screenshotCount": 6,
+      "screenshotMs": 518,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 103
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 59
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 106
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 89
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 71
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 90
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "第1話を演習なしで完了した後、再開して任意演習へ進める",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2479,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5969,
+      "screenshotCount": 6,
+      "screenshotMs": 1491,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 115
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 150
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 118
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 307
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 420
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 381
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "第1話を演習なしで完了した後、再開して任意演習へ進める",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3527,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5859,
+      "screenshotCount": 6,
+      "screenshotMs": 1695,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 185
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 133
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 153
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 425
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 393
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 406
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "第1話を演習なしで完了した後、再開して任意演習へ進める",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4033,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5471,
+      "screenshotCount": 6,
+      "screenshotMs": 1396,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 194
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 133
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 148
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 336
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 335
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 250
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "第1話を演習なしで完了した後、再開して任意演習へ進める",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3847,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    }
+  ]
+}

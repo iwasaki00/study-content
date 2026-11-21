@@ -1,0 +1,134 @@
+{
+  "status": "passed",
+  "workers": "Configured single worker; timeout remains 45000ms",
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "five optional deep dives close back to same position, and fixed CNN uses real image values",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3171,
+      "screenshotCount": 1,
+      "screenshotMs": 119,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 119
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 10488,
+      "screenshotCount": 3,
+      "screenshotMs": 611,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 170
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 133
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 308
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 9553,
+      "screenshotCount": 3,
+      "screenshotMs": 887,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 186
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 217
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 484
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "five optional deep dives close back to same position, and fixed CNN uses real image values",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5969,
+      "screenshotCount": 1,
+      "screenshotMs": 719,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 719
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 11556,
+      "screenshotCount": 3,
+      "screenshotMs": 1009,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 498
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 247
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 264
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 12296,
+      "screenshotCount": 3,
+      "screenshotMs": 1903,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 392
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 490
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 1021
+        }
+      ]
+    }
+  ]
+}

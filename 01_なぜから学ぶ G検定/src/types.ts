@@ -115,7 +115,31 @@ export interface GeneralizationProgress {
   updatedAt: string;
   completed: boolean;
 }
+export interface FairnessProgress {
+  id: "progress-L006";
+  lessonId: "L006";
+  stage:
+    | "intro"
+    | "results"
+    | "investigation"
+    | "lighting"
+    | "bias"
+    | "fairness"
+    | "ending"
+    | "quiz"
+    | "details";
+  visited: FairnessProgress["stage"][];
+  lightingAdjusted: boolean;
+  questionIndex: number;
+  sessionId: string;
+  updatedAt: string;
+  completed: boolean;
+}
 export interface Backup {
+  deepLearning?: DeepLearningProgress;
+  deepLearningAttempts?: QuestionAttempt[];
+  fairness?: FairnessProgress;
+  fairnessAttempts?: QuestionAttempt[];
   generalization?: GeneralizationProgress;
   evaluation?: EvaluationProgress;
   evaluationAttempts?: QuestionAttempt[];
@@ -126,4 +150,31 @@ export interface Backup {
   progress: LearningProgress;
   reviews: ReviewState[];
   settings: Settings;
+}
+export interface DeepLearningProgress {
+  id: "progress-L007";
+  lessonId: "L007";
+  stage:
+    | "intro"
+    | "photos"
+    | "pixels"
+    | "layers"
+    | "training"
+    | "uses"
+    | "ending"
+    | "quiz"
+    | "details";
+  visited: DeepLearningProgress["stage"][];
+  examplesShown: boolean;
+  animal: number | null;
+  pixelExpanded: boolean;
+  pixelX: number;
+  pixelY: number;
+  networkStep: number;
+  networkSeen: boolean;
+  flow: "training" | "inference";
+  questionIndex: number;
+  sessionId: string;
+  updatedAt: string;
+  completed: boolean;
 }

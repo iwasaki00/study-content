@@ -1,0 +1,26 @@
+[
+  {
+    "name": "shelter-welcome",
+    "prompt": "Use case: illustration-story. Asset type: Japanese beginner educational app scene, original landscape pixel art. Reference image is STYLE ONLY, not scene or character. Match chunky stepped dark outlines, visible square pixel blocks, muted sage green, warm cream and ochre limited palette of reference. New animal shelter entrance/workroom, not factory. A friendly young adult woman shelter worker with short dark-brown bob hair, round simple eyes, muted teal apron over cream shirt, concerned at computer filled with tiny cat and dog photo thumbnails. A ginger tabby cat and tan floppy-eared dog nearby. Large readable subjects, uncluttered 3:2 horizontal composition. No writing, symbols, numbers, labels, logos, watermarks. Establish this new staff design for future scenes."
+  },
+  {
+    "name": "animal-photos",
+    "prompt": "Use case: illustration-story. New original asset, reference STYLE and animal identity only. Chunky true square-pixel art, dark stepped outlines, muted sage, ochre, cream, no smooth vectors. Landscape diptych, two evenly sized square animal photo portraits separated by a plain cream gutter. LEFT ginger tabby cat with upright triangular ears, short round muzzle, whiskers, looking forward. RIGHT tan dog with clearly floppy ears and longer muzzle, looking forward. Simple muted green background behind each, both faces large, equal scale, no staff, no furniture. Intended interactive educational photo comparison. No writing, labels, numbers, arrows, logos. Two distinct animals clearly recognizable at phone width."
+  },
+  {
+    "name": "varied-animals",
+    "prompt": "Use case: illustration-story. Original educational pixel art triptych, same palette and chunky stepped square pixels as reference, no smooth outlines. Three equally sized square photo portraits in one horizontal row with thin cream gutters. LEFT a gray folded-ear CAT: clearly rounded face, short muzzle, whiskers, small ears folded forward down, recognizably cat. CENTER a tan erect-eared DOG with long muzzle, tall upright ears, recognizably shepherd-type dog. RIGHT a ginger CAT partially hidden behind a green cushion, one eye and part of face obscured, other eye and whiskers visible. This demonstrates ears alone do not identify species, and occlusion hides clues. Simple sage backgrounds, heads large and centered in each third. No writing, labels, numbers, arrows, or symbols."
+  },
+  {
+    "name": "cat-pixel-source",
+    "prompt": "Use case: scientific-educational. Original SQUARE pixel-art cat photo for a real interactive pixel-color magnifier. Reference style and cat identity only. A single ginger tabby CAT face front-on, upright ears, clear whiskers, cream muzzle, dark round eyes, fills most of frame against flat sage-green background. Genuine coarse low-resolution aesthetic as if drawn on a 64x64 pixel grid and enlarged nearest-neighbor: crisp square blocks, stepped dark outlines, limited warm cream ochre brown mutedgreen palette, no gradients or blur. No numbers, text, gridlines, inset, arrows, or UI. Only this single cat photo: the app will compute magnification and pixel values from this actual PNG."
+  },
+  {
+    "name": "shelter-ending",
+    "prompt": "Use case: illustration-story. New original ending scene in same animal shelter, same staff EXACT identity as reference: short dark brown bob hair, cream shirt, muted teal apron, simple oval eyes. Landscape 3:2 pixel art with chunky stepped dark outlines and visible square pixels, warm cream sage ochre palette. Staff calmly at tidy work desk, manually checking two paper animal photo prints against computer animal thumbnails, ginger cat snoozing nearby and tan floppy-eared dog resting. Smaller neat stack of photos after some human organizing, relaxed but attentive expression, not celebrating automation. Different composition from opening: side view of worker and desk near window, entrance out of shot. No writing, numbers, verdicts, arrows, ticks, logos or watermark."
+  },
+  {
+    "name": "dl-applications",
+    "prompt": "Use case: scientific-educational. Original pixel-art four-panel horizontal strip for beginner app, matching reference square pixels, dark stepped outlines, warm cream sage ochre. Four equal square panels clearly separated by narrow cream gutters. Panel1 camera taking a photo of a ginger cat, small monitor shows same cat image. Panel2 shelter staff with short brown bob creamshirt tealapron speaking into microphone, visible simple audio waveform on monitor (no writing). Panel3 open book and computer showing several plain horizontal lines suggesting text, no legible letters. Panel4 artist tablet and monitor showing newly made imaginary landscape and document side by side, hand holding stylus. These are concrete small scenes of image recognition, speech recognition, text processing, and image/text generation, NOT generic icons. No titles, letters, labels, numbers, checkmarks, arrows, logos. Distinct silhouettes readable in square crop."
+  }
+]

@@ -1,0 +1,42 @@
+
+> why-learn-g@0.1.9 test:e2e
+> playwright test tests/episode.spec.ts --grep 390px：専門知識|第1話を演習なしで完了した後 --repeat-each=3 --reporter=list,./scripts/performance-reporter.mjs
+
+node.exe : [WebServer] (node:7512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+発生場所 行:1 文字:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 12 tests using 1 worker
+
+(node:26828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › tests\episode.spec.ts:17:1 › 390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える (2.8s)
+  ok  2 [chromium] › tests\episode.spec.ts:118:1 › 第1話を演習なしで完了した後、再開して任意演習へ進める (3.0s)
+(node:31164) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  3 [chromium] › tests\episode.spec.ts:17:1 › 390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える (2.9s)
+  ok  4 [chromium] › tests\episode.spec.ts:118:1 › 第1話を演習なしで完了した後、再開して任意演習へ進める (3.0s)
+(node:29992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  5 [chromium] › tests\episode.spec.ts:17:1 › 390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える (2.7s)
+  ok  6 [chromium] › tests\episode.spec.ts:118:1 › 第1話を演習なしで完了した後、再開して任意演習へ進める (2.5s)
+(node:31404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  7 [webkit-mobile] › tests\episode.spec.ts:17:1 › 390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える (6.0s)
+  ok  8 [webkit-mobile] › tests\episode.spec.ts:118:1 › 第1話を演習なしで完了した後、再開して任意演習へ進める (3.5s)
+(node:18308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  9 [webkit-mobile] › tests\episode.spec.ts:17:1 › 390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える (5.9s)
+  ok 10 [webkit-mobile] › tests\episode.spec.ts:118:1 › 第1話を演習なしで完了した後、再開して任意演習へ進める (4.0s)
+(node:24420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 11 [webkit-mobile] › tests\episode.spec.ts:17:1 › 390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える (5.5s)
+  ok 12 [webkit-mobile] › tests\episode.spec.ts:118:1 › 第1話を演習なしで完了した後、再開して任意演習へ進める (3.8s)
+
+  12 passed (53.3s)
+Performance evidence: docs/performance-repeat-v0.1.9.json

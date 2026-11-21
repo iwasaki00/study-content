@@ -1,0 +1,12 @@
+
+> why-learn-g@0.1.9 test
+> vitest run
+
+
+ RUN  v4.1.12 C:/_wk/github/study-content/01_なぜから学ぶ G検定
+
+
+ Test Files  7 passed (7)
+      Tests  62 passed (62)
+   Start at  06:24:10
+   Duration  615ms (transform 771ms, setup 0ms, import 1.72s, tests 245ms, environment 1ms)

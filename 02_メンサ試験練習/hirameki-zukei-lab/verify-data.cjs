@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const context = { window: {}, Intl, Date };
-for (const file of ['questions.js','questions-extra.js','learning.js']) vm.runInNewContext(fs.readFileSync(path.join(__dirname,file),'utf8'), context);
+for (const file of ['questions.js','questions-extra.js','questions-v02.js','questions-v03.js','adaptive.js','shapes.js','challenge.js','learning.js','analytics.js','explanations.js']) vm.runInNewContext(fs.readFileSync(path.join(__dirname,file),'utf8'), context);
 const qs = JSON.parse(JSON.stringify(context.window.LabQuestions));
 const learning = context.window.LabLearning;
 const get = id => qs.find(q=>q.id===id);
@@ -16,7 +16,7 @@ const base = [[25,20],[78,20],[60,42],[43,42],[43,63],[57,63],[57,80],[25,80]];
 function points(s) {
   return base.map(([x,y])=>{
     x=(x-50)*(s.mirror?-1:1); y-=50;
-    for(let i=0;i<s.direction/90;i++) [x,y]=[-y,x];
+    const angle=s.direction*Math.PI/180; const xx=x*Math.cos(angle)-y*Math.sin(angle); y=x*Math.sin(angle)+y*Math.cos(angle); x=xx; x=Math.round(x*1e6)/1e6||0; y=Math.round(y*1e6)/1e6||0;
     return [x,y];
   });
 }
@@ -25,9 +25,9 @@ const operations = {
   mx: ([x,y])=>[-x,y], my: ([x,y])=>[x,-y]
 };
 const visualKey = s => s.kind==='flag' ? JSON.stringify([points(s),s.paint,s.count]) : JSON.stringify(s);
-assert.deepEqual(qs.map(q=>q.id),Array.from({length:24},(_,i)=>`Q${String(i+1).padStart(2,'0')}`));
-for(const category of learning.categories)assert.equal(qs.filter(q=>q.category===category).length,6);
-assert.equal(qs.filter(q=>!q.practice).length,23);
+assert.deepEqual(qs.map(q=>q.id),Array.from({length:64},(_,i)=>`Q${String(i+1).padStart(2,'0')}`));
+for(const category of learning.categories)assert.equal(qs.filter(q=>q.category===category).length,16);
+assert.equal(qs.filter(q=>!q.practice).length,63);
 for(const q of qs){
   assert.equal(q.choices.length,4,q.id);
   assert.equal(new Set(q.choices.map(c=>c.id)).size,4,q.id);
@@ -115,7 +115,7 @@ for(const id of ['Q02','Q03','Q21','Q22','Q23']){
 }
 assert.equal(get('Q02').ruleFamily,get('Q03').ruleFamily);
 assert.equal(get('Q02').ruleFamily,get('Q22').ruleFamily);
-console.log('DATA PASS: 24 questions, independent geometry/count/set audit, competing simple rules, original 3 regression');
+console.log('DATA PASS: 64 questions, independent geometry/count/set audit, competing simple rules, original 3 regression');
 
 function memory(initial) { let value=initial?JSON.stringify(initial):null;return {getItem:()=>value,setItem:(key,next)=>{value=next;},get value(){return value;}}; }
 let date=new Date('2026-11-20T14:59:00Z');
@@ -154,10 +154,10 @@ const review=learning.create(qs,memory(),clock);
 review.record('Q01','a',0);assert.equal(Object.keys(review.data.records).length,0);
 review.record('Q02','a',0);review.record('Q02','a',0);
 assert.equal(Object.keys(review.data.reviews).length,1);
-let plan=review.reviewPlan();assert.equal(plan[0].originId,'Q02');assert.equal(plan[0].questionId,'Q22');
+let plan=review.reviewPlan();assert.equal(plan[0].originId,'Q02');assert.equal(plan[0].questionId,'Q59');
 const firstJSON=JSON.stringify(review.data.records.Q02.first);
 review.record('Q22','b',1,{originId:'Q02'});assert(review.data.reviews.Q02);assert.equal(Object.keys(review.data.reviews).length,1);
-review.record('Q03','d',0);
+review.record('Q03','d',0);review.record('Q59','c',1,{originId:'Q02'});
 plan=review.reviewPlan();assert.equal(plan[0].questionId,'Q02','fallback original when all similar questions answered');
 review.record('Q02','b',0,{originId:'Q02'});assert.equal(Object.keys(review.data.reviews).length,0);
 assert.equal(JSON.stringify(review.data.records.Q02.first),firstJSON);
@@ -169,4 +169,4 @@ assert(!broken.persistent);assert.equal(broken.daily().ids.length,5);broken.reco
 const malformed=learning.create(qs,memory({version:1,records:{},reviews:{},lastSeen:{},daily:{'2026-11-21':{ids:['Q01','Q01'],answers:{}}}}),clock);
 assert.equal(malformed.daily().ids.length,5);
 console.log('LEARNING PASS: JST dates, fixed 5, resume, rollover, scarce unseen, oldest seen, related review/fallback/dedup, immutable first attempt, storage failure');
-module.exports={qs,learning};
+module.exports={qs,learning,context};

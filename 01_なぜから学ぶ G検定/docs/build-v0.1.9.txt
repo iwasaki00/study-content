@@ -1,0 +1,14 @@
+
+> why-learn-g@0.1.9 build
+> tsc -b && vite build && node scripts/build-sw.mjs
+
+vite v7.3.8 building client environment for production...
+transforming...
+✓ 53 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.82 kB │ gzip:   0.50 kB
+dist/assets/index-DukO8zeD.css   35.18 kB │ gzip:   8.22 kB
+dist/assets/index-CPdfCGJw.js   394.16 kB │ gzip: 120.05 kB
+✓ built in 1.20s
+Service Worker: 22 assets, why-g-640379a789e0

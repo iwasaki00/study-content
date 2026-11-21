@@ -1,3 +1,10 @@
+import type { DeepLearningProgress } from "../types";
+import {
+  deepStages,
+  deepStoryStages,
+  deepQuestions,
+} from "../data/deepLearning";
+import { newDeepLearningProgress, deepLearningFinished } from "./deepLearning";
 import type {
   Backup,
   LearningProgress,
@@ -14,6 +21,13 @@ import {
   generalizationFinished,
 } from "./generalization";
 import { questions } from "../data/content";
+import type { FairnessProgress } from "../types";
+import {
+  fairnessStages,
+  fairnessStoryStages,
+  fairnessQuestions,
+} from "../data/fairness";
+import { newFairnessProgress, fairnessFinished } from "./fairness";
 export const newProgress = (): LearningProgress => ({
   id: "progress-L003",
   lessonId: "L003",
@@ -294,6 +308,136 @@ export function validateBackup(input: unknown): Backup {
       ids.add(a.id);
     }
   }
+  if (input.fairness !== undefined) {
+    const f = input.fairness;
+    if (
+      !record(f) ||
+      f.id !== "progress-L006" ||
+      f.lessonId !== "L006" ||
+      !fairnessStages.includes(f.stage as FairnessProgress["stage"]) ||
+      !str(f.sessionId) ||
+      !date(f.updatedAt) ||
+      typeof f.completed !== "boolean" ||
+      typeof f.lightingAdjusted !== "boolean" ||
+      !int(f.questionIndex, 3) ||
+      !Array.isArray(f.visited) ||
+      !f.visited.every((s) =>
+        fairnessStages.includes(s as FairnessProgress["stage"]),
+      ) ||
+      new Set(f.visited).size !== f.visited.length ||
+      !f.visited.includes(f.stage)
+    )
+      return fail();
+    const index = fairnessStages.indexOf(f.stage as FairnessProgress["stage"]);
+    const required = fairnessStoryStages.slice(
+      0,
+      Math.min(index + 1, fairnessStoryStages.length),
+    );
+    if (
+      !required.every((s) => (f.visited as string[]).includes(s)) ||
+      (index >= 4 && !f.lightingAdjusted) ||
+      (f.lightingAdjusted && !(f.visited as string[]).includes("lighting")) ||
+      (f.completed && !fairnessFinished(f as unknown as FairnessProgress))
+    )
+      return fail();
+  }
+  if (input.fairnessAttempts !== undefined) {
+    if (
+      !Array.isArray(input.fairnessAttempts) ||
+      input.fairnessAttempts.length > 100000
+    )
+      return fail();
+    const ids = new Set();
+    for (const a of input.fairnessAttempts) {
+      if (
+        !record(a) ||
+        !str(a.id) ||
+        ids.has(a.id) ||
+        !str(a.sessionId) ||
+        !date(a.answeredAt) ||
+        !int(a.selected, 3)
+      )
+        return fail();
+      const q = fairnessQuestions.find((q) => q.id === a.questionId);
+      if (
+        !q ||
+        a.version !== q.version ||
+        a.correct !== (a.selected === q.answer)
+      )
+        return fail();
+      ids.add(a.id);
+    }
+  }
+
+  if (input.deepLearning !== undefined) {
+    const d = input.deepLearning;
+    if (
+      !record(d) ||
+      d.id !== "progress-L007" ||
+      d.lessonId !== "L007" ||
+      !deepStages.includes(d.stage as DeepLearningProgress["stage"]) ||
+      !str(d.sessionId) ||
+      !date(d.updatedAt) ||
+      typeof d.completed !== "boolean" ||
+      typeof d.examplesShown !== "boolean" ||
+      typeof d.pixelExpanded !== "boolean" ||
+      !(d.animal === null || int(d.animal, 4)) ||
+      !int(d.pixelX, 31) ||
+      !int(d.pixelY, 31) ||
+      typeof d.networkSeen !== "boolean" ||
+      !int(d.networkStep, 4) ||
+      !["training", "inference"].includes(d.flow as string) ||
+      !int(d.questionIndex, 4) ||
+      !Array.isArray(d.visited) ||
+      !d.visited.every((v) =>
+        deepStages.includes(v as DeepLearningProgress["stage"]),
+      ) ||
+      new Set(d.visited).size !== d.visited.length ||
+      !d.visited.includes(d.stage)
+    )
+      return fail();
+    const index = deepStages.indexOf(d.stage as DeepLearningProgress["stage"]);
+    const required = deepStoryStages.slice(
+      0,
+      Math.min(index + 1, deepStoryStages.length),
+    );
+    if (
+      !required.every((v) => (d.visited as string[]).includes(v)) ||
+      (index >= 2 && (!d.examplesShown || d.animal === null)) ||
+      (index >= 3 && !d.pixelExpanded) ||
+      (index >= 4 && !d.networkSeen) ||
+      (d.completed &&
+        !deepLearningFinished(d as unknown as DeepLearningProgress))
+    )
+      return fail();
+  }
+  if (input.deepLearningAttempts !== undefined) {
+    if (
+      !Array.isArray(input.deepLearningAttempts) ||
+      input.deepLearningAttempts.length > 100000
+    )
+      return fail();
+    const seen = new Set();
+    for (const a of input.deepLearningAttempts) {
+      if (
+        !record(a) ||
+        !str(a.id) ||
+        seen.has(a.id) ||
+        !str(a.sessionId) ||
+        !date(a.answeredAt) ||
+        !int(a.selected, 3)
+      )
+        return fail();
+      const q = deepQuestions.find((q) => q.id === a.questionId);
+      if (
+        !q ||
+        a.version !== q.version ||
+        a.correct !== (a.selected === q.answer)
+      )
+        return fail();
+      seen.add(a.id);
+    }
+  }
   // Return a detached, validated snapshot; UI never mutates the imported object.
   return structuredClone(input) as unknown as Backup;
 }
@@ -342,6 +486,8 @@ export function mergeBackups(current: Backup, incoming: Backup): Backup {
       b.progress.updatedAt > a.progress.updatedAt ? b.progress : a.progress,
     reviews: [...reviews.values()],
     ...mergeEvaluation(a, b),
+    ...mergeFairness(a, b),
+    ...mergeDeepLearning(a, b),
     ...(a.generalization || b.generalization
       ? {
           generalization: !a.generalization
@@ -389,7 +535,13 @@ function combineCompletions(items: LessonCompletion[]): LessonCompletion[] {
 }
 export function completionRecords(b: Backup): LessonCompletion[] {
   const records = [...(b.completions ?? [])];
-  for (const p of [b.progress, b.evaluation, b.generalization]) {
+  for (const p of [
+    b.progress,
+    b.evaluation,
+    b.generalization,
+    b.fairness,
+    b.deepLearning,
+  ]) {
     if (!p?.completed) continue;
     const id = `completion-${p.lessonId}-${p.sessionId}`;
     if (!records.some((c) => c.id === id))
@@ -513,4 +665,126 @@ export function completeGeneralization(b: Backup): Backup {
     },
   };
   return { ...next, completions: completionRecords(next) };
+}
+
+export function beginFairness(b: Backup, restart = false): Backup {
+  if (b.fairness && !restart) return b;
+  return {
+    ...b,
+    completions: completionRecords(b),
+    fairness: newFairnessProgress(),
+  };
+}
+export function completeFairness(b: Backup): Backup {
+  if (!b.fairness || !fairnessFinished(b.fairness))
+    throw Error("第4話の結末まで確認してください");
+  const next: Backup = {
+    ...b,
+    completions: completionRecords(b),
+    fairness: {
+      ...b.fairness,
+      completed: true,
+      updatedAt: new Date().toISOString(),
+    },
+  };
+  return { ...next, completions: completionRecords(next) };
+}
+function mergeFairness(a: Backup, b: Backup): Partial<Backup> {
+  const result: Partial<Backup> = {};
+  if (a.fairness || b.fairness)
+    result.fairness = !a.fairness
+      ? b.fairness
+      : !b.fairness
+        ? a.fairness
+        : b.fairness.updatedAt > a.fairness.updatedAt
+          ? b.fairness
+          : a.fairness;
+  if (a.fairnessAttempts || b.fairnessAttempts) {
+    const attempts = new Map((a.fairnessAttempts ?? []).map((x) => [x.id, x]));
+    for (const item of b.fairnessAttempts ?? []) {
+      const old = attempts.get(item.id);
+      if (
+        old &&
+        (
+          [
+            "id",
+            "questionId",
+            "version",
+            "selected",
+            "correct",
+            "answeredAt",
+            "sessionId",
+          ] as const
+        ).some((key) => old[key] !== item[key])
+      )
+        throw Error("第4話の同じ履歴IDに異なる内容があるため統合できません。");
+      attempts.set(item.id, item);
+    }
+    result.fairnessAttempts = [...attempts.values()].sort((x, y) =>
+      x.answeredAt.localeCompare(y.answeredAt),
+    );
+  }
+  return result;
+}
+
+export function beginDeepLearning(b: Backup, restart = false): Backup {
+  if (b.deepLearning && !restart) return b;
+  return {
+    ...b,
+    completions: completionRecords(b),
+    deepLearning: newDeepLearningProgress(),
+  };
+}
+export function completeDeepLearning(b: Backup): Backup {
+  if (!b.deepLearning || !deepLearningFinished(b.deepLearning))
+    throw Error("第5話の体験と結末を確認してください");
+  const next: Backup = {
+    ...b,
+    completions: completionRecords(b),
+    deepLearning: {
+      ...b.deepLearning,
+      completed: true,
+      updatedAt: new Date().toISOString(),
+    },
+  };
+  return { ...next, completions: completionRecords(next) };
+}
+function mergeDeepLearning(a: Backup, b: Backup): Partial<Backup> {
+  const result: Partial<Backup> = {};
+  if (a.deepLearning || b.deepLearning)
+    result.deepLearning = !a.deepLearning
+      ? b.deepLearning
+      : !b.deepLearning
+        ? a.deepLearning
+        : b.deepLearning.updatedAt > a.deepLearning.updatedAt
+          ? b.deepLearning
+          : a.deepLearning;
+  if (a.deepLearningAttempts || b.deepLearningAttempts) {
+    const attempts = new Map(
+      (a.deepLearningAttempts ?? []).map((x) => [x.id, x]),
+    );
+    for (const item of b.deepLearningAttempts ?? []) {
+      const old = attempts.get(item.id);
+      if (
+        old &&
+        (
+          [
+            "id",
+            "questionId",
+            "version",
+            "selected",
+            "correct",
+            "answeredAt",
+            "sessionId",
+          ] as const
+        ).some((key) => old[key] !== item[key])
+      )
+        throw Error("第5話の同じ履歴IDに異なる内容があるため統合できません。");
+      attempts.set(item.id, item);
+    }
+    result.deepLearningAttempts = [...attempts.values()].sort((x, y) =>
+      x.answeredAt.localeCompare(y.answeredAt),
+    );
+  }
+  return result;
 }

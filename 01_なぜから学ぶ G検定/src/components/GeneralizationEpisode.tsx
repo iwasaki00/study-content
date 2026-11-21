@@ -115,12 +115,14 @@ export function GeneralizationEpisode({
   onPrediction,
   onFinish,
   onGuide,
+  onNext,
 }: {
   progress: GeneralizationProgress;
   onMove: (stage: GeneralizationProgress["stage"]) => void;
   onPrediction: (value: GeneralizationProgress["prediction"]) => void;
   onFinish: () => void;
   onGuide: () => void;
+  onNext: () => void;
 }) {
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
@@ -338,6 +340,12 @@ export function GeneralizationEpisode({
             <button className="primary story-action" onClick={onFinish}>
               ここで終える
             </button>
+            <aside className="episode-next">
+              <p>
+                次は、同じ判定を別の検査ラインで試します。使う場所が変わったら、何を確かめればよいでしょう。
+              </p>
+              <button onClick={onNext}>第4話を開く</button>
+            </aside>
             {p.completed && (
               <p className="notice">L005を最後まで学習した記録があります。</p>
             )}

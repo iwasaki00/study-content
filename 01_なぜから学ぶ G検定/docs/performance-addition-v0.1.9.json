@@ -1,0 +1,302 @@
+{
+  "status": "passed",
+  "workers": "Configured single worker; timeout remains 45000ms",
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "390px: story and four local illustrations, real per-box results, lighting change, fairness and no-quiz completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3600,
+      "screenshotCount": 5,
+      "screenshotMs": 586,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 76
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 102
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 177
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 138
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 93
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "adjusted state resumes from home and returns from related chapter 0 without touching v0.1.8 data",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2170,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "restart before and after completion is isolated, preserves history and completions, and backup restores L006",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3428,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "all four original questions grade correctly, explain every option, retain wrong/retake history, and survive restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4372,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "optional explanations A-E, ordered easy/example/details, numerical model and local sources",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2989,
+      "screenshotCount": 1,
+      "screenshotMs": 215,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 215
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "L005 ending offers L006 explicitly and both lessons retain independent resume/restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2280,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes, images and labels stay inside viewport / enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5881,
+      "screenshotCount": 2,
+      "screenshotMs": 197,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 119
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 78
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes, images and labels stay inside viewport / enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5341,
+      "screenshotCount": 2,
+      "screenshotMs": 349,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 177
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 172
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "offline: all four PNGs, the whole story, optional explanations, completion and reload",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3030,
+      "screenshotCount": 1,
+      "screenshotMs": 124,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 124
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px: story and four local illustrations, real per-box results, lighting change, fairness and no-quiz completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6317,
+      "screenshotCount": 5,
+      "screenshotMs": 1233,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 257
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 213
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 399
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 230
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 134
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "adjusted state resumes from home and returns from related chapter 0 without touching v0.1.8 data",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2331,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "restart before and after completion is isolated, preserves history and completions, and backup restores L006",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3396,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "all four original questions grade correctly, explain every option, retain wrong/retake history, and survive restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5515,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "optional explanations A-E, ordered easy/example/details, numerical model and local sources",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4310,
+      "screenshotCount": 1,
+      "screenshotMs": 565,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 565
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "L005 ending offers L006 explicitly and both lessons retain independent resume/restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2150,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes, images and labels stay inside viewport / enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8239,
+      "screenshotCount": 2,
+      "screenshotMs": 391,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 255
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 136
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes, images and labels stay inside viewport / enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 10936,
+      "screenshotCount": 2,
+      "screenshotMs": 822,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 492
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 330
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "offline: all four PNGs, the whole story, optional explanations, completion and reload",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3855,
+      "screenshotCount": 1,
+      "screenshotMs": 193,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 193
+        }
+      ]
+    }
+  ]
+}

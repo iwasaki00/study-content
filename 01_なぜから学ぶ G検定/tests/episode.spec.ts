@@ -112,12 +112,25 @@ test("390px：専門知識・クイズ・詳細設定なしで3方式を体験�
   expect(data.progress.completed).toBe(true);
   expect(data.completions).toHaveLength(1);
   expect(data.progress.visited).toEqual([0]);
+  expect(errors).toEqual([]);
+});
+
+test("第1話を演習なしで完了した後、再開して任意演習へ進める", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await firstBox(page);
+  await page
+    .getByRole("button", { name: "検査済みの箱を見本に加える" })
+    .click();
+  await finishEpisode(page);
+  await page.getByRole("button", { name: "ここで終える", exact: true }).click();
+  await saved(page);
   await page.reload();
   await page.getByRole("button", { name: "続きから学ぶ" }).click();
   await heading(page, "トラックが来た。");
   await page.getByRole("button", { name: "試験問題で確認する" }).click();
   await expect(page.getByRole("radio")).toHaveCount(4);
-  expect(errors).toEqual([]);
 });
 
 test("搬送記録の操作前後・条件切替後を再開し、最初から学ぶで今回の3体験だけ初期化", async ({

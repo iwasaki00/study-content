@@ -1,9 +1,14 @@
+import type { DeepLearningProgress } from "./types";
+import { beginDeepLearning, completeDeepLearning } from "./engine/learning";
+import { DeepLearningEpisode } from "./components/DeepLearningEpisode";
+import { deepQuestions } from "./data/deepLearning";
 import { useEffect, useRef, useState } from "react";
 import type {
   Backup,
   LearningProgress,
   EvaluationProgress,
   GeneralizationProgress,
+  FairnessProgress,
 } from "./types";
 import {
   course,
@@ -18,6 +23,8 @@ import {
   emptyBackup,
   beginEvaluation,
   beginGeneralization,
+  beginFairness,
+  completeFairness,
   completeGeneralization,
   completeEvaluation,
   grade,
@@ -45,6 +52,8 @@ import { EvaluationEpisode } from "./components/EvaluationEpisode";
 import { evaluationQuestions } from "./data/evaluation";
 import { BeginnerGuide } from "./components/BeginnerGuide";
 import { GeneralizationEpisode } from "./components/GeneralizationEpisode";
+import { FairnessEpisode } from "./components/FairnessEpisode";
+import { fairnessQuestions } from "./data/fairness";
 const nav = [
   ["⌂", "ホーム"],
   ["▤", "コース"],
@@ -60,9 +69,9 @@ export default function App() {
     [tab, setTab] = useState(0),
     [inLesson, setInLesson] = useState(false),
     [guideOpen, setGuideOpen] = useState(false),
-    [activeLesson, setActiveLesson] = useState<"L003" | "L004" | "L005">(
-      "L003",
-    ),
+    [activeLesson, setActiveLesson] = useState<
+      "L003" | "L004" | "L005" | "L006" | "L007"
+    >("L003"),
     [origin, setOrigin] = useState(0),
     [online, setOnline] = useState(navigator.onLine),
     [offlineReady, setOfflineReady] = useState(false),
@@ -74,7 +83,12 @@ export default function App() {
     scroll: 0,
     element: null as HTMLElement | null,
   });
-  function openGuide(event?: { currentTarget: EventTarget | null }) {
+  const [guideSection, setGuideSection] = useState<string>();
+  function openGuide(
+    event?: { currentTarget: EventTarget | null },
+    section?: string,
+  ) {
+    setGuideSection(section);
     guideReturn.current = {
       scroll: window.scrollY,
       element:
@@ -91,13 +105,14 @@ export default function App() {
       guideReturn.current.element?.focus({ preventScroll: true });
     });
   }
-  function guideLesson(id: "L003" | "L004") {
+  function guideLesson(id: "L003" | "L004" | "L007") {
     if (inLesson && activeLesson === id) {
       closeGuide();
       return;
     }
     setGuideOpen(false);
     if (id === "L003") enter();
+    else if (id === "L007") enterDeepLearning();
     else enterEvaluation();
   }
   const ref = useRef(snapshot),
@@ -143,7 +158,10 @@ export default function App() {
     };
   }, []);
   const totalAttempts =
-    snapshot.attempts.length + (snapshot.evaluationAttempts?.length ?? 0);
+    snapshot.attempts.length +
+    (snapshot.evaluationAttempts?.length ?? 0) +
+    (snapshot.fairnessAttempts?.length ?? 0) +
+    (snapshot.deepLearningAttempts?.length ?? 0);
   const p = snapshot.progress;
   const resumeEvaluation =
     !!snapshot.evaluation &&
@@ -155,6 +173,22 @@ export default function App() {
       snapshot.generalization.updatedAt > p.updatedAt) &&
     (!snapshot.evaluation ||
       snapshot.generalization.updatedAt > snapshot.evaluation.updatedAt);
+  const resumeFairness =
+    !!snapshot.fairness &&
+    (!hasLearningRecord(snapshot) ||
+      snapshot.fairness.updatedAt > p.updatedAt) &&
+    (!snapshot.evaluation ||
+      snapshot.fairness.updatedAt > snapshot.evaluation.updatedAt) &&
+    (!snapshot.generalization ||
+      snapshot.fairness.updatedAt > snapshot.generalization.updatedAt);
+  const resumeDeepLearning =
+    !!snapshot.deepLearning &&
+    [
+      hasLearningRecord(snapshot) ? p : undefined,
+      snapshot.evaluation,
+      snapshot.generalization,
+      snapshot.fairness,
+    ].every((old) => !old || snapshot.deepLearning!.updatedAt >= old.updatedAt);
   const episodeCount =
     Number(!!p.storySampleAdded) +
     Number(!!p.episode?.grouped) +
@@ -344,6 +378,132 @@ export default function App() {
     setInLesson(false);
     setTab(origin);
   }
+  function enterFairness(restart = false, quiz = false) {
+    const next = beginFairness(ref.current, restart);
+    const f = next.fairness!;
+    commit({
+      ...next,
+      completions: completionRecords(next),
+      fairness: {
+        ...f,
+        ...(quiz && f.visited.includes("ending")
+          ? {
+              stage: "quiz" as const,
+              visited: [...new Set([...f.visited, "quiz" as const])],
+            }
+          : {}),
+        updatedAt: new Date().toISOString(),
+      },
+    });
+    setOrigin(tab);
+    setActiveLesson("L006");
+    setInLesson(true);
+  }
+  function updateFairness(change: Partial<FairnessProgress>) {
+    const current = ref.current;
+    if (!current.fairness) return;
+    commit({
+      ...current,
+      completions: completionRecords(current),
+      fairness: {
+        ...current.fairness,
+        ...change,
+        updatedAt: new Date().toISOString(),
+      },
+    });
+  }
+  function moveFairness(stage: FairnessProgress["stage"]) {
+    updateFairness({
+      stage,
+      visited: [...new Set([...ref.current.fairness!.visited, stage])],
+    });
+  }
+  function answerFairness(choice: number) {
+    const current = ref.current,
+      f = current.fairness!;
+    const a = grade(
+      fairnessQuestions[f.questionIndex].id,
+      choice,
+      f.sessionId,
+      fairnessQuestions,
+    );
+    commit({
+      ...current,
+      completions: completionRecords(current),
+      fairnessAttempts: [...(current.fairnessAttempts ?? []), a],
+      fairness: { ...f, updatedAt: a.answeredAt },
+    });
+  }
+  function finishFairness() {
+    if (!ref.current.fairness?.completed) commit(completeFairness(ref.current));
+    setInLesson(false);
+    setTab(origin);
+  }
+
+  function enterDeepLearning(restart = false, quiz = false) {
+    const next = beginDeepLearning(ref.current, restart),
+      d = next.deepLearning!;
+    commit({
+      ...next,
+      completions: completionRecords(next),
+      deepLearning: {
+        ...d,
+        ...(quiz && d.visited.includes("ending")
+          ? {
+              stage: "quiz" as const,
+              visited: [...new Set([...d.visited, "quiz" as const])],
+            }
+          : {}),
+        updatedAt: new Date().toISOString(),
+      },
+    });
+    setOrigin(tab);
+    setActiveLesson("L007");
+    setInLesson(true);
+  }
+  function updateDeepLearning(change: Partial<DeepLearningProgress>) {
+    const b = ref.current;
+    if (!b.deepLearning) return;
+    commit({
+      ...b,
+      completions: completionRecords(b),
+      deepLearning: {
+        ...b.deepLearning,
+        ...change,
+        ...(change.networkStep === 4 ? { networkSeen: true } : {}),
+        updatedAt: new Date().toISOString(),
+      },
+    });
+  }
+  function moveDeepLearning(stage: DeepLearningProgress["stage"]) {
+    updateDeepLearning({
+      stage,
+      visited: [...new Set([...ref.current.deepLearning!.visited, stage])],
+    });
+  }
+  function answerDeepLearning(choice: number) {
+    const b = ref.current,
+      d = b.deepLearning!;
+    const a = grade(
+      deepQuestions[d.questionIndex].id,
+      choice,
+      d.sessionId,
+      deepQuestions,
+    );
+    commit({
+      ...b,
+      completions: completionRecords(b),
+      deepLearningAttempts: [...(b.deepLearningAttempts ?? []), a],
+      deepLearning: { ...d, updatedAt: a.answeredAt },
+    });
+  }
+  function finishDeepLearning() {
+    if (!ref.current.deepLearning?.completed)
+      commit(completeDeepLearning(ref.current));
+    setInLesson(false);
+    setTab(origin);
+  }
+
   function move(scene: number) {
     updateProgress({
       scene,
@@ -756,7 +916,7 @@ export default function App() {
               <br />
               理解のはじまり。
             </p>
-            <small>v0.1.8 · この端末に保存</small>
+            <small>v0.2.0 · この端末に保存</small>
           </div>
         </aside>
       )}
@@ -794,7 +954,9 @@ export default function App() {
               : "オフライン教材：初回取得中（本番ビルド時）"}
           </span>
         </div>
-        {guideOpen && <BeginnerGuide onLesson={guideLesson} />}
+        {guideOpen && (
+          <BeginnerGuide onLesson={guideLesson} initialSection={guideSection} />
+        )}
         <div hidden={guideOpen}>
           {!ready ? (
             <section className="card">
@@ -803,6 +965,31 @@ export default function App() {
                 <button onClick={() => void load()}>読み込みを再試行</button>
               )}
             </section>
+          ) : inLesson && activeLesson === "L007" && snapshot.deepLearning ? (
+            <DeepLearningEpisode
+              progress={snapshot.deepLearning}
+              attempts={snapshot.deepLearningAttempts ?? []}
+              onChange={updateDeepLearning}
+              onMove={moveDeepLearning}
+              onAnswer={answerDeepLearning}
+              onFinish={finishDeepLearning}
+              onGuide={(e) => openGuide(e, "guide-dl")}
+              busy={saving}
+              suspended={guideOpen}
+            />
+          ) : inLesson && activeLesson === "L006" && snapshot.fairness ? (
+            <FairnessEpisode
+              progress={snapshot.fairness}
+              attempts={snapshot.fairnessAttempts ?? []}
+              onMove={moveFairness}
+              onNext={() => enterDeepLearning()}
+              onAdjust={() => updateFairness({ lightingAdjusted: true })}
+              onIndex={(questionIndex) => updateFairness({ questionIndex })}
+              onAnswer={answerFairness}
+              onFinish={finishFairness}
+              onGuide={(event) => openGuide(event, "guide-exam")}
+              busy={saving}
+            />
           ) : inLesson && activeLesson === "L005" && snapshot.generalization ? (
             <GeneralizationEpisode
               progress={snapshot.generalization}
@@ -811,6 +998,7 @@ export default function App() {
                 updateGeneralization({ prediction })
               }
               onFinish={finishGeneralization}
+              onNext={() => enterFairness()}
               onGuide={openGuide}
             />
           ) : inLesson && activeLesson === "L004" && snapshot.evaluation ? (
@@ -976,13 +1164,17 @@ export default function App() {
                         BEGINNER GUIDE <span>第0章から</span>
                       </span>
                       <p className="lesson-number">
-                        {resumeGeneralization
-                          ? "再開する教材：第3話 · どの箱で確かめるか"
-                          : resumeEvaluation
-                            ? "再開する教材：第2話 · モデル評価"
-                            : hasLearningRecord(snapshot)
-                              ? "再開する教材：第1話 · AIの3つの学び方"
-                              : "AIの入り口 · 3つの工場体験"}
+                        {resumeDeepLearning
+                          ? "再開する教材：第5話 · 写真と層の仕組み"
+                          : resumeFairness
+                            ? "再開する教材：第4話 · 条件の違いと公平性"
+                            : resumeGeneralization
+                              ? "再開する教材：第3話 · どの箱で確かめるか"
+                              : resumeEvaluation
+                                ? "再開する教材：第2話 · モデル評価"
+                                : hasLearningRecord(snapshot)
+                                  ? "再開する教材：第1話 · AIの3つの学び方"
+                                  : "AIの入り口 · 工場と動物保護施設で体験"}
                       </p>
                       <h2>
                         まずは、
@@ -997,7 +1189,10 @@ export default function App() {
                         <button
                           className="cream"
                           onClick={(event) => {
-                            if (resumeGeneralization) enterGeneralization();
+                            if (resumeDeepLearning) enterDeepLearning();
+                            else if (resumeFairness) enterFairness();
+                            else if (resumeGeneralization)
+                              enterGeneralization();
                             else if (resumeEvaluation) enterEvaluation();
                             else if (hasLearningRecord(snapshot)) enter();
                             else openGuide(event);
@@ -1005,26 +1200,34 @@ export default function App() {
                         >
                           {hasLearningRecord(snapshot) ||
                           snapshot.evaluation ||
-                          snapshot.generalization
+                          snapshot.generalization ||
+                          snapshot.fairness ||
+                          snapshot.deepLearning
                             ? "続きから学ぶ"
                             : "3分で全体像を見る"}{" "}
                           <span>↗</span>
                         </button>
-                        <span>全体像 → 気になるところ → 工場で体験</span>
+                        <span>全体像 → 気になるところ → 物語で体験</span>
                         <button className="hero-revisit" onClick={openGuide}>
                           第0章を見る
                         </button>
                         {(hasLearningRecord(snapshot) ||
                           snapshot.evaluation ||
-                          snapshot.generalization) && (
+                          snapshot.generalization ||
+                          snapshot.fairness ||
+                          snapshot.deepLearning) && (
                           <button
                             className="hero-revisit"
                             onClick={() =>
-                              resumeGeneralization
-                                ? enterGeneralization(true)
-                                : resumeEvaluation
-                                  ? enterEvaluation(true)
-                                  : startOver()
+                              resumeDeepLearning
+                                ? enterDeepLearning(true)
+                                : resumeFairness
+                                  ? enterFairness(true)
+                                  : resumeGeneralization
+                                    ? enterGeneralization(true)
+                                    : resumeEvaluation
+                                      ? enterEvaluation(true)
+                                      : startOver()
                             }
                           >
                             最初から学ぶ
@@ -1134,8 +1337,9 @@ export default function App() {
                     </p>
                     <button onClick={openGuide}>第0章を見る</button>
                   </section>
+                  <h2 className="course-group">機械学習の基礎編 · 工場の4話</h2>
                   <section className="card">
-                    <span className="tag">公開中 · 3レッスン</span>
+                    <span className="tag">基礎編 · 第1話</span>
                     <h2>{course.title}</h2>
                     <h3>L003 {lesson.title}</h3>
                     <p>教師あり学習 / 教師なし学習 / 強化学習</p>
@@ -1212,30 +1416,110 @@ export default function App() {
                       )}
                     </div>
                   </section>
-                  <section className="card">
-                    <h3>これからの教材</h3>
+                  <section className="card fairness-course" data-lesson="L006">
+                    <span className="tag">第4話 · L006</span>
+                    <h2>同じ箱なのに、場所が変わるとAIが間違える？</h2>
                     <p>
-                      ニューラルネットワーク <span className="tag">準備中</span>
+                      別の検査ラインで同じAIを試し、照明を変えて結果を見比べます。使う条件と、人に関わる公平性を考える物語です。
+                    </p>
+                    <p>
+                      {snapshot.fairness?.completed
+                        ? "最後まで学習した記録あり"
+                        : snapshot.fairness
+                          ? "途中の場面から再開できます。"
+                          : "専門用語は体験のあと。4問の演習は任意です。"}
+                    </p>
+                    <div className="controls">
+                      <button
+                        className="primary"
+                        onClick={() => enterFairness()}
+                      >
+                        {snapshot.fairness ? "続きから学ぶ" : "第4話を始める"}
+                      </button>
+                      {snapshot.fairness && (
+                        <button onClick={() => enterFairness(true)}>
+                          最初から学ぶ
+                        </button>
+                      )}
+                    </div>
+                  </section>
+
+                  <h2 className="course-group">
+                    ディープラーニング編 · 写真から広がる学び
+                  </h2>
+                  <section className="card deep-course" data-lesson="L007">
+                    <span className="tag">第5話 · L007</span>
+                    <h2>AIはどうやって猫と犬を見分けるの？</h2>
+                    <p>
+                      動物保護施設で写真整理を手伝い、画素を拡大したり、層の流れを動かしたりして仕組みをつかみます。専門知識は不要。演習は最後に選べます。
+                    </p>
+                    <p>
+                      {snapshot.deepLearning?.completed
+                        ? "最後まで学習した記録あり"
+                        : snapshot.deepLearning
+                          ? "途中の場面と操作状態から再開できます。"
+                          : "第0章や工場編を読まずに始めても大丈夫です。"}
+                    </p>
+                    <div className="controls">
+                      <button
+                        className="primary"
+                        onClick={() => enterDeepLearning()}
+                      >
+                        {snapshot.deepLearning
+                          ? "続きから学ぶ"
+                          : "第5話を始める"}
+                      </button>
+                      {snapshot.deepLearning && (
+                        <button onClick={() => enterDeepLearning(true)}>
+                          最初から学ぶ
+                        </button>
+                      )}
+                    </div>
+                  </section>
+                </>
+              )}
+              {tab === 2 && (
+                <>
+                  <section className="card">
+                    <span className="tag">L003 / オリジナル12問</span>
+                    <h2>学習方式を使い分けよう</h2>
+                    <p>
+                      理由理解・比較判断・事例応用の12問。各選択肢に解説を用意しました。新しい演習を始めても過去の回答履歴は残ります。
+                    </p>
+                    <div className="controls">
+                      <button className="primary" onClick={startQuiz}>
+                        新しい演習を始める
+                      </button>
+                      <button onClick={() => enter(7)}>
+                        現在の演習を続ける
+                      </button>
+                    </div>
+                    <p>
+                      今回の回答：{answered} / 12問 · 正解 {correct}問
                     </p>
                   </section>
                 </>
               )}
               {tab === 2 && (
-                <section className="card">
-                  <span className="tag">L003 / オリジナル12問</span>
-                  <h2>学習方式を使い分けよう</h2>
-                  <p>
-                    理由理解・比較判断・事例応用の12問。各選択肢に解説を用意しました。新しい演習を始めても過去の回答履歴は残ります。
-                  </p>
-                  <div className="controls">
-                    <button className="primary" onClick={startQuiz}>
-                      新しい演習を始める
-                    </button>
-                    <button onClick={() => enter(7)}>現在の演習を続ける</button>
-                  </div>
-                  <p>
-                    今回の回答：{answered} / 12問 · 正解 {correct}問
-                  </p>
+                <section className="card fairness-exercise">
+                  <h2>第4話 · データの偏りと公平性</h2>
+                  <p>物語のあとに選べるオリジナル4問です。</p>
+                  <button onClick={() => enterFairness(false, true)}>
+                    {snapshot.fairness?.visited.includes("ending")
+                      ? "第4話の演習を開く"
+                      : "第4話を体験してから演習へ"}
+                  </button>
+                </section>
+              )}
+              {tab === 2 && (
+                <section className="card deep-exercise">
+                  <h2>第5話 · 写真とディープラーニング</h2>
+                  <p>本編のあとに選べるオリジナル5問です。</p>
+                  <button onClick={() => enterDeepLearning(false, true)}>
+                    {snapshot.deepLearning?.visited.includes("ending")
+                      ? "第5話の演習を開く"
+                      : "第5話を体験してから演習へ"}
+                  </button>
                 </section>
               )}
               {tab === 3 && (
@@ -1344,6 +1628,50 @@ export default function App() {
                         ))}
                     </ul>
                   </section>
+                  <section className="card deep-history">
+                    <h2>L007の記録</h2>
+                    <p>
+                      {snapshot.deepLearning?.completed
+                        ? "最後まで学習"
+                        : snapshot.deepLearning
+                          ? "学習中"
+                          : "未開始"}{" "}
+                      · 回答履歴 {snapshot.deepLearningAttempts?.length ?? 0}件
+                    </p>
+                    <ul>
+                      {[...(snapshot.deepLearningAttempts ?? [])]
+                        .reverse()
+                        .map((a) => (
+                          <li key={a.id}>
+                            {a.questionId} v{a.version} · {"ABCD"[a.selected]} ·{" "}
+                            {a.correct ? "正解" : "不正解"} ·{" "}
+                            {new Date(a.answeredAt).toLocaleString("ja-JP")}
+                          </li>
+                        ))}
+                    </ul>
+                  </section>
+                  <section className="card fairness-history">
+                    <h2>L006の記録</h2>
+                    <p>
+                      {snapshot.fairness?.completed
+                        ? "最後まで学習"
+                        : snapshot.fairness || snapshot.deepLearning
+                          ? "学習中"
+                          : "未開始"}{" "}
+                      · 回答履歴 {(snapshot.fairnessAttempts ?? []).length}件
+                    </p>
+                    <ul>
+                      {[...(snapshot.fairnessAttempts ?? [])]
+                        .reverse()
+                        .map((a) => (
+                          <li key={a.id}>
+                            {a.questionId} v{a.version} · {"ABCD"[a.selected]} ·{" "}
+                            {a.correct ? "正解" : "不正解"} ·{" "}
+                            {new Date(a.answeredAt).toLocaleString("ja-JP")}
+                          </li>
+                        ))}
+                    </ul>
+                  </section>
                   <section className="card">
                     <h2>バックアップ</h2>
                     <p>
@@ -1401,7 +1729,7 @@ export default function App() {
                 </>
               )}
               <footer className="page-footer">
-                <span>WHY LEARN G · v0.1.8</span>
+                <span>WHY LEARN G · v0.2.0</span>
                 <details>
                   <summary>教材の参照情報</summary>
                   <p>

@@ -1,0 +1,106 @@
+
+> why-learn-g@0.2.0 test:e2e
+> playwright test tests/deep-learning.spec.ts --reporter=list,./scripts/performance-reporter.mjs
+
+node.exe : [WebServer] (node:30368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+発生場所 行:1 文字:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:24520) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › tests\deep-learning.spec.ts:134:1 › 390px new user: Chapter0 diagram to all seven scenes and optional-free completion (4.3s)
+  ok  2 [chromium] › tests\deep-learning.spec.ts:189:1 › pixel colors derive from actual local PNG and update on keyboard/button selection (2.3s)
+  ok  3 [chromium] › tests\deep-learning.spec.ts:249:1 › network manual steps, auto pause, Chapter0 detour and reload preserve current state (5.1s)
+  ok  4 [chromium] › tests\deep-learning.spec.ts:279:1 › restart, optional-free completion, history, actual backup export and restore keep four old lessons (4.6s)
+  ok  5 [chromium] › tests\deep-learning.spec.ts:333:1 › all five quiz questions and all option explanations, wrong/retake history and restart (5.4s)
+  x   6 [chromium] › tests\deep-learning.spec.ts:376:1 › five optional deep dives close back to same position, and fixed CNN uses real image values (48.2s)
+(node:6744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  7 [chromium] › tests\deep-learning.spec.ts:447:3 › 320px all scenes without overlap/horizontal scroll, enlarged=false (5.6s)
+  ok  8 [chromium] › tests\deep-learning.spec.ts:447:3 › 320px all scenes without overlap/horizontal scroll, enlarged=true (8.3s)
+  ok  9 [chromium] › tests\deep-learning.spec.ts:509:1 › offline main story, all six assets, pixel reading and deep text stay available (5.4s)
+  ok 10 [chromium] › tests\deep-learning.spec.ts:553:1 › course groups, L006 explicit ending link, old resume and home latest L007 resume (3.0s)
+(node:4744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 11 [webkit-mobile] › tests\deep-learning.spec.ts:134:1 › 390px new user: Chapter0 diagram to all seven scenes and optional-free completion (6.4s)
+  ok 12 [webkit-mobile] › tests\deep-learning.spec.ts:189:1 › pixel colors derive from actual local PNG and update on keyboard/button selection (2.7s)
+  ok 13 [webkit-mobile] › tests\deep-learning.spec.ts:249:1 › network manual steps, auto pause, Chapter0 detour and reload preserve current state (5.5s)
+  ok 14 [webkit-mobile] › tests\deep-learning.spec.ts:279:1 › restart, optional-free completion, history, actual backup export and restore keep four old lessons (8.4s)
+  ok 15 [webkit-mobile] › tests\deep-learning.spec.ts:333:1 › all five quiz questions and all option explanations, wrong/retake history and restart (10.1s)
+  x  16 [webkit-mobile] › tests\deep-learning.spec.ts:376:1 › five optional deep dives close back to same position, and fixed CNN uses real image values (46.3s)
+(node:16980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 17 [webkit-mobile] › tests\deep-learning.spec.ts:447:3 › 320px all scenes without overlap/horizontal scroll, enlarged=false (9.8s)
+  ok 18 [webkit-mobile] › tests\deep-learning.spec.ts:447:3 › 320px all scenes without overlap/horizontal scroll, enlarged=true (13.8s)
+  ok 19 [webkit-mobile] › tests\deep-learning.spec.ts:509:1 › offline main story, all six assets, pixel reading and deep text stay available (7.2s)
+  ok 20 [webkit-mobile] › tests\deep-learning.spec.ts:553:1 › course groups, L006 explicit ending link, old resume and home latest L007 resume (3.4s)
+
+
+  1) [chromium] › tests\deep-learning.spec.ts:376:1 › five optional deep dives close back to same position, and fixed CNN uses real image values
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByLabel('固定フィルタ', { exact: true })
+
+
+      428 |       await page
+      429 |         .getByLabel("固定フィルタ", { exact: true })
+    > 430 |         .selectOption("average");
+          |          ^
+      431 |       await expect(page.getByTestId("filter-first")).toHaveText(
+      432 |         `左上の計算結果：${Number(expected[1].toFixed(3))}`,
+      433 |       );
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\deep-learning.spec.ts:430:10
+
+    Error Context: test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [webkit-mobile] › tests\deep-learning.spec.ts:376:1 › five optional deep dives close back to same position, and fixed CNN uses real image values
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByLabel('固定フィルタ', { exact: true })
+
+
+      428 |         ];
+      429 |       }, "/" + pixelSource);
+    > 430 |       await expect(page.getByTestId("filter-first")).toHaveText(
+          |          ^
+      431 |         `左上の計算結果：${Number(expected[0].toFixed(3))}`,
+      432 |       );
+      433 |       await page
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\deep-learning.spec.ts:430:10
+
+    Error Context: test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-webkit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-webkit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deep-learning-five-optiona-14e19--CNN-uses-real-image-values-webkit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests\deep-learning.spec.ts:376:1 › five optional deep dives close back to same position, and fixed CNN uses real image values
+    [webkit-mobile] › tests\deep-learning.spec.ts:376:1 › five optional deep dives close back to same position, and fixed CNN uses real image values
+  18 passed (3.6m)
+Performance evidence: docs/performance-addition-v0.2.0.json

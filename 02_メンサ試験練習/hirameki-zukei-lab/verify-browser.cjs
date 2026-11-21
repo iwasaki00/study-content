@@ -1,5 +1,5 @@
 const { chromium, webkit } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
-const { qs } = require('./verify-data.cjs');
+const { qs } = require('./verify-v03.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -67,8 +67,8 @@ async function run(engine,name){
         assert(rects.every(r=>r.left>=0&&r.right<=width),`${q.id} clipped`);
         if(width===390){const r=await page.locator('.choices').boundingBox();assert(r.y+r.height<810,`${q.id} choices below initial mobile viewport: ${r.y+r.height}`);}
         if((width===320&&q.id==='Q08')||(width===390&&['Q14','Q23'].includes(q.id))){
-          fs.mkdirSync(path.join(__dirname,'screenshots','v0.1.0'),{recursive:true});
-          await page.screenshot({path:path.join(__dirname,'screenshots','v0.1.0',`${q.id}-${width}-${name}.png`),fullPage:true});
+          fs.mkdirSync(path.join(__dirname,'screenshots','v0.3.0'),{recursive:true});
+          await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`${q.id}-${width}-${name}.png`),fullPage:true});
         }
         if(q.hints.length){
           await action('hint');assert.equal(await page.locator('.missing svg').count(),0);
@@ -91,7 +91,7 @@ async function run(engine,name){
         }
         assert(await page.locator('[data-action="next"]').isEnabled());
       }
-      console.log(`${name} ${width}px: all 24 questions, hints, grading lock, explanations, layout PASS`);
+      console.log(`${name} ${width}px: all 64 questions, hints, grading lock, explanations, layout PASS`);
     }
     await page.setViewportSize({width:390,height:844});
     const oldFeedback={Q02:{a:'矢印の下向きは合っています',c:'点３つは合っています',d:'点３つは合っています'},Q03:{a:'切り欠きの向きは合っています',b:'穴１つは合っています',c:'向きと個数を'}};
@@ -99,7 +99,7 @@ async function run(engine,name){
       await openQuestion(q.id);await choose(c.id);await action('grade');
       assert((await page.locator('.feedback').innerText()).includes(c.feedback||oldFeedback[q.id][c.id]),`${q.id}/${c.id} feedback`);
     }
-    console.log(`${name}: all 69 distractor feedbacks PASS`);
+    console.log(`${name}: all 189 distractor feedbacks PASS`);
 
     await clean();await action('menu');await action('review');
     assert((await page.locator('.empty-state').innerText()).includes('いま復習する問題はありません'));
@@ -109,12 +109,13 @@ async function run(engine,name){
     await choose('d');await action('grade');await finish();
     const original=JSON.stringify((await stored()).records.Q02.first);
     await action('menu');await action('review');
-    assert((await page.locator('.review-list').innerText()).includes('類題 Q22'));
-    fs.mkdirSync(path.join(__dirname,'screenshots','v0.1.0'),{recursive:true});
-    await page.screenshot({path:path.join(__dirname,'screenshots','v0.1.0',`review-${name}.png`),fullPage:true});
+    assert((await page.locator('.review-list').innerText()).includes('類題 Q59'));
+    fs.mkdirSync(path.join(__dirname,'screenshots','v0.3.0'),{recursive:true});
+    await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`review-${name}.png`),fullPage:true});
     await action('start-review');assert((await page.locator('.review-origin').innerText()).includes('Q02'));
-    await action('hint');await choose('b');await action('grade');await finish();
+    await action('hint');await choose('c');await action('grade');await finish();
     assert((await stored()).reviews.Q02);
+    await action('menu');await action('review');assert((await page.locator('.review-list').innerText()).includes('類題 Q22'));await action('start-review');await action('hint');await choose('b');await action('grade');await finish();
     await action('menu');await action('review');
     assert((await page.locator('.review-list').innerText()).includes('元の問題'));
     await action('start-review');await choose('b');await action('grade');await finish();
@@ -152,11 +153,11 @@ async function run(engine,name){
     await page.locator('.explanation').scrollIntoViewIfNeeded();
     // 動画の中間フレームと、常設している静止画をそれぞれ保存。
     await page.locator('.overlap-stage').evaluate(n=>n.getAnimations({subtree:true}).forEach(animation=>{animation.pause();animation.currentTime=2200;}));
-    await page.screenshot({path:path.join(__dirname,'screenshots','v0.1.0',`overlay-moving-${name}.png`),fullPage:true});
+    await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`overlay-moving-${name}.png`),fullPage:true});
     await page.emulateMedia({reducedMotion:'reduce'});await action('replay');
     assert.equal(await page.locator('.layer-result').evaluate(n=>getComputedStyle(n).animationName),'none');
     assert.equal(await page.locator('.layer-result').evaluate(n=>getComputedStyle(n).opacity),'1');
-    await page.screenshot({path:path.join(__dirname,'screenshots','v0.1.0',`overlay-still-${name}.png`),fullPage:true});
+    await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`overlay-still-${name}.png`),fullPage:true});
     await openQuestion('Q03');await choose('d');await action('grade');
     assert.equal(await page.locator('.moving .outer').first().evaluate(n=>getComputedStyle(n).animationName),'none');
     assert.equal(await page.locator('.moving .inner').first().evaluate(n=>getComputedStyle(n).transform),'none');
@@ -168,6 +169,8 @@ async function run(engine,name){
     await offline.locator('[data-choice="c"]').click();await offline.locator('[data-action="grade"]').click();await offline.locator('[data-action="next"]').click();
     await offline.locator('[data-action="menu"]').click();await offline.locator('[data-action="daily"]').click();assert.equal(await offline.locator('.choices button').count(),4);
     await unavailable.close();assert.deepEqual(errors,[]);
+    await require('./verify-challenge-browser.cjs').runChallengeTests(browser,url,name);
+    await require('./verify-adaptive-browser.cjs').runAdaptiveTests(browser,url,name);
     console.log(`${name} ${browser.version()}: tutorial regression, review/fallback/first record, daily auto resume/results/JST rollover, reduced motion, blocked storage PASS`);
   }finally{await browser.close();}
 }

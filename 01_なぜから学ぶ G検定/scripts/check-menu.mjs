@@ -62,7 +62,9 @@ try {
     .locator('[data-lesson="L005"]')
     .getByRole("button", { name: "第3話を始める" })
     .click();
-  await page.locator(".generalization-picture img").waitFor();
+  await page
+    .locator(".generalization-picture img")
+    .evaluate((img) => img.decode());
   assert.ok(
     await page
       .locator(".generalization-picture img")
@@ -79,7 +81,7 @@ try {
     /6\/8/,
   );
   await page.screenshot({
-    path: "docs/screenshots/v0.1.8/menu-reversal-390-chromium.png",
+    path: "docs/screenshots/v0.2.0/menu-l005-reversal-390-chromium.png",
     fullPage: true,
   });
   await page
@@ -87,8 +89,114 @@ try {
     .click();
   await page.getByRole("button", { name: "ここで終える", exact: true }).click();
   await page.getByText("端末に保存済み", { exact: true }).waitFor();
+
+  await page.getByRole("button", { name: "コース", exact: true }).click();
+  await page
+    .locator('[data-lesson="L006"]')
+    .getByRole("button", { name: "第4話を始める" })
+    .click();
+  await page.locator(".fairness-picture img").evaluate((img) => img.decode());
+  await page
+    .getByRole("button", { name: "2つのラインで試してみる", exact: true })
+    .click();
+  assert.match(await page.locator(".fairness-overall").innerText(), /18\/20/);
+
+  await page
+    .getByRole("button", { name: "何が違うのか調べる", exact: true })
+    .click();
+  assert.match(
+    await page.locator(".scene-body").innerText(),
+    /AIに渡る手がかりが変わり/,
+  );
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    const style =
+      width === 320
+        ? await page.addStyleTag({
+            content:
+              ".fairness-lesson{font-size:28px}.fairness-lesson :is(h1,h2,h3,p,dt,dd,figcaption,button){font-size:inherit!important}",
+          })
+        : null;
+    assert.ok(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    );
+    await page.screenshot({
+      path:
+        "docs/screenshots/v0.2.0/menu-l006-cause-" + width + "-chromium.png",
+      fullPage: true,
+      animations: "disabled",
+    });
+    if (style) await style.evaluate((el) => el.remove());
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const name of ["照明を見直してみる", "暗いラインの照明を調整する"])
+    await page.getByRole("button", { name, exact: true }).click();
+  await page.locator(".fairness-picture img").evaluate((img) => img.decode());
+  assert.match(
+    await page.locator(".fairness-light-scores").innerText(),
+    /10\/10/,
+  );
+  await page.screenshot({
+    path: "docs/screenshots/v0.2.0/menu-l006-lighting-390-chromium.png",
+    fullPage: true,
+    animations: "disabled",
+  });
+  for (const name of [
+    "用意したデータを振り返る",
+    "人に関わるAIの判断も考える",
+    "第4話をまとめる",
+    "ここで終える",
+  ])
+    await page.getByRole("button", { name, exact: true }).click();
+  await page.getByText("端末に保存済み", { exact: true }).waitFor();
+
+  await page.getByRole("button", { name: "コース", exact: true }).click();
+  await page
+    .locator(".deep-course")
+    .getByRole("button", { name: "第5話を始める" })
+    .click();
+  await page.locator(".deep-picture img").evaluate((img) => img.decode());
+  await page.screenshot({
+    path: "docs/screenshots/v0.2.0/menu-l007-intro-390-chromium.png",
+    fullPage: true,
+  });
+  await page
+    .getByRole("button", { name: "写真を見てみる", exact: true })
+    .click();
+  await page.getByRole("button", { name: /^猫の写真/ }).click();
+  for (const name of [
+    "ほかの写真も見てみる",
+    "AIには写真がどう見えている？",
+    "拡大する",
+    "写真の情報が進む先を見る",
+  ])
+    await page.getByRole("button", { name, exact: true }).click();
+  for (let i = 0; i < 4; i++)
+    await page
+      .getByRole("button", { name: "1ステップ進む", exact: true })
+      .click();
+  assert.equal(
+    await page.locator(".network-demo").getAttribute("data-step"),
+    "4",
+  );
+  for (const name of [
+    "どうやって特徴を学ぶの？",
+    "利用時の流れ",
+    "写真以外の使い道も見る",
+    "施設での体験をまとめる",
+  ])
+    await page.getByRole("button", { name, exact: true }).click();
+  await page.locator(".deep-picture img").evaluate((img) => img.decode());
+  await page.screenshot({
+    path: "docs/screenshots/v0.2.0/menu-l007-ending-390-chromium.png",
+    fullPage: true,
+  });
+  await page.getByRole("button", { name: "ここで終える", exact: true }).click();
+  await page.getByText("端末に保存済み", { exact: true }).waitFor();
   console.log(
-    `PASS: dist/app ${menuFiles.length} files are byte-identical; menu L005 completed at 390px with local images.`,
+    `PASS: dist/app ${menuFiles.length} files are byte-identical; menu L005/L006/L007 completed at 390px with local images.`,
   );
 } finally {
   await browser.close();

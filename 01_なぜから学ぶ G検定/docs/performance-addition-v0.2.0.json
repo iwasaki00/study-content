@@ -1,0 +1,322 @@
+{
+  "status": "failed",
+  "workers": "Configured single worker; timeout remains 45000ms",
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "390px new user: Chapter0 diagram to all seven scenes and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4345,
+      "screenshotCount": 7,
+      "screenshotMs": 680,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 77
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 125
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 72
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 86
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 82
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 117
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 121
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "pixel colors derive from actual local PNG and update on keyboard/button selection",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2317,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "network manual steps, auto pause, Chapter0 detour and reload preserve current state",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5111,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "restart, optional-free completion, history, actual backup export and restore keep four old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4575,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "all five quiz questions and all option explanations, wrong/retake history and restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5422,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "five optional deep dives close back to same position, and fixed CNN uses real image values",
+      "repeat": 0,
+      "retry": 0,
+      "status": "timedOut",
+      "durationMs": 48198,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": [],
+      "error": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5639,
+      "screenshotCount": 2,
+      "screenshotMs": 223,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 75
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 148
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8318,
+      "screenshotCount": 2,
+      "screenshotMs": 461,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 206
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 255
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "offline main story, all six assets, pixel reading and deep text stay available",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5390,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "course groups, L006 explicit ending link, old resume and home latest L007 resume",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3033,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px new user: Chapter0 diagram to all seven scenes and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6370,
+      "screenshotCount": 7,
+      "screenshotMs": 1813,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 127
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 188
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 76
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 298
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 249
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 410
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 465
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "pixel colors derive from actual local PNG and update on keyboard/button selection",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2710,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "network manual steps, auto pause, Chapter0 detour and reload preserve current state",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5521,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "restart, optional-free completion, history, actual backup export and restore keep four old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8396,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "all five quiz questions and all option explanations, wrong/retake history and restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 10087,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "five optional deep dives close back to same position, and fixed CNN uses real image values",
+      "repeat": 0,
+      "retry": 0,
+      "status": "timedOut",
+      "durationMs": 46290,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": [],
+      "error": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 9775,
+      "screenshotCount": 2,
+      "screenshotMs": 497,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 108
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 389
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 13802,
+      "screenshotCount": 2,
+      "screenshotMs": 1250,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 595
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 655
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "offline main story, all six assets, pixel reading and deep text stay available",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7166,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "course groups, L006 explicit ending link, old resume and home latest L007 resume",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3376,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    }
+  ]
+}

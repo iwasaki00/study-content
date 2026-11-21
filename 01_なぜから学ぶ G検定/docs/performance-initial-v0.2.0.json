@@ -1,0 +1,266 @@
+{
+  "status": "failed",
+  "workers": "Configured single worker; timeout remains 45000ms",
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "390px new user: Chapter0 diagram to all seven scenes and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "timedOut",
+      "durationMs": 50608,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": [],
+      "error": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+    },
+    {
+      "project": "chromium",
+      "title": "pixel colors derive from actual local PNG and update on keyboard/button selection",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1860,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "network manual steps, auto pause, Chapter0 detour and reload preserve current state",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6582,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "restart, optional-free completion, history, actual backup export and restore keep four old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5745,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "all five quiz questions and all option explanations, wrong/retake history and restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8242,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "five optional deep dives close back to same position, and fixed CNN uses real image values",
+      "repeat": 0,
+      "retry": 0,
+      "status": "failed",
+      "durationMs": 6622,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": [],
+      "error": "Error: locator.click: Error: strict mode violation: locator('.deep-dive').filter({ has: getByText('D05：CNN（畳み込みニューラルネットワーク）とは？', { exact: true }) }).locator('summary') resolved to 2 elements:\n    1) <summary>D05：CNN（畳み込みニューラルネットワーク）とは？</summary> aka getByText('D05：CNN（畳み込みニューラルネットワーク）とは？')\n    2) <summary>最初の位置の計算を詳しく見る</summary> aka getByText('最初の位置の計算を詳しく見る')\n\nCall log:\n\u001b[2m  - waiting for locator('.deep-dive').filter({ has: getByText('D05：CNN（畳み込みニューラルネットワーク）とは？', { exact: true }) }).locator('summary')\u001b[22m\n"
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 14870,
+      "screenshotCount": 2,
+      "screenshotMs": 4303,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 4019
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 284
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7557,
+      "screenshotCount": 2,
+      "screenshotMs": 694,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 449
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 245
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "offline main story, all six assets, pixel reading and deep text stay available",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4556,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "course groups, L006 explicit ending link, old resume and home latest L007 resume",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2823,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px new user: Chapter0 diagram to all seven scenes and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "timedOut",
+      "durationMs": 45537,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": [],
+      "error": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "pixel colors derive from actual local PNG and update on keyboard/button selection",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1931,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "network manual steps, auto pause, Chapter0 detour and reload preserve current state",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5328,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "restart, optional-free completion, history, actual backup export and restore keep four old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6217,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "all five quiz questions and all option explanations, wrong/retake history and restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6457,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "five optional deep dives close back to same position, and fixed CNN uses real image values",
+      "repeat": 0,
+      "retry": 0,
+      "status": "failed",
+      "durationMs": 5162,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": [],
+      "error": "Error: locator.click: Error: strict mode violation: locator('.deep-dive').filter({ has: getByText('D05：CNN（畳み込みニューラルネットワーク）とは？', { exact: true }) }).locator('summary') resolved to 2 elements:\n    1) <summary>D05：CNN（畳み込みニューラルネットワーク）とは？</summary> aka getByText('D05：CNN（畳み込みニューラルネットワーク）とは？')\n    2) <summary>最初の位置の計算を詳しく見る</summary> aka getByText('最初の位置の計算を詳しく見る')\n\nCall log:\n\u001b[2m  - waiting for locator('.deep-dive').filter({ has: getByText('D05：CNN（畳み込みニューラルネットワーク）とは？', { exact: true }) }).locator('summary')\u001b[22m\n"
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 10648,
+      "screenshotCount": 2,
+      "screenshotMs": 532,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 325
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 207
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 12265,
+      "screenshotCount": 2,
+      "screenshotMs": 1290,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 455
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 835
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "offline main story, all six assets, pixel reading and deep text stay available",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 13372,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "course groups, L006 explicit ending link, old resume and home latest L007 resume",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 11290,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    }
+  ]
+}
