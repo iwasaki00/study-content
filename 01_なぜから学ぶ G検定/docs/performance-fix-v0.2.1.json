@@ -1,0 +1,156 @@
+{
+  "status": "passed",
+  "workers": "Configured single worker; timeout remains 45000ms",
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "390px story from actual initial mistake through training, separate evaluation and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8483,
+      "screenshotCount": 7,
+      "screenshotMs": 1010,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 167
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 134
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 99
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 162
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 121
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 176
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 151
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "0/10/50/100 updates: exact accepted counts, graph data and predictions agree",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3739,
+      "screenshotCount": 3,
+      "screenshotMs": 346,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 120
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 112
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 114
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6335,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px story from actual initial mistake through training, separate evaluation and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 10671,
+      "screenshotCount": 7,
+      "screenshotMs": 2736,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 366
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 374
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 282
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 517
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 296
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 444
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 457
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "0/10/50/100 updates: exact accepted counts, graph data and predictions agree",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4744,
+      "screenshotCount": 3,
+      "screenshotMs": 792,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 211
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 264
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 317
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6856,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    }
+  ]
+}

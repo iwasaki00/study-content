@@ -136,6 +136,10 @@ export interface FairnessProgress {
   completed: boolean;
 }
 export interface Backup {
+  cnn?: CnnProgress;
+  cnnAttempts?: QuestionAttempt[];
+  training?: TrainingProgress;
+  trainingAttempts?: QuestionAttempt[];
   deepLearning?: DeepLearningProgress;
   deepLearningAttempts?: QuestionAttempt[];
   fairness?: FairnessProgress;
@@ -173,6 +177,74 @@ export interface DeepLearningProgress {
   networkStep: number;
   networkSeen: boolean;
   flow: "training" | "inference";
+  questionIndex: number;
+  sessionId: string;
+  updatedAt: string;
+  completed: boolean;
+}
+export interface TrainingRow {
+  id: string;
+  ear: number;
+  nose: number;
+  label: number;
+}
+export interface TrainingPoint {
+  step: number;
+  loss: number;
+  correct: number;
+  catScore: number;
+}
+export interface TrainingProgress {
+  id: "progress-L008";
+  lessonId: "L008";
+  stage:
+    | "intro"
+    | "features"
+    | "loss"
+    | "update"
+    | "practice"
+    | "evaluation"
+    | "ending"
+    | "quiz"
+    | "details";
+  visited: TrainingProgress["stage"][];
+  parameters: number[];
+  previousParameters: number[];
+  updates: number;
+  history: TrainingPoint[];
+  trainedOnce: boolean;
+  evaluated: boolean;
+  openDives: string[];
+  modelDetails: boolean;
+  questionIndex: number;
+  sessionId: string;
+  updatedAt: string;
+  completed: boolean;
+}
+export interface CnnProgress {
+  id: "progress-L009";
+  lessonId: "L009";
+  stage:
+    | "intro"
+    | "pixels"
+    | "window"
+    | "filters"
+    | "pooling"
+    | "cnn"
+    | "ending"
+    | "quiz"
+    | "details";
+  visited: CnnProgress["stage"][];
+  image: "cat" | "dog";
+  filter: "A" | "B" | "C";
+  position: number;
+  pixel: number;
+  poolStage: number;
+  poolDone: boolean;
+  poolPosition: number;
+  cnnStep: number;
+  mathOpen: boolean;
+  openDives: string[];
   questionIndex: number;
   sessionId: string;
   updatedAt: string;

@@ -557,6 +557,7 @@ export function DeepLearningEpisode({
   onAnswer,
   onFinish,
   onGuide,
+  onNext,
   busy,
   suspended,
 }: {
@@ -566,6 +567,7 @@ export function DeepLearningEpisode({
   onMove: (s: DeepLearningProgress["stage"]) => void;
   onAnswer: (choice: number) => void;
   onFinish: () => void;
+  onNext: () => void;
   onGuide: (e: React.MouseEvent<HTMLButtonElement>) => void;
   busy: boolean;
   suspended: boolean;
@@ -821,6 +823,13 @@ export function DeepLearningEpisode({
                 もっと詳しく学ぶ
               </button>
             </div>
+            <aside className="notice">
+              <h2>次は、実際に学習させてみよう</h2>
+              <p>同じ施設で、小さなネットワークの内部を更新します。</p>
+              <button onClick={onNext}>
+                第6話へ：AIはどうやって間違いから学ぶの？
+              </button>
+            </aside>
             {p.completed && (
               <p className="notice">L007を最後まで学習した記録があります。</p>
             )}

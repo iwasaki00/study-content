@@ -1,3 +1,18 @@
+import type { CnnProgress } from "../types";
+import { allCnnStages, cnnStages, cnnQuestions, cnnDives } from "../data/cnn";
+import { newCnnProgress, cnnFinished } from "./cnn";
+import type { TrainingProgress } from "../types";
+import {
+  trainingQuestions,
+  allTrainingStages,
+  trainingStages,
+  trainingDives,
+} from "../data/training";
+import {
+  newTrainingProgress,
+  trainingFinished,
+  consistentTraining,
+} from "./training";
 import type { DeepLearningProgress } from "../types";
 import {
   deepStages,
@@ -438,6 +453,141 @@ export function validateBackup(input: unknown): Backup {
       seen.add(a.id);
     }
   }
+
+  if (input.training !== undefined) {
+    const t = input.training;
+    if (
+      !record(t) ||
+      t.id !== "progress-L008" ||
+      t.lessonId !== "L008" ||
+      !allTrainingStages.includes(t.stage as TrainingProgress["stage"]) ||
+      !str(t.sessionId) ||
+      !date(t.updatedAt) ||
+      typeof t.completed !== "boolean" ||
+      typeof t.trainedOnce !== "boolean" ||
+      typeof t.evaluated !== "boolean" ||
+      typeof t.modelDetails !== "boolean" ||
+      !int(t.questionIndex, 4) ||
+      !Array.isArray(t.visited) ||
+      new Set(t.visited).size !== t.visited.length ||
+      !t.visited.every((v) =>
+        allTrainingStages.includes(v as TrainingProgress["stage"]),
+      ) ||
+      !t.visited.includes(t.stage) ||
+      !Array.isArray(t.openDives) ||
+      new Set(t.openDives).size !== t.openDives.length ||
+      !t.openDives.every((id) => trainingDives.some((d) => d.id === id)) ||
+      !consistentTraining(t as unknown as TrainingProgress)
+    )
+      return fail();
+    const index = allTrainingStages.indexOf(
+      t.stage as TrainingProgress["stage"],
+    );
+    if (
+      !trainingStages
+        .slice(0, Math.min(index + 1, 7))
+        .every((stage) => (t.visited as string[]).includes(stage)) ||
+      t.trainedOnce !== (t.updates as number) > 0 ||
+      (t.evaluated && !(t.visited as string[]).includes("evaluation")) ||
+      (index >= 5 && !t.trainedOnce) ||
+      (index >= 6 && !t.evaluated) ||
+      (t.completed && !trainingFinished(t as unknown as TrainingProgress))
+    )
+      return fail();
+  }
+  if (input.trainingAttempts !== undefined) {
+    if (
+      !Array.isArray(input.trainingAttempts) ||
+      input.trainingAttempts.length > 100000
+    )
+      return fail();
+    const seen = new Set();
+    for (const a of input.trainingAttempts) {
+      if (
+        !record(a) ||
+        !str(a.id) ||
+        seen.has(a.id) ||
+        !str(a.sessionId) ||
+        !date(a.answeredAt) ||
+        !int(a.selected, 3)
+      )
+        return fail();
+      const q = trainingQuestions.find((q) => q.id === a.questionId);
+      if (
+        !q ||
+        a.version !== q.version ||
+        a.correct !== (a.selected === q.answer)
+      )
+        return fail();
+      seen.add(a.id);
+    }
+  }
+
+  if (input.cnn !== undefined) {
+    const c = input.cnn;
+    if (
+      !record(c) ||
+      c.id !== "progress-L009" ||
+      c.lessonId !== "L009" ||
+      !allCnnStages.includes(c.stage as CnnProgress["stage"]) ||
+      !str(c.sessionId) ||
+      !date(c.updatedAt) ||
+      typeof c.completed !== "boolean" ||
+      !["cat", "dog"].includes(c.image as string) ||
+      !["A", "B", "C"].includes(c.filter as string) ||
+      !int(c.position, 195) ||
+      !int(c.pixel, 255) ||
+      typeof c.poolDone !== "boolean" ||
+      !int(c.poolStage, 3) ||
+      !int(c.poolPosition, 48) ||
+      !int(c.cnnStep, 5) ||
+      typeof c.mathOpen !== "boolean" ||
+      !int(c.questionIndex, 4) ||
+      !Array.isArray(c.visited) ||
+      new Set(c.visited).size !== c.visited.length ||
+      !c.visited.includes(c.stage) ||
+      !c.visited.every((s) =>
+        allCnnStages.includes(s as CnnProgress["stage"]),
+      ) ||
+      !Array.isArray(c.openDives) ||
+      new Set(c.openDives).size !== c.openDives.length ||
+      !c.openDives.every((id) => cnnDives.some((d) => d.id === id))
+    )
+      return fail();
+    const index = allCnnStages.indexOf(c.stage as CnnProgress["stage"]);
+    if (
+      !cnnStages
+        .slice(0, Math.min(index + 1, 7))
+        .every((s) => (c.visited as string[]).includes(s)) ||
+      (index >= 5 && !c.poolDone) ||
+      (c.completed && !cnnFinished(c as unknown as CnnProgress))
+    )
+      return fail();
+  }
+  if (input.cnnAttempts !== undefined) {
+    if (!Array.isArray(input.cnnAttempts) || input.cnnAttempts.length > 100000)
+      return fail();
+    const seen = new Set();
+    for (const a of input.cnnAttempts) {
+      if (
+        !record(a) ||
+        !str(a.id) ||
+        seen.has(a.id) ||
+        !str(a.sessionId) ||
+        !date(a.answeredAt) ||
+        !int(a.selected, 3)
+      )
+        return fail();
+      const q = cnnQuestions.find((q) => q.id === a.questionId);
+      if (
+        !q ||
+        a.version !== q.version ||
+        a.correct !== (a.selected === q.answer)
+      )
+        return fail();
+      seen.add(a.id);
+    }
+  }
   // Return a detached, validated snapshot; UI never mutates the imported object.
   return structuredClone(input) as unknown as Backup;
 }
@@ -488,6 +638,8 @@ export function mergeBackups(current: Backup, incoming: Backup): Backup {
     ...mergeEvaluation(a, b),
     ...mergeFairness(a, b),
     ...mergeDeepLearning(a, b),
+    ...mergeTraining(a, b),
+    ...mergeCnn(a, b),
     ...(a.generalization || b.generalization
       ? {
           generalization: !a.generalization
@@ -541,6 +693,8 @@ export function completionRecords(b: Backup): LessonCompletion[] {
     b.generalization,
     b.fairness,
     b.deepLearning,
+    b.training,
+    b.cnn,
   ]) {
     if (!p?.completed) continue;
     const id = `completion-${p.lessonId}-${p.sessionId}`;
@@ -783,6 +937,126 @@ function mergeDeepLearning(a: Backup, b: Backup): Partial<Backup> {
       attempts.set(item.id, item);
     }
     result.deepLearningAttempts = [...attempts.values()].sort((x, y) =>
+      x.answeredAt.localeCompare(y.answeredAt),
+    );
+  }
+  return result;
+}
+
+export function beginTraining(b: Backup, restart = false): Backup {
+  if (b.training && !restart) return b;
+  return {
+    ...b,
+    completions: completionRecords(b),
+    training: newTrainingProgress(),
+  };
+}
+export function completeTraining(b: Backup): Backup {
+  if (!b.training || !trainingFinished(b.training))
+    throw Error("第6話の体験と結末を確認してください");
+  const next: Backup = {
+    ...b,
+    completions: completionRecords(b),
+    training: {
+      ...b.training,
+      completed: true,
+      updatedAt: new Date().toISOString(),
+    },
+  };
+  return { ...next, completions: completionRecords(next) };
+}
+function mergeTraining(a: Backup, b: Backup): Partial<Backup> {
+  const result: Partial<Backup> = {};
+  if (a.training || b.training)
+    result.training = !a.training
+      ? b.training
+      : !b.training
+        ? a.training
+        : b.training.updatedAt > a.training.updatedAt
+          ? b.training
+          : a.training;
+  if (a.trainingAttempts || b.trainingAttempts) {
+    const attempts = new Map((a.trainingAttempts ?? []).map((x) => [x.id, x]));
+    for (const item of b.trainingAttempts ?? []) {
+      const old = attempts.get(item.id);
+      if (
+        old &&
+        (
+          [
+            "id",
+            "questionId",
+            "version",
+            "selected",
+            "correct",
+            "answeredAt",
+            "sessionId",
+          ] as const
+        ).some((key) => old[key] !== item[key])
+      )
+        throw Error("第6話の同じ履歴IDに異なる内容があるため統合できません。");
+      attempts.set(item.id, item);
+    }
+    result.trainingAttempts = [...attempts.values()].sort((x, y) =>
+      x.answeredAt.localeCompare(y.answeredAt),
+    );
+  }
+  return result;
+}
+
+export function beginCnn(b: Backup, restart = false): Backup {
+  if (b.cnn && !restart) return b;
+  return {
+    ...b,
+    completions: completionRecords(b),
+    cnn: newCnnProgress(),
+  };
+}
+export function completeCnn(b: Backup): Backup {
+  if (!b.cnn || !cnnFinished(b.cnn))
+    throw Error("第7話の体験と結末を確認してください");
+  const next: Backup = {
+    ...b,
+    completions: completionRecords(b),
+    cnn: {
+      ...b.cnn,
+      completed: true,
+      updatedAt: new Date().toISOString(),
+    },
+  };
+  return { ...next, completions: completionRecords(next) };
+}
+function mergeCnn(a: Backup, b: Backup): Partial<Backup> {
+  const result: Partial<Backup> = {};
+  if (a.cnn || b.cnn)
+    result.cnn = !a.cnn
+      ? b.cnn
+      : !b.cnn
+        ? a.cnn
+        : b.cnn.updatedAt > a.cnn.updatedAt
+          ? b.cnn
+          : a.cnn;
+  if (a.cnnAttempts || b.cnnAttempts) {
+    const attempts = new Map((a.cnnAttempts ?? []).map((x) => [x.id, x]));
+    for (const item of b.cnnAttempts ?? []) {
+      const old = attempts.get(item.id);
+      if (
+        old &&
+        (
+          [
+            "id",
+            "questionId",
+            "version",
+            "selected",
+            "correct",
+            "answeredAt",
+            "sessionId",
+          ] as const
+        ).some((key) => old[key] !== item[key])
+      )
+        throw Error("第7話の同じ履歴IDに異なる内容があるため統合できません。");
+      attempts.set(item.id, item);
+    }
+    result.cnnAttempts = [...attempts.values()].sort((x, y) =>
       x.answeredAt.localeCompare(y.answeredAt),
     );
   }

@@ -1,0 +1,213 @@
+
+> why-learn-g@0.2.1 test:e2e
+> playwright test tests/training.spec.ts --reporter=list,./scripts/performance-reporter.mjs
+
+node.exe : [WebServer] (node:27816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+発生場所 行:1 文字:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:28004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   1 [chromium] › tests\training.spec.ts:138:1 › 390px story from actual initial mistake through training, separate evaluation and optional-free completion (36.8s)
+(node:15800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   2 [chromium] › tests\training.spec.ts:211:1 › saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons (26.4s)
+(node:26756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  3 [chromium] › tests\training.spec.ts:237:1 › rapid clicks execute one accepted batch, real graph agrees, reset returns initial model without scrolling (13.4s)
+  ok  4 [chromium] › tests\training.spec.ts:280:1 › completion restart, old state, real JSON backup and replacement restore stay compatible (22.6s)
+  ok  5 [chromium] › tests\training.spec.ts:325:1 › five optional deep dives persist their open state after reload and close back to original item (5.7s)
+  ok  6 [chromium] › tests\training.spec.ts:358:1 › all five optional questions and all explanations grade, retain wrong/retake history and old records (8.7s)
+  ok  7 [chromium] › tests\training.spec.ts:395:3 › 320px story, graph and expanded parameters / enlarged=false (7.5s)
+  ok  8 [chromium] › tests\training.spec.ts:395:3 › 320px story, graph and expanded parameters / enlarged=true (7.8s)
+  ok  9 [chromium] › tests\training.spec.ts:451:1 › offline all four new images, whole real training, saved details and completion (6.7s)
+  ok 10 [chromium] › tests\training.spec.ts:487:1 › L007 ending explicitly opens L008 without replacing existing L007 progress (4.2s)
+(node:25648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  11 [webkit-mobile] › tests\training.spec.ts:138:1 › 390px story from actual initial mistake through training, separate evaluation and optional-free completion (23.3s)
+(node:15236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  12 [webkit-mobile] › tests\training.spec.ts:211:1 › saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons (11.2s)
+(node:25748) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 13 [webkit-mobile] › tests\training.spec.ts:237:1 › rapid clicks execute one accepted batch, real graph agrees, reset returns initial model without scrolling (5.0s)
+  ok 14 [webkit-mobile] › tests\training.spec.ts:280:1 › completion restart, old state, real JSON backup and replacement restore stay compatible (9.5s)
+  ok 15 [webkit-mobile] › tests\training.spec.ts:325:1 › five optional deep dives persist their open state after reload and close back to original item (12.4s)
+  ok 16 [webkit-mobile] › tests\training.spec.ts:358:1 › all five optional questions and all explanations grade, retain wrong/retake history and old records (13.4s)
+  ok 17 [webkit-mobile] › tests\training.spec.ts:395:3 › 320px story, graph and expanded parameters / enlarged=false (15.2s)
+  ok 18 [webkit-mobile] › tests\training.spec.ts:395:3 › 320px story, graph and expanded parameters / enlarged=true (15.3s)
+  ok 19 [webkit-mobile] › tests\training.spec.ts:451:1 › offline all four new images, whole real training, saved details and completion (8.4s)
+  ok 20 [webkit-mobile] › tests\training.spec.ts:487:1 › L007 ending explicitly opens L008 without replacing existing L007 progress (4.5s)
+
+
+  1) [chromium] › tests\training.spec.ts:138:1 › 390px story from actual initial mistake through training, separate evaluation and optional-free completion
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.training-chart svg')
+    Expected: "0.17044555424860663"
+    Received: "0.17044555424860666"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.training-chart svg') with timeout 5000ms
+      - waiting for locator('.training-chart svg')
+        13 × locator resolved to <svg role="img" data-updates="100" viewBox="0 0 310 195" data-loss="0.17044555424860666" aria-label="学習0回から100回までの損失。現在0.1704">…</svg>
+           - unexpected value "0.17044555424860666"
+
+
+      187 |     real.loss.toFixed(4),
+      188 |   );
+    > 189 |   expect(Number(await page.locator(".training-chart svg").getAttribute("data-loss"))).toBeCloseTo(real.loss,12);
+          |                                                     ^
+      190 |   await expect(page.locator(".training-chart circle")).toHaveCount(101);
+      191 |   await shot(page, "07-hundred-updates-390");
+      192 |   await click(page, "新しい動物でも試す");
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\training.spec.ts:189:53
+
+    Error: browserContext._wrapApiCall: file data stream has unexpected number of bytes
+
+    Error: End of central directory record signature not found. Either not a zip file, or file is truncated.
+
+    Error Context: test-results\training-390px-story-from--2cc41-nd-optional-free-completion-chromium\error-context.md
+
+  2) [chromium] › tests\training.spec.ts:211:1 › saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Array [
+        0.7721932457096486,
+    -   -0.2449167630126604,
+    +   -0.24491676301266038,
+        -0.5061266637849753,
+        -0.8854598031012896,
+        0.24791022274186109,
+        0.8268813916670614,
+    -   0.029756212261585677,
+    +   0.029756212261585674,
+        -0.04492340947605071,
+        -0.025091401627647683,
+        1.1684965631786701,
+        -0.31927524121768786,
+        -0.9521486493609073,
+    -   0.07710317582945599,
+    +   0.07710317582945601,
+      ]
+
+      231 |   const expected=learn(before.training,10).history; b.training.history.forEach((h:any,i:number)=>{expect(h.step).toBe(expected[i].step);expect(h.correct).toBe(expected[i].correct);expect(h.loss).toBeCloseTo(expected[i].loss,12);expect(h.catScore).toBeCloseTo(expected[i].catScore,12);});
+      232 |   preserved(b);
+    > 233 | });
+          |    ^
+      234 | test("rapid clicks execute one accepted batch, real graph agrees, reset returns initial model without scrolling", async ({
+      235 |   page,
+      236 | }) => {
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\training.spec.ts:233:33
+
+    Error Context: test-results\training-saved-weights-his-94e79-eserve-all-five-old-lessons-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\training-saved-weights-his-94e79-eserve-all-five-old-lessons-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\training-saved-weights-his-94e79-eserve-all-five-old-lessons-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [webkit-mobile] › tests\training.spec.ts:138:1 › 390px story from actual initial mistake through training, separate evaluation and optional-free completion
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.training-chart svg')
+    Expected: "0.17044555424860663"
+    Received: "0.17044555424860666"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.training-chart svg') with timeout 5000ms
+      - waiting for locator('.training-chart svg')
+        12 × locator resolved to <svg role="img" data-updates="100" viewBox="0 0 310 195" data-loss="0.17044555424860666" aria-label="学習0回から100回までの損失。現在0.1704">…</svg>
+           - unexpected value "0.17044555424860666"
+
+
+      187 |   await page.setViewportSize({width:390,height:844});
+      188 |   const value=structuredClone(old);value.training={...newTrainingProgress(),stage:"practice",visited:trainingStages.slice(0,5)};
+    > 189 |   await install(page,value);await open(page);
+          |                                              ^
+      190 |   await expect(page.getByTestId("training-count")).toHaveText("0");
+      191 |   await click(page,"10回学習");await saved(page);await expect(page.locator(".training-dashboard")).toContainText("3/8");
+      192 |   await shot(page,"05-ten-updates-390");
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\training.spec.ts:189:53
+
+    Error Context: test-results\training-390px-story-from--2cc41-nd-optional-free-completion-webkit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\training-390px-story-from--2cc41-nd-optional-free-completion-webkit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\training-390px-story-from--2cc41-nd-optional-free-completion-webkit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [webkit-mobile] › tests\training.spec.ts:211:1 › saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 4
+    + Received  + 4
+
+      Array [
+        0.7721932457096486,
+    -   -0.2449167630126604,
+    +   -0.24491676301266038,
+        -0.5061266637849753,
+        -0.8854598031012896,
+        0.24791022274186109,
+        0.8268813916670614,
+    -   0.02975621226158567,
+    +   0.029756212261585667,
+        -0.04492340947605071,
+    -   -0.02509140162764769,
+    +   -0.025091401627647683,
+        1.1684965631786701,
+        -0.31927524121768786,
+        -0.9521486493609073,
+    -   0.07710317582945599,
+    +   0.07710317582945601,
+      ]
+
+      231 | }) => {
+      232 |   await page.setViewportSize({ width: 390, height: 844 });
+    > 233 |   await page.goto("/");
+          |                        ^
+      234 |   await open(page);
+      235 |   await toPractice(page);
+      236 |   await page
+        at C:\_wk\github\study-content\01_なぜから学ぶ G検定\tests\training.spec.ts:233:33
+
+    Error Context: test-results\training-saved-weights-his-94e79-eserve-all-five-old-lessons-webkit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\training-saved-weights-his-94e79-eserve-all-five-old-lessons-webkit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\training-saved-weights-his-94e79-eserve-all-five-old-lessons-webkit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › tests\training.spec.ts:138:1 › 390px story from actual initial mistake through training, separate evaluation and optional-free completion
+    [chromium] › tests\training.spec.ts:211:1 › saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons
+    [webkit-mobile] › tests\training.spec.ts:138:1 › 390px story from actual initial mistake through training, separate evaluation and optional-free completion
+    [webkit-mobile] › tests\training.spec.ts:211:1 › saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons
+  16 passed (6.5m)
+Performance evidence: docs/performance-addition-v0.2.1.json

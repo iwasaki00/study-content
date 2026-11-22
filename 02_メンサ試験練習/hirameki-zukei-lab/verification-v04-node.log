@@ -1,0 +1,8 @@
+DATA PASS: 64 questions, independent geometry/count/set audit, competing simple rules, original 3 regression
+LEARNING PASS: JST dates, fixed 5, resume, rollover, scarce unseen, oldest seen, related review/fallback/dedup, immutable first attempt, storage failure
+V02 DATA PASS: 16 added questions, independent geometry/count/set checks, static/animation targets, alternative rules
+V02 LOGIC PASS: v1 migration/corruption, 5/10 balanced sets, monotonic timing/pause/reload/skip/timeout/interruption, immutable first, separate analytics
+V03 DATA PASS: 24 independent audits, 64 definitions, 192 distractors, recipe alternatives, graphical explanation output
+V03 LOGIC PASS: strict levels, cold/partial/weak/all answered profiles, 8 balance/freeze/resume/dedup/reasons, speed exclusion, mastery, v2 compatibility/corruption/storage failure
+LEVEL COUNTS (Q02–Q64): [{"level":1,"count":28},{"level":2,"count":27},{"level":3,"count":8}]
+V04 PASS: 4 lessons / 8 guided questions, independent hypothesis evidence, no answer access, mismatch on other rows, completion independent of correctness, resume, guide vs hint, immutable normal records / fixed sets, v3 migration, corruption, related families

@@ -1,0 +1,46 @@
+DATA PASS: 64 questions, independent geometry/count/set audit, competing simple rules, original 3 regression
+LEARNING PASS: JST dates, fixed 5, resume, rollover, scarce unseen, oldest seen, related review/fallback/dedup, immutable first attempt, storage failure
+V02 DATA PASS: 16 added questions, independent geometry/count/set checks, static/animation targets, alternative rules
+V02 LOGIC PASS: v1 migration/corruption, 5/10 balanced sets, monotonic timing/pause/reload/skip/timeout/interruption, immutable first, separate analytics
+V03 DATA PASS: 24 independent audits, 64 definitions, 192 distractors, recipe alternatives, graphical explanation output
+V03 LOGIC PASS: strict levels, cold/partial/weak/all answered profiles, 8 balance/freeze/resume/dedup/reasons, speed exclusion, mastery, v2 compatibility/corruption/storage failure
+LEVEL COUNTS (Q02–Q64): [{"level":1,"count":28},{"level":2,"count":27},{"level":3,"count":8}]
+V04 PASS: 4 lessons / 8 guided questions, independent hypothesis evidence, no answer access, mismatch on other rows, completion independent of correctness, resume, guide vs hint, immutable normal records / fixed sets, v3 migration, corruption, related families
+chromium 320px: all 64 questions, hints, grading lock, explanations, layout PASS
+chromium 390px: all 64 questions, hints, grading lock, explanations, layout PASS
+webkit 320px: all 64 questions, hints, grading lock, explanations, layout PASS
+chromium: all 189 distractor feedbacks PASS
+node : chromium: FAIL AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+発生場所 行:2 文字:596
++ ... les/playwright-core'; node hirameki-zukei-lab/verify.cjs 2>&1 | Tee-O ...
++                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (chromium: FAIL ...tly deep-equal::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
++ actual - expected
+
++ [
++   "Cannot read properties of undefined (reading 'create')"
++ ]
+- []
+
+    at run (C:\_wk\github\study-content\02_メンサ試験練習\hirameki-zukei-lab\verify-browser.cjs:171:38)
+    at async C:\_wk\github\study-content\02_メンサ試験練習\hirameki-zukei-lab\verify-browser.cjs:181:9
+    at async Promise.all (index 0)
+    at async Server.<anonymous> (C:\_wk\github\study-content\02_メンサ試験練習\hirameki-zukei-lab\verify-browser.cjs:180:3) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+webkit 390px: all 64 questions, hints, grading lock, explanations, layout PASS
+webkit: all 189 distractor feedbacks PASS
+webkit 320px background visibility: simulated visibilitychange (headless tab did not hide)
+webkit 390px background visibility: simulated visibilitychange (headless tab did not hide)
+webkit: challenge 5/10, skip/timeout/pause/reload/background/clock change/interruption/results/explanations, analytics, v1 corruption recovery, Q01 three wrong choices PASS
+webkit: adaptive 8 resume/freeze/results/repeat/debug, strict level filters 320/390, keyboard, guide/mastery UI PASS
+webkit 320px: 4 lessons complete, feature/axis/motion controls, hypotheses pass/fail/no answer leak, reload, guided 8, separate records/exposure, same-family link PASS
+webkit 390px: 4 lessons complete, feature/axis/motion controls, hypotheses pass/fail/no answer leak, reload, guided 8, separate records/exposure, same-family link PASS
+webkit 26.4: tutorial regression, review/fallback/first record, daily auto resume/results/JST rollover, reduced motion, blocked storage PASS

@@ -1,0 +1,2604 @@
+{
+  "status": "passed",
+  "workers": "Configured single worker; timeout remains 45000ms",
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "9場面、導入再訪、前後移動、途中終了・再開と全問解説",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 9518,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "計算UI、連続再生の停止・リセット・設定復元",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8998,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "バックアップ置換・統合・不正拒否・履歴と復習候補の保持",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4416,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "保存失敗を保存済みと表示せず再試行する",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3560,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "PWA全資産のキャッシュとオフライン再読込・9場面・履歴復元",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4822,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "320px幅の5画面と9場面に横溢れがない",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5343,
+      "screenshotCount": 3,
+      "screenshotMs": 945,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 702
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 139
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 104
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "390px：第0章の基準絵から3コマ、誤判定と再判定まで同じ工場で進む",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4815,
+      "screenshotCount": 8,
+      "screenshotMs": 1080,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 237
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 143
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 136
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 132
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 126
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 89
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 86
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 131
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px：第0章の基準絵から3コマ、誤判定と再判定まで同じ工場で進む",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3340,
+      "screenshotCount": 6,
+      "screenshotMs": 617,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 133
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 125
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 103
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 78
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 68
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 110
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "新規PNGはローカル・箱は透明部品、オフラインで再開・最初からも動く",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6439,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "390px new user: Chapter0 diagram to all seven scenes and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5275,
+      "screenshotCount": 7,
+      "screenshotMs": 870,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 86
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 186
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 122
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 82
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 83
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 141
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 170
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "pixel colors derive from actual local PNG and update on keyboard/button selection",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3110,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "network manual steps, auto pause, Chapter0 detour and reload preserve current state",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5522,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "restart, optional-free completion, history, actual backup export and restore keep four old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5896,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "all five quiz questions and all option explanations, wrong/retake history and restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6329,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "five optional deep dives close back to same position, and fixed CNN uses real image values",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5596,
+      "screenshotCount": 1,
+      "screenshotMs": 221,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 221
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8642,
+      "screenshotCount": 3,
+      "screenshotMs": 458,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 128
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 132
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 198
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8463,
+      "screenshotCount": 3,
+      "screenshotMs": 914,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 184
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 248
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 482
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "offline main story, all six assets, pixel reading and deep text stay available",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5500,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "course groups, L006 explicit ending link, old resume and home latest L007 resume",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3397,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4483,
+      "screenshotCount": 6,
+      "screenshotMs": 994,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 333
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 107
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 108
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 135
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 127
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 184
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "第1話を演習なしで完了した後、再開して任意演習へ進める",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3609,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "搬送記録の操作前後・条件切替後を再開し、最初から学ぶで今回の3体験だけ初期化",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5653,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "オフラインで漫画から出荷・振り返り・完了まで通し、完了記録を再開する",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3563,
+      "screenshotCount": 1,
+      "screenshotMs": 105,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 105
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px全編に切れや重なりがない／文字拡大=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4107,
+      "screenshotCount": 1,
+      "screenshotMs": 108,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 108
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px全編に切れや重なりがない／文字拡大=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7373,
+      "screenshotCount": 1,
+      "screenshotMs": 197,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 197
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "390px：未読でも始め、100箱の見逃しを発見しA/Bを比較、演習なしで完了",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3801,
+      "screenshotCount": 5,
+      "screenshotMs": 512,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 98
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 81
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 105
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 104
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 124
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "両話の独立した再開・やり直し、旧履歴、3問の解説とバックアップ往復",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6756,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "オフラインで第2話の導入から結末・完了、再読込後の再開も可能",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2333,
+      "screenshotCount": 1,
+      "screenshotMs": 113,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 113
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px：導入・比較・用語・表が切れずに完了／拡大=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2721,
+      "screenshotCount": 2,
+      "screenshotMs": 180,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 88
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 92
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px：導入・比較・用語・表が切れずに完了／拡大=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2654,
+      "screenshotCount": 2,
+      "screenshotMs": 285,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 133
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 152
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "390px: story and four local illustrations, real per-box results, lighting change, fairness and no-quiz completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3894,
+      "screenshotCount": 5,
+      "screenshotMs": 538,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 150
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 92
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 118
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 103
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 75
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "adjusted state resumes from home and returns from related chapter 0 without touching v0.1.8 data",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2135,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "restart before and after completion is isolated, preserves history and completions, and backup restores L006",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3762,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "all four original questions grade correctly, explain every option, retain wrong/retake history, and survive restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4349,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "optional explanations A-E, ordered easy/example/details, numerical model and local sources",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3287,
+      "screenshotCount": 1,
+      "screenshotMs": 184,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 184
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "L005 ending offers L006 explicitly and both lessons retain independent resume/restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2028,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes, images and labels stay inside viewport / enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5901,
+      "screenshotCount": 2,
+      "screenshotMs": 297,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 175
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 122
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px all scenes, images and labels stay inside viewport / enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7242,
+      "screenshotCount": 2,
+      "screenshotMs": 430,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 222
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 208
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "offline: all four PNGs, the whole story, optional explanations, completion and reload",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4398,
+      "screenshotCount": 1,
+      "screenshotMs": 176,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 176
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "390px: scores reverse from real rules; prediction and details are optional; finish without quiz",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2708,
+      "screenshotCount": 5,
+      "screenshotMs": 542,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 127
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 75
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 62
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 145
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 133
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "resume prediction/result, restart only L005, keep legacy data and round-trip backup",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3720,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "L004 ending offers L005 without auto-navigation, and either lesson can resume independently",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2215,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "320px: readable images, labels, buttons and expanded explanation / large=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3093,
+      "screenshotCount": 1,
+      "screenshotMs": 116,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 116
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px: readable images, labels, buttons and expanded explanation / large=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3404,
+      "screenshotCount": 1,
+      "screenshotMs": 157,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 157
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "offline local body and both PNGs work through completion and reload",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2472,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "新規ホーム → 第0章 → 深掘り不要で第1話、包含図は入れ子で描く",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3036,
+      "screenshotCount": 4,
+      "screenshotMs": 1246,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 701
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 302
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 114
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 129
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "深掘り4項目を開閉して元のスクロール位置とフォーカスへ戻る",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2453,
+      "screenshotCount": 1,
+      "screenshotMs": 156,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 156
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "両レッスンの操作後から第0章へ寄り道し、位置・操作・保存データを保ったまま戻る",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2589,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "漫画の読書位置を第0章のスクロールで上書きせず、ホーム・コースからいつでも開ける",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2864,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "320px・文字通常：図・画像・深掘り・2話の入口を読める",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2012,
+      "screenshotCount": 4,
+      "screenshotMs": 431,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 147
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 85
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 91
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 108
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px・文字200%：図・画像・深掘り・2話の入口を読める",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2133,
+      "screenshotCount": 4,
+      "screenshotMs": 524,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 150
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 111
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 118
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 145
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "オフラインで第0章・深掘り本文・全PNGを表示できる",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5623,
+      "screenshotCount": 1,
+      "screenshotMs": 825,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 825
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "ホームは直近の第2話を再開・やり直しし、第1話の状態を変えない",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2732,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "390×844：プロローグから人とAIの食い違い、見本追加へ進み漫画3コマと各場面を撮影",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3308,
+      "screenshotCount": 7,
+      "screenshotMs": 960,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 163
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 145
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 137
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 229
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 88
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 77
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 121
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "完了済みデータから最初から学ぶ：現在のプレイだけ初期化し、完了履歴を残して再完了・再開始",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3914,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "更新前の操作済み保存は誤判定体験の操作後へ直接再開し、やり直し後のプロローグもオフラインで利用可能",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2737,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "プロローグも320px・文字200%相当で切れや横溢れなく操作できる",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2405,
+      "screenshotCount": 2,
+      "screenshotMs": 254,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 180
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 74
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "漫画の読書位置とAI試行の途中位置を再開する",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2641,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "v0.1.2の保存段階を復元：prologue",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1408,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "v0.1.2の保存段階を復元：sorting",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1398,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "390×844：回答や選択なしで最初の発見、挿絵とボタンが初期画面内に収まる",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2164,
+      "screenshotCount": 2,
+      "screenshotMs": 150,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 67
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 83
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "試験を選ばずにまとめと完了へ進め、演習メニューから直接出題できる",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2766,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "v0.1.0の途中データをその場から再開し、導入再訪と旧JSON復元でも履歴を保持",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2436,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "オフラインでも挿絵・見本追加・説明が表示され、操作後の位置を再開する",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2695,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "320pxと文字200%相当で横溢れ・挿絵やボタンの重なりがない",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2545,
+      "screenshotCount": 1,
+      "screenshotMs": 92,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 92
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "390px story from actual initial mistake through training, separate evaluation and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3523,
+      "screenshotCount": 7,
+      "screenshotMs": 717,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 113
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 87
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 74
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 116
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 76
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 166
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 85
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "0/10/50/100 updates: exact accepted counts, graph data and predictions agree",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2108,
+      "screenshotCount": 3,
+      "screenshotMs": 259,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 75
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 74
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 110
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2646,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "rapid clicks execute one accepted batch, real graph agrees, reset returns initial model without scrolling",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1818,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "completion restart, old state, real JSON backup and replacement restore stay compatible",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3228,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "five optional deep dives persist their open state after reload and close back to original item",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3081,
+      "screenshotCount": 1,
+      "screenshotMs": 90,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 90
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "all five optional questions and all explanations grade, retain wrong/retake history and old records",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4147,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "320px story, graph and expanded parameters / enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4703,
+      "screenshotCount": 1,
+      "screenshotMs": 116,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 116
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px story, graph and expanded parameters / enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6099,
+      "screenshotCount": 1,
+      "screenshotMs": 374,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 374
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "offline all four new images, whole real training, saved details and completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4250,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "L007 ending explicitly opens L008 without replacing existing L007 progress",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2804,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "9場面、導入再訪、前後移動、途中終了・再開と全問解説",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 17003,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "計算UI、連続再生の停止・リセット・設定復元",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 10430,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "バックアップ置換・統合・不正拒否・履歴と復習候補の保持",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4949,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "保存失敗を保存済みと表示せず再試行する",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2331,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "PWA全資産のキャッシュとオフライン再読込・9場面・履歴復元",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6287,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px幅の5画面と9場面に横溢れがない",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5935,
+      "screenshotCount": 2,
+      "screenshotMs": 440,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 179
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 261
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px：第0章の基準絵から3コマ、誤判定と再判定まで同じ工場で進む",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5876,
+      "screenshotCount": 8,
+      "screenshotMs": 2508,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 528
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 372
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 339
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 287
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 383
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 172
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 170
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 257
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px：第0章の基準絵から3コマ、誤判定と再判定まで同じ工場で進む",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4265,
+      "screenshotCount": 6,
+      "screenshotMs": 1301,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 270
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 278
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 220
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 146
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 201
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 186
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "新規PNGはローカル・箱は透明部品、オフラインで再開・最初からも動く",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7893,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px new user: Chapter0 diagram to all seven scenes and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 9883,
+      "screenshotCount": 7,
+      "screenshotMs": 2526,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 292
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 429
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 272
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 285
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 213
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 515
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 520
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "pixel colors derive from actual local PNG and update on keyboard/button selection",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6503,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "network manual steps, auto pause, Chapter0 detour and reload preserve current state",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6671,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "restart, optional-free completion, history, actual backup export and restore keep four old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7491,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "all five quiz questions and all option explanations, wrong/retake history and restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 10673,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "five optional deep dives close back to same position, and fixed CNN uses real image values",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 12230,
+      "screenshotCount": 1,
+      "screenshotMs": 923,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 923
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 26312,
+      "screenshotCount": 3,
+      "screenshotMs": 3496,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 1783
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 351
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 1362
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes without overlap/horizontal scroll, enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 18503,
+      "screenshotCount": 3,
+      "screenshotMs": 1826,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 357
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 538
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 931
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "offline main story, all six assets, pixel reading and deep text stay available",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 12493,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "course groups, L006 explicit ending link, old resume and home latest L007 resume",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3300,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px：専門知識・クイズ・詳細設定なしで3方式を体験し16時の出荷で終える",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5575,
+      "screenshotCount": 6,
+      "screenshotMs": 1373,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 292
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 258
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 214
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 159
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 282
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 168
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "第1話を演習なしで完了した後、再開して任意演習へ進める",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3954,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "搬送記録の操作前後・条件切替後を再開し、最初から学ぶで今回の3体験だけ初期化",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7439,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "オフラインで漫画から出荷・振り返り・完了まで通し、完了記録を再開する",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3781,
+      "screenshotCount": 1,
+      "screenshotMs": 201,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 201
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px全編に切れや重なりがない／文字拡大=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7655,
+      "screenshotCount": 1,
+      "screenshotMs": 220,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 220
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px全編に切れや重なりがない／文字拡大=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8018,
+      "screenshotCount": 1,
+      "screenshotMs": 535,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 535
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px：未読でも始め、100箱の見逃しを発見しA/Bを比較、演習なしで完了",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 20636,
+      "screenshotCount": 5,
+      "screenshotMs": 2688,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 527
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 657
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 393
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 602
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 509
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "両話の独立した再開・やり直し、旧履歴、3問の解説とバックアップ往復",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 13522,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "オフラインで第2話の導入から結末・完了、再読込後の再開も可能",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2960,
+      "screenshotCount": 1,
+      "screenshotMs": 223,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 223
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px：導入・比較・用語・表が切れずに完了／拡大=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3530,
+      "screenshotCount": 2,
+      "screenshotMs": 256,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 99
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 157
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px：導入・比較・用語・表が切れずに完了／拡大=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2782,
+      "screenshotCount": 2,
+      "screenshotMs": 412,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 140
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 272
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px: story and four local illustrations, real per-box results, lighting change, fairness and no-quiz completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4537,
+      "screenshotCount": 5,
+      "screenshotMs": 897,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 135
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 223
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 225
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 192
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 122
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "adjusted state resumes from home and returns from related chapter 0 without touching v0.1.8 data",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2498,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "restart before and after completion is isolated, preserves history and completions, and backup restores L006",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4463,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "all four original questions grade correctly, explain every option, retain wrong/retake history, and survive restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7257,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "optional explanations A-E, ordered easy/example/details, numerical model and local sources",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4301,
+      "screenshotCount": 1,
+      "screenshotMs": 345,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 345
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "L005 ending offers L006 explicitly and both lessons retain independent resume/restart",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2848,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes, images and labels stay inside viewport / enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6474,
+      "screenshotCount": 2,
+      "screenshotMs": 338,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 206
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 132
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px all scenes, images and labels stay inside viewport / enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7193,
+      "screenshotCount": 2,
+      "screenshotMs": 500,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 256
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 244
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "offline: all four PNGs, the whole story, optional explanations, completion and reload",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3610,
+      "screenshotCount": 1,
+      "screenshotMs": 162,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 162
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px: scores reverse from real rules; prediction and details are optional; finish without quiz",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2537,
+      "screenshotCount": 5,
+      "screenshotMs": 629,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 187
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 88
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 90
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 156
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 108
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "resume prediction/result, restart only L005, keep legacy data and round-trip backup",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4711,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "L004 ending offers L005 without auto-navigation, and either lesson can resume independently",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2014,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px: readable images, labels, buttons and expanded explanation / large=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3605,
+      "screenshotCount": 1,
+      "screenshotMs": 159,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 159
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px: readable images, labels, buttons and expanded explanation / large=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3666,
+      "screenshotCount": 1,
+      "screenshotMs": 218,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 218
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "offline local body and both PNGs work through completion and reload",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2470,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "新規ホーム → 第0章 → 深掘り不要で第1話、包含図は入れ子で描く",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2548,
+      "screenshotCount": 4,
+      "screenshotMs": 1116,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 155
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 449
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 237
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 275
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "深掘り4項目を開閉して元のスクロール位置とフォーカスへ戻る",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3262,
+      "screenshotCount": 1,
+      "screenshotMs": 270,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 270
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "両レッスンの操作後から第0章へ寄り道し、位置・操作・保存データを保ったまま戻る",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3536,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "漫画の読書位置を第0章のスクロールで上書きせず、ホーム・コースからいつでも開ける",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3122,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px・文字通常：図・画像・深掘り・2話の入口を読める",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1995,
+      "screenshotCount": 4,
+      "screenshotMs": 676,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 186
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 184
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 155
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 151
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px・文字200%：図・画像・深掘り・2話の入口を読める",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2316,
+      "screenshotCount": 4,
+      "screenshotMs": 893,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 226
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 261
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 220
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 186
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "オフラインで第0章・深掘り本文・全PNGを表示できる",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6203,
+      "screenshotCount": 1,
+      "screenshotMs": 478,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 478
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "ホームは直近の第2話を再開・やり直しし、第1話の状態を変えない",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2511,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390×844：プロローグから人とAIの食い違い、見本追加へ進み漫画3コマと各場面を撮影",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2922,
+      "screenshotCount": 7,
+      "screenshotMs": 1150,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 155
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 160
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 178
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 335
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 105
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 109
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 108
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "完了済みデータから最初から学ぶ：現在のプレイだけ初期化し、完了履歴を残して再完了・再開始",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4363,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "更新前の操作済み保存は誤判定体験の操作後へ直接再開し、やり直し後のプロローグもオフラインで利用可能",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2865,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "プロローグも320px・文字200%相当で切れや横溢れなく操作できる",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1872,
+      "screenshotCount": 2,
+      "screenshotMs": 395,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 284
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 111
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "漫画の読書位置とAI試行の途中位置を再開する",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2764,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "v0.1.2の保存段階を復元：prologue",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1214,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "v0.1.2の保存段階を復元：sorting",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1057,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390×844：回答や選択なしで最初の発見、挿絵とボタンが初期画面内に収まる",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2549,
+      "screenshotCount": 2,
+      "screenshotMs": 315,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 175
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 140
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "試験を選ばずにまとめと完了へ進め、演習メニューから直接出題できる",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2629,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "v0.1.0の途中データをその場から再開し、導入再訪と旧JSON復元でも履歴を保持",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2638,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "オフラインでも挿絵・見本追加・説明が表示され、操作後の位置を再開する",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2419,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320pxと文字200%相当で横溢れ・挿絵やボタンの重なりがない",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1715,
+      "screenshotCount": 1,
+      "screenshotMs": 110,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 110
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px story from actual initial mistake through training, separate evaluation and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3733,
+      "screenshotCount": 7,
+      "screenshotMs": 894,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 126
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 114
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 69
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 123
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 96
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 215
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 151
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "0/10/50/100 updates: exact accepted counts, graph data and predictions agree",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1950,
+      "screenshotCount": 3,
+      "screenshotMs": 284,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 87
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 94
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 103
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2669,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "rapid clicks execute one accepted batch, real graph agrees, reset returns initial model without scrolling",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1718,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "completion restart, old state, real JSON backup and replacement restore stay compatible",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 3317,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "five optional deep dives persist their open state after reload and close back to original item",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4403,
+      "screenshotCount": 1,
+      "screenshotMs": 64,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 64
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "all five optional questions and all explanations grade, retain wrong/retake history and old records",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7156,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px story, graph and expanded parameters / enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4863,
+      "screenshotCount": 1,
+      "screenshotMs": 162,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 162
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px story, graph and expanded parameters / enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4479,
+      "screenshotCount": 1,
+      "screenshotMs": 366,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 366
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "offline all four new images, whole real training, saved details and completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 2920,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "L007 ending explicitly opens L008 without replacing existing L007 progress",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 1086,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    }
+  ]
+}

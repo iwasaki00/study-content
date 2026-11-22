@@ -1,3 +1,12 @@
+import type { CnnProgress } from "./types";
+import { beginCnn, completeCnn } from "./engine/learning";
+import { cnnQuestions } from "./data/cnn";
+import { CnnEpisode } from "./components/CnnEpisode";
+import type { TrainingProgress } from "./types";
+import { beginTraining, completeTraining } from "./engine/learning";
+import { learn, freshTrainingState } from "./engine/training";
+import { trainingQuestions, trainingStages } from "./data/training";
+import { TrainingEpisode } from "./components/TrainingEpisode";
 import type { DeepLearningProgress } from "./types";
 import { beginDeepLearning, completeDeepLearning } from "./engine/learning";
 import { DeepLearningEpisode } from "./components/DeepLearningEpisode";
@@ -70,7 +79,7 @@ export default function App() {
     [inLesson, setInLesson] = useState(false),
     [guideOpen, setGuideOpen] = useState(false),
     [activeLesson, setActiveLesson] = useState<
-      "L003" | "L004" | "L005" | "L006" | "L007"
+      "L003" | "L004" | "L005" | "L006" | "L007" | "L008" | "L009"
     >("L003"),
     [origin, setOrigin] = useState(0),
     [online, setOnline] = useState(navigator.onLine),
@@ -105,7 +114,7 @@ export default function App() {
       guideReturn.current.element?.focus({ preventScroll: true });
     });
   }
-  function guideLesson(id: "L003" | "L004" | "L007") {
+  function guideLesson(id: "L003" | "L004" | "L007" | "L008" | "L009") {
     if (inLesson && activeLesson === id) {
       closeGuide();
       return;
@@ -113,6 +122,8 @@ export default function App() {
     setGuideOpen(false);
     if (id === "L003") enter();
     else if (id === "L007") enterDeepLearning();
+    else if (id === "L008") enterTraining();
+    else if (id === "L009") enterCnn();
     else enterEvaluation();
   }
   const ref = useRef(snapshot),
@@ -161,7 +172,9 @@ export default function App() {
     snapshot.attempts.length +
     (snapshot.evaluationAttempts?.length ?? 0) +
     (snapshot.fairnessAttempts?.length ?? 0) +
-    (snapshot.deepLearningAttempts?.length ?? 0);
+    (snapshot.deepLearningAttempts?.length ?? 0) +
+    (snapshot.trainingAttempts?.length ?? 0) +
+    (snapshot.cnnAttempts?.length ?? 0);
   const p = snapshot.progress;
   const resumeEvaluation =
     !!snapshot.evaluation &&
@@ -189,6 +202,26 @@ export default function App() {
       snapshot.generalization,
       snapshot.fairness,
     ].every((old) => !old || snapshot.deepLearning!.updatedAt >= old.updatedAt);
+  const resumeTraining =
+    !!snapshot.training &&
+    [
+      hasLearningRecord(snapshot) ? p : undefined,
+      snapshot.evaluation,
+      snapshot.generalization,
+      snapshot.fairness,
+      snapshot.deepLearning,
+    ].every((old) => !old || snapshot.training!.updatedAt >= old.updatedAt);
+  const resumeCnn =
+    !!snapshot.cnn &&
+    [
+      hasLearningRecord(snapshot) ? p : undefined,
+      snapshot.evaluation,
+      snapshot.generalization,
+      snapshot.fairness,
+      snapshot.deepLearning,
+      snapshot.training,
+    ].every((old) => !old || snapshot.cnn!.updatedAt >= old.updatedAt);
+  const trainingLock = useRef(false);
   const episodeCount =
     Number(!!p.storySampleAdded) +
     Number(!!p.episode?.grouped) +
@@ -500,6 +533,153 @@ export default function App() {
   function finishDeepLearning() {
     if (!ref.current.deepLearning?.completed)
       commit(completeDeepLearning(ref.current));
+    setInLesson(false);
+    setTab(origin);
+  }
+
+  function enterTraining(restart = false, quiz = false) {
+    const next = beginTraining(ref.current, restart),
+      t = next.training!;
+    commit({
+      ...next,
+      completions: completionRecords(next),
+      training: {
+        ...t,
+        ...(quiz && t.visited.includes("ending")
+          ? {
+              stage: "quiz" as const,
+              visited: [...new Set([...t.visited, "quiz" as const])],
+            }
+          : {}),
+        updatedAt: new Date().toISOString(),
+      },
+    });
+    setOrigin(tab);
+    setActiveLesson("L008");
+    setInLesson(true);
+  }
+  function updateTraining(change: Partial<TrainingProgress>) {
+    const b = ref.current;
+    if (!b.training) return;
+    commit({
+      ...b,
+      completions: completionRecords(b),
+      training: {
+        ...b.training,
+        ...change,
+        updatedAt: new Date().toISOString(),
+      },
+    });
+  }
+  function moveTraining(stage: TrainingProgress["stage"]) {
+    updateTraining({
+      stage,
+      visited: [...new Set([...ref.current.training!.visited, stage])],
+    });
+  }
+  function answerTraining(choice: number) {
+    const b = ref.current,
+      t = b.training!,
+      a = grade(
+        trainingQuestions[t.questionIndex].id,
+        choice,
+        t.sessionId,
+        trainingQuestions,
+      );
+    commit({
+      ...b,
+      completions: completionRecords(b),
+      trainingAttempts: [...(b.trainingAttempts ?? []), a],
+      training: { ...t, updatedAt: a.answeredAt },
+    });
+  }
+  function finishTraining() {
+    if (!ref.current.training?.completed) commit(completeTraining(ref.current));
+    setInLesson(false);
+    setTab(origin);
+  }
+  function trainUpdates(count: number) {
+    if (trainingLock.current || saving) return;
+    trainingLock.current = true;
+    try {
+      updateTraining(learn(ref.current.training!, count));
+    } finally {
+      void queue.current.finally(() => {
+        trainingLock.current = false;
+      });
+    }
+  }
+  function resetTraining() {
+    if (trainingLock.current || saving) return;
+    updateTraining({
+      ...freshTrainingState(),
+      trainedOnce: false,
+      evaluated: false,
+      completed: false,
+      stage: "practice",
+      visited: trainingStages.slice(0, 5),
+    });
+  }
+
+  function enterCnn(restart = false, quiz = false) {
+    const next = beginCnn(ref.current, restart),
+      c = next.cnn!;
+    commit({
+      ...next,
+      completions: completionRecords(next),
+      cnn: {
+        ...c,
+        ...(quiz && c.visited.includes("ending")
+          ? {
+              stage: "quiz" as const,
+              visited: [...new Set([...c.visited, "quiz" as const])],
+            }
+          : {}),
+        updatedAt: new Date().toISOString(),
+      },
+    });
+    setOrigin(tab);
+    setActiveLesson("L009");
+    setInLesson(true);
+  }
+  function updateCnn(change: Partial<CnnProgress>) {
+    const b = ref.current;
+    if (!b.cnn) return;
+    commit({
+      ...b,
+      completions: completionRecords(b),
+      cnn: {
+        ...b.cnn,
+        ...change,
+        ...(change.poolStage === 3 ? { poolDone: true } : {}),
+        updatedAt: new Date().toISOString(),
+      },
+    });
+  }
+  function moveCnn(stage: CnnProgress["stage"]) {
+    updateCnn({
+      stage,
+      visited: [...new Set([...ref.current.cnn!.visited, stage])],
+    });
+  }
+  function answerCnn(choice: number) {
+    const b = ref.current,
+      c = b.cnn!,
+      a = grade(
+        cnnQuestions[c.questionIndex].id,
+        choice,
+        c.sessionId,
+        cnnQuestions,
+      );
+    commit({
+      ...b,
+      completions: completionRecords(b),
+      cnnAttempts: [...(b.cnnAttempts ?? []), a],
+      cnn: { ...c, updatedAt: a.answeredAt },
+    });
+  }
+  function finishCnn() {
+    if (!ref.current.cnn?.completed) commit(completeCnn(ref.current));
     setInLesson(false);
     setTab(origin);
   }
@@ -916,7 +1096,7 @@ export default function App() {
               <br />
               理解のはじまり。
             </p>
-            <small>v0.2.0 · この端末に保存</small>
+            <small>v0.2.2 · この端末に保存</small>
           </div>
         </aside>
       )}
@@ -965,8 +1145,35 @@ export default function App() {
                 <button onClick={() => void load()}>読み込みを再試行</button>
               )}
             </section>
+          ) : inLesson && activeLesson === "L009" && snapshot.cnn ? (
+            <CnnEpisode
+              progress={snapshot.cnn}
+              attempts={snapshot.cnnAttempts ?? []}
+              onChange={updateCnn}
+              onMove={moveCnn}
+              onAnswer={answerCnn}
+              onFinish={finishCnn}
+              onGuide={(e) => openGuide(e, "guide-dl")}
+              busy={saving}
+              suspended={guideOpen}
+            />
+          ) : inLesson && activeLesson === "L008" && snapshot.training ? (
+            <TrainingEpisode
+              onNext={() => enterCnn()}
+              progress={snapshot.training}
+              attempts={snapshot.trainingAttempts ?? []}
+              onChange={updateTraining}
+              onMove={moveTraining}
+              onLearn={trainUpdates}
+              onReset={resetTraining}
+              onAnswer={answerTraining}
+              onFinish={finishTraining}
+              onGuide={(e) => openGuide(e, "guide-dl")}
+              busy={saving}
+            />
           ) : inLesson && activeLesson === "L007" && snapshot.deepLearning ? (
             <DeepLearningEpisode
+              onNext={() => enterTraining()}
               progress={snapshot.deepLearning}
               attempts={snapshot.deepLearningAttempts ?? []}
               onChange={updateDeepLearning}
@@ -1164,17 +1371,21 @@ export default function App() {
                         BEGINNER GUIDE <span>第0章から</span>
                       </span>
                       <p className="lesson-number">
-                        {resumeDeepLearning
-                          ? "再開する教材：第5話 · 写真と層の仕組み"
-                          : resumeFairness
-                            ? "再開する教材：第4話 · 条件の違いと公平性"
-                            : resumeGeneralization
-                              ? "再開する教材：第3話 · どの箱で確かめるか"
-                              : resumeEvaluation
-                                ? "再開する教材：第2話 · モデル評価"
-                                : hasLearningRecord(snapshot)
-                                  ? "再開する教材：第1話 · AIの3つの学び方"
-                                  : "AIの入り口 · 工場と動物保護施設で体験"}
+                        {resumeCnn
+                          ? "再開する教材：第7話 · 画像とフィルタ"
+                          : resumeTraining
+                            ? "再開する教材：第6話 · 間違いから学ぶ"
+                            : resumeDeepLearning
+                              ? "再開する教材：第5話 · 写真と層の仕組み"
+                              : resumeFairness
+                                ? "再開する教材：第4話 · 条件の違いと公平性"
+                                : resumeGeneralization
+                                  ? "再開する教材：第3話 · どの箱で確かめるか"
+                                  : resumeEvaluation
+                                    ? "再開する教材：第2話 · モデル評価"
+                                    : hasLearningRecord(snapshot)
+                                      ? "再開する教材：第1話 · AIの3つの学び方"
+                                      : "AIの入り口 · 工場と動物保護施設で体験"}
                       </p>
                       <h2>
                         まずは、
@@ -1189,7 +1400,9 @@ export default function App() {
                         <button
                           className="cream"
                           onClick={(event) => {
-                            if (resumeDeepLearning) enterDeepLearning();
+                            if (resumeCnn) enterCnn();
+                            else if (resumeTraining) enterTraining();
+                            else if (resumeDeepLearning) enterDeepLearning();
                             else if (resumeFairness) enterFairness();
                             else if (resumeGeneralization)
                               enterGeneralization();
@@ -1202,7 +1415,9 @@ export default function App() {
                           snapshot.evaluation ||
                           snapshot.generalization ||
                           snapshot.fairness ||
-                          snapshot.deepLearning
+                          snapshot.deepLearning ||
+                          snapshot.training ||
+                          snapshot.cnn
                             ? "続きから学ぶ"
                             : "3分で全体像を見る"}{" "}
                           <span>↗</span>
@@ -1215,19 +1430,25 @@ export default function App() {
                           snapshot.evaluation ||
                           snapshot.generalization ||
                           snapshot.fairness ||
-                          snapshot.deepLearning) && (
+                          snapshot.deepLearning ||
+                          snapshot.training ||
+                          snapshot.cnn) && (
                           <button
                             className="hero-revisit"
                             onClick={() =>
-                              resumeDeepLearning
-                                ? enterDeepLearning(true)
-                                : resumeFairness
-                                  ? enterFairness(true)
-                                  : resumeGeneralization
-                                    ? enterGeneralization(true)
-                                    : resumeEvaluation
-                                      ? enterEvaluation(true)
-                                      : startOver()
+                              resumeCnn
+                                ? enterCnn(true)
+                                : resumeTraining
+                                  ? enterTraining(true)
+                                  : resumeDeepLearning
+                                    ? enterDeepLearning(true)
+                                    : resumeFairness
+                                      ? enterFairness(true)
+                                      : resumeGeneralization
+                                        ? enterGeneralization(true)
+                                        : resumeEvaluation
+                                          ? enterEvaluation(true)
+                                          : startOver()
                             }
                           >
                             最初から学ぶ
@@ -1476,6 +1697,57 @@ export default function App() {
                       )}
                     </div>
                   </section>
+                  <section className="card training-course" data-lesson="L008">
+                    <span className="tag">第6話 · L008</span>
+                    <h2>AIはどうやって間違いから学ぶの？</h2>
+                    <p>
+                      同じ施設で、予測と正解のずれを調べ、小さなネットワークを実際に学習させます。数式は任意。演習は最後に選べます。
+                    </p>
+                    <p>
+                      {snapshot.training?.completed
+                        ? "最後まで学習した記録あり"
+                        : snapshot.training
+                          ? "途中の場面と操作状態から再開できます。"
+                          : "第0章や工場編を読まずに始めても大丈夫です。"}
+                    </p>
+                    <div className="controls">
+                      <button
+                        className="primary"
+                        onClick={() => enterTraining()}
+                      >
+                        {snapshot.training ? "続きから学ぶ" : "第6話を始める"}
+                      </button>
+                      {snapshot.training && (
+                        <button onClick={() => enterTraining(true)}>
+                          最初から学ぶ
+                        </button>
+                      )}
+                    </div>
+                  </section>
+                  <section className="card cnn-course" data-lesson="L009">
+                    <span className="tag">第7話 · L009</span>
+                    <h2>AIは写真のどこを見ているの？</h2>
+                    <p>
+                      同じ施設で、16×16の画像に小さなフィルタを動かし、輪郭や模様を計算する仕組みを体験します。演習は最後に選べます。
+                    </p>
+                    <p>
+                      {snapshot.cnn?.completed
+                        ? "最後まで学習した記録あり"
+                        : snapshot.cnn
+                          ? "途中の場面と操作状態から再開できます。"
+                          : "第0章や工場編を読まずに始めても大丈夫です。"}
+                    </p>
+                    <div className="controls">
+                      <button className="primary" onClick={() => enterCnn()}>
+                        {snapshot.cnn ? "続きから学ぶ" : "第7話を始める"}
+                      </button>
+                      {snapshot.cnn && (
+                        <button onClick={() => enterCnn(true)}>
+                          最初から学ぶ
+                        </button>
+                      )}
+                    </div>
+                  </section>
                 </>
               )}
               {tab === 2 && (
@@ -1519,6 +1791,28 @@ export default function App() {
                     {snapshot.deepLearning?.visited.includes("ending")
                       ? "第5話の演習を開く"
                       : "第5話を体験してから演習へ"}
+                  </button>
+                </section>
+              )}
+              {tab === 2 && (
+                <section className="card training-exercise">
+                  <h2>第6話 · 間違いから学ぶ仕組み</h2>
+                  <p>物語のあとに選べる独自問題5問です。</p>
+                  <button onClick={() => enterTraining(false, true)}>
+                    {snapshot.training?.visited.includes("ending")
+                      ? "第6話の演習を開く"
+                      : "第6話を体験してから演習へ"}
+                  </button>
+                </section>
+              )}
+              {tab === 2 && (
+                <section className="card cnn-exercise">
+                  <h2>第7話 · 画像とフィルタ</h2>
+                  <p>物語のあとに選べるオリジナル5問です。</p>
+                  <button onClick={() => enterCnn(false, true)}>
+                    {snapshot.cnn?.visited.includes("ending")
+                      ? "第7話の演習を開く"
+                      : "第7話を体験してから演習へ"}
                   </button>
                 </section>
               )}
@@ -1628,6 +1922,46 @@ export default function App() {
                         ))}
                     </ul>
                   </section>
+                  <section className="card cnn-history">
+                    <h2>L009の記録</h2>
+                    <p>
+                      {snapshot.cnn?.completed
+                        ? "最後まで学習"
+                        : snapshot.cnn
+                          ? "学習中"
+                          : "未開始"}{" "}
+                      · 回答履歴 {snapshot.cnnAttempts?.length ?? 0}件
+                    </p>
+                    <ul>
+                      {[...(snapshot.cnnAttempts ?? [])].reverse().map((a) => (
+                        <li key={a.id}>
+                          {a.questionId} · {"ABCD"[a.selected]} ·{" "}
+                          {a.correct ? "正解" : "不正解"}
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                  <section className="card training-history">
+                    <h2>L008の記録</h2>
+                    <p>
+                      {snapshot.training?.completed
+                        ? "最後まで学習"
+                        : snapshot.training
+                          ? "学習中"
+                          : "未開始"}{" "}
+                      · 回答履歴 {snapshot.trainingAttempts?.length ?? 0}件
+                    </p>
+                    <ul>
+                      {[...(snapshot.trainingAttempts ?? [])]
+                        .reverse()
+                        .map((a) => (
+                          <li key={a.id}>
+                            {a.questionId} · {"ABCD"[a.selected]} ·{" "}
+                            {a.correct ? "正解" : "不正解"}
+                          </li>
+                        ))}
+                    </ul>
+                  </section>
                   <section className="card deep-history">
                     <h2>L007の記録</h2>
                     <p>
@@ -1729,7 +2063,7 @@ export default function App() {
                 </>
               )}
               <footer className="page-footer">
-                <span>WHY LEARN G · v0.2.0</span>
+                <span>WHY LEARN G · v0.2.2</span>
                 <details>
                   <summary>教材の参照情報</summary>
                   <p>

@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const context = { window: {}, Intl, Date };
-for (const file of ['questions.js','questions-extra.js','questions-v02.js','questions-v03.js','adaptive.js','shapes.js','challenge.js','learning.js','analytics.js','explanations.js']) vm.runInNewContext(fs.readFileSync(path.join(__dirname,file),'utf8'), context);
+for (const file of ['questions.js','questions-extra.js','questions-v02.js','questions-v03.js','adaptive.js','shapes.js','reasoning.js','history.js','insights-content.js','challenge.js','learning.js','analytics.js','explanations.js','insights.js']) vm.runInNewContext(fs.readFileSync(path.join(__dirname,file),'utf8'), context);
 const qs = JSON.parse(JSON.stringify(context.window.LabQuestions));
 const learning = context.window.LabLearning;
 const get = id => qs.find(q=>q.id===id);

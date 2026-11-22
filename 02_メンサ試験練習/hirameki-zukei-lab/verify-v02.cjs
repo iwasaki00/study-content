@@ -69,7 +69,7 @@ const legacyFirst={choiceId:'a',correct:false,hints:0,status:'解説で確認',a
 const legacy={version:1,onboarded:true,records:{Q02:{first:legacyFirst,last:legacyFirst,attempts:3}},reviews:{Q02:{originId:'Q02',createdAt:100}},daily:{'2026-11-21':{ids:['Q02','Q04','Q09','Q15','Q22'],answers:{}}},lastSeen:{Q02:100},activeDaily:'2026-11-21'};
 const store=memory(legacy);let m=learning.create(qs,store);m.record('Q02','b',0,{durationMs:5000});
 assert.deepEqual(clone(m.data.records.Q02.first),legacyFirst);m.save();m=learning.create(qs,store);
-assert.equal(m.data.version,3);assert.deepEqual(Array.from(m.daily('2026-11-21').ids),legacy.daily['2026-11-21'].ids);
+assert.equal(m.data.version,5);assert.deepEqual(Array.from(m.daily('2026-11-21').ids),legacy.daily['2026-11-21'].ids);
 assert.equal(m.data.activeDaily,'2026-11-21');assert(m.data.reviews.Q02);assert.equal(m.reviewPlan()[0].questionId,'Q59');
 assert.deepEqual(clone(m.data.records.Q02.first),legacyFirst);
 const poisoned=clone(legacy);poisoned.daily['2026-11-21'].answers.Q02={choiceId:'b',hints:0,id:'Q999',status:'bad'};

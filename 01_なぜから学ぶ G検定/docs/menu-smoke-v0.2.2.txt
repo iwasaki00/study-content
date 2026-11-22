@@ -1,0 +1,1 @@
+PASS: dist/app 40 files are byte-identical; menu L005/L006/L007/L008/L009 completed at 390px with local images.

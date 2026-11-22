@@ -9,7 +9,7 @@ window.LabShapes = (() => {
     if(s.kind==='agents')return `丸は左から${s.position+1}番目、四角は左から${s.secondPosition+1}番目`;
     if (s.kind === 'arrow') return `${arrowNames[s.direction]}向きの矢印${s.count ? `、点${s.count}つ` : ''}`;
     if (s.kind === 'ring') return `${ringNames[s.direction]}に切り欠き、穴${s.count}つ`;
-    if (s.kind === 'flag') return `基準から時計回り${s.direction}度${s.mirror ? '、鏡の形' : ''}の旗、${paintNames[s.paint]}${s.count ? `、小さな四角${s.count}つ` : ''}`;
+    if (s.kind === 'flag') return `基準から時計回り${s.direction}度${s.mirror ? '、鏡の形' : ''}の旗${s.landmark?'、角に目印':''}、${paintNames[s.paint]}${s.count ? `、小さな四角${s.count}つ` : ''}`;
     if (s.kind === 'moving-flag') return `${s.slots}つの枠の左から${s.position+1}番目、${s.mirror?'鏡の向き':'元の向き'}の小さな形、${s.direction}度、${paintNames[s.paint]}`;
     if (s.kind === 'track') return `${s.slots}マスの左から${s.position + 1}番目に印${s.count ? `、下の点${s.count}つ` : ''}`;
     if (s.kind === 'beads') return `印${s.count}個`;
@@ -42,7 +42,7 @@ window.LabShapes = (() => {
       const glyph = 'M25 20H78L60 42H43V63H57V80H25Z';
       const paintId = `paint-${++serial}`;
       const paint = s.paint === 'solid' ? `<path d="${glyph}" fill="currentColor"/>` : s.paint === 'striped' ? `<defs><clipPath id="${paintId}"><path d="${glyph}"/></clipPath></defs><g clip-path="url(#${paintId})" stroke="currentColor" stroke-width="4">${Array.from({length:12},(_,i) => `<path d="M${i*10-70} 85L${i*10+15} 0"/>`).join('')}</g>` : '';
-      content = `<g class="outer"><g transform="rotate(${s.direction} 50 50) translate(50 50) scale(${s.mirror ? -1 : 1} 1) translate(-50 -50)"><g class="paint">${paint}</g><path class="outline" d="${glyph}" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></g></g><g class="inner" fill="currentColor">${Array.from({length:s.count},(_,i) => `<rect x="${47+(i-(s.count-1)/2)*13}" y="87" width="6" height="6"/>`).join('')}</g>`;
+      content = `<g class="outer"><g transform="rotate(${s.direction} 50 50) translate(50 50) scale(${s.mirror ? -1 : 1} 1) translate(-50 -50)"><g class="paint">${paint}</g>${s.landmark?'<circle class="landmark" cx="25" cy="20" r="6" fill="#fffef9" stroke="currentColor" stroke-width="3"/>':''}<path class="outline" d="${glyph}" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></g></g><g class="inner" fill="currentColor">${Array.from({length:s.count},(_,i) => `<rect x="${47+(i-(s.count-1)/2)*13}" y="87" width="6" height="6"/>`).join('')}</g>`;
       if(s.kind==='moving-flag'){
         const frames=Array.from({length:3},(_,i)=>`<rect class="${i===s.position?'active-slot':''}" x="${3+i*32}" y="23" width="30" height="54" rx="2"/>`).join('');
         content=`<g class="grid" fill="none" stroke="#a6b5a3" stroke-width="1.4">${frames}</g><g transform="translate(${18+s.position*32} 50) scale(.48) translate(-50 -50)">${content}</g>`;

@@ -3,7 +3,7 @@ window.LabAdaptive = (() => {
   const categories = ['回転・反転','移動・個数','重ね合わせ','複数ルール'];
   function profile(questions,data) {
     return categories.map(category=>{
-      const firsts=questions.filter(q=>!q.practice&&q.category===category).map(q=>({q,a:data.records[q.id]?.first})).filter(x=>x.a?.source==='practice');
+      const firsts=questions.filter(q=>!q.practice&&q.category===category).map(q=>({q,a:data.records[q.id]?.first})).filter(x=>x.a?.source==='practice'&&Number.isInteger(x.a.hints));
       const n=firsts.length,correct=firsts.filter(x=>x.a.correct).length,hinted=firsts.filter(x=>x.a.hints>0).length;
       const unaided=firsts.filter(x=>x.a.correct&&!x.a.hints).length;
       // ５件ごとの初見区間で、１段階ずつ調整。最大でも１→２→３。

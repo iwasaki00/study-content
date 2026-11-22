@@ -81,7 +81,7 @@ try {
     /6\/8/,
   );
   await page.screenshot({
-    path: "docs/screenshots/v0.2.0/menu-l005-reversal-390-chromium.png",
+    path: "docs/screenshots/v0.2.2/menu-l005-reversal-390-chromium.png",
     fullPage: true,
   });
   await page
@@ -124,7 +124,7 @@ try {
     );
     await page.screenshot({
       path:
-        "docs/screenshots/v0.2.0/menu-l006-cause-" + width + "-chromium.png",
+        "docs/screenshots/v0.2.2/menu-l006-cause-" + width + "-chromium.png",
       fullPage: true,
       animations: "disabled",
     });
@@ -139,7 +139,7 @@ try {
     /10\/10/,
   );
   await page.screenshot({
-    path: "docs/screenshots/v0.2.0/menu-l006-lighting-390-chromium.png",
+    path: "docs/screenshots/v0.2.2/menu-l006-lighting-390-chromium.png",
     fullPage: true,
     animations: "disabled",
   });
@@ -159,7 +159,7 @@ try {
     .click();
   await page.locator(".deep-picture img").evaluate((img) => img.decode());
   await page.screenshot({
-    path: "docs/screenshots/v0.2.0/menu-l007-intro-390-chromium.png",
+    path: "docs/screenshots/v0.2.2/menu-l007-intro-390-chromium.png",
     fullPage: true,
   });
   await page
@@ -190,13 +190,88 @@ try {
     await page.getByRole("button", { name, exact: true }).click();
   await page.locator(".deep-picture img").evaluate((img) => img.decode());
   await page.screenshot({
-    path: "docs/screenshots/v0.2.0/menu-l007-ending-390-chromium.png",
+    path: "docs/screenshots/v0.2.2/menu-l007-ending-390-chromium.png",
     fullPage: true,
   });
   await page.getByRole("button", { name: "ここで終える", exact: true }).click();
   await page.getByText("端末に保存済み", { exact: true }).waitFor();
+
+  await page.getByRole("button", { name: "コース", exact: true }).click();
+  await page
+    .locator(".training-course")
+    .getByRole("button", { name: "第6話を始める" })
+    .click();
+  for (const name of [
+    "間違いの理由を調べる",
+    "予測と正解を見比べる",
+    "内部の数字を調整してみる",
+    "1回学習する",
+  ]) {
+    await page.getByRole("button", { name, exact: true }).click();
+    await page.getByText("端末に保存済み", { exact: true }).waitFor();
+  }
+  await page
+    .getByRole("button", { name: "何度も学習してみる", exact: true })
+    .click();
+  await page.getByRole("button", { name: "50回学習", exact: true }).click();
+  await page.getByText("端末に保存済み", { exact: true }).waitFor();
+  assert.match(
+    await page.locator(".training-prediction").innerText(),
+    /AIの現在の判定：猫/,
+  );
+  assert.equal(await page.getByTestId("training-count").innerText(), "51");
+  await page.screenshot({
+    path: "docs/screenshots/v0.2.2/menu-l008-training-390-chromium.png",
+    fullPage: true,
+    animations: "disabled",
+  });
+  for (const name of [
+    "新しい動物でも試す",
+    "学習に使っていない4例を確かめる",
+    "第6話をまとめる",
+    "ここで終える",
+  ]) {
+    await page.getByRole("button", { name, exact: true }).click();
+    await page.getByText("端末に保存済み", { exact: true }).waitFor();
+  }
+  await page.getByRole("button", { name: "コース", exact: true }).click();
+  await page
+    .locator(".cnn-course")
+    .getByRole("button", { name: "第7話を始める", exact: true })
+    .click();
+  for (const name of ["写真を拡大する", "小さなフィルタを重ねる"])
+    await page.getByRole("button", { name, exact: true }).click();
+  await page.getByTestId("cnn-result").waitFor();
+  assert.ok(
+    Number.isFinite(
+      Number(await page.getByTestId("cnn-result").getAttribute("data-value")),
+    ),
+  );
+  await page.screenshot({
+    path: "docs/screenshots/v0.2.2/menu-l009-window-390-chromium.png",
+    fullPage: true,
+    animations: "disabled",
+  });
+  for (const name of [
+    "別のフィルタも試す",
+    "特徴マップを小さくまとめる",
+    "フィルタ結果を見る",
+    "ReLU結果を見る",
+    "プーリング結果を見る",
+    "全体の流れを見る",
+    "第7話をまとめる",
+  ])
+    await page.getByRole("button", { name, exact: true }).click();
+  await page.locator(".cnn-picture img").evaluate((img) => img.decode());
+  await page.screenshot({
+    path: "docs/screenshots/v0.2.2/menu-l009-ending-390-chromium.png",
+    fullPage: true,
+    animations: "disabled",
+  });
+  await page.getByRole("button", { name: "ここで終える", exact: true }).click();
+  await page.getByText("端末に保存済み", { exact: true }).waitFor();
   console.log(
-    `PASS: dist/app ${menuFiles.length} files are byte-identical; menu L005/L006/L007 completed at 390px with local images.`,
+    `PASS: dist/app ${menuFiles.length} files are byte-identical; menu L005/L006/L007/L008/L009 completed at 390px with local images.`,
   );
 } finally {
   await browser.close();

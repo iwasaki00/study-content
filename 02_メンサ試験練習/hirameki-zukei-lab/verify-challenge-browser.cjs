@@ -10,7 +10,7 @@ async function runChallengeTests(browser,url,name){
   const active=async()=>{const d=await state();return d.challenges.find(c=>c.id===d.activeChallengeId)||d.challenges.at(-1);};
   const qid=async()=>{const s=await active();return s.ids.find(id=>!s.answers[id]);};
   const choose=async(correct=true)=>{const id=await qid(),q=qs.find(q=>q.id===id);await page.locator(`[data-choice="${correct?q.answerId:q.choices.find(c=>c.id!==q.answerId).id}"]`).click();return id;};
-  const shot=async label=>{fs.mkdirSync(path.join(__dirname,'screenshots','v0.3.0'),{recursive:true});await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`${label}-${name}.png`),fullPage:true});};
+  const shot=async label=>{fs.mkdirSync(path.join(__dirname,'screenshots','v0.5.0'),{recursive:true});await page.screenshot({path:path.join(__dirname,'screenshots','v0.5.0',`${label}-${name}.png`),fullPage:true});};
   const noOverflow=async()=>assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   try{
     await page.goto(url);await page.evaluate(()=>localStorage.clear());await page.reload();await click('menu');
@@ -101,7 +101,7 @@ async function runChallengeTests(browser,url,name){
     assert((await page.locator('.analysis-list .analysis-card').first().innerText()).includes('0%（0 / 5問）'));
     assert((await page.locator('.analysis-list .analysis-card').first().innerText()).includes('3.0秒'));
     await noOverflow();
-    await page.locator('.analysis-list').screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`analytics-populated-${name}.png`)});
+    await page.locator('.analysis-list').screenshot({path:path.join(__dirname,'screenshots','v0.5.0',`analytics-populated-${name}.png`)});
     // 欠けたv1保存値を引き継ぎ、初見・日次セット・復習の有効な部分を保持。
     const legacy={version:1,onboarded:true,records:{Q02:{first:{choiceId:'a',correct:false,hints:0,status:'解説で確認',at:100},attempts:1}},reviews:{Q02:{originId:'Q02',createdAt:100}},daily:{'2026-11-21':{ids:['Q02','Q04','Q09','Q15','Q22'],answers:{}}},lastSeen:{Q02:100}};
     await page.evaluate(({key,legacy})=>localStorage.setItem(key,JSON.stringify(legacy)),{key:KEY,legacy});await page.reload();await click('records');

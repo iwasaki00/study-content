@@ -1,0 +1,28 @@
+
+> why-learn-g@0.2.1 test:e2e
+> playwright test tests/training.spec.ts --grep 390px story|0/10/50/100|saved weights --reporter=list,./scripts/performance-reporter.mjs
+
+node.exe : [WebServer] (node:22160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+発生場所 行:1 文字:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:27088) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\training.spec.ts:138:1 › 390px story from actual initial mistake through training, separate evaluation and optional-free completion (8.5s)
+  ok 2 [chromium] › tests\training.spec.ts:194:1 › 0/10/50/100 updates: exact accepted counts, graph data and predictions agree (3.7s)
+  ok 3 [chromium] › tests\training.spec.ts:231:1 › saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons (6.3s)
+(node:16840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 4 [webkit-mobile] › tests\training.spec.ts:138:1 › 390px story from actual initial mistake through training, separate evaluation and optional-free completion (10.7s)
+  ok 5 [webkit-mobile] › tests\training.spec.ts:194:1 › 0/10/50/100 updates: exact accepted counts, graph data and predictions agree (4.7s)
+  ok 6 [webkit-mobile] › tests\training.spec.ts:231:1 › saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons (6.9s)
+
+  6 passed (51.4s)
+Performance evidence: docs/performance-fix-v0.2.1.json

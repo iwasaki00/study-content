@@ -71,6 +71,7 @@ window.LabChallenge = (() => {
       const id=s.ids.find(id=>!s.answers[id]);
       if(!id||expectedId!==id||(!skip&&!byId[id].choices.some(c=>c.id===choiceId)))return null;
       s.answers[id]={state:skip?'skipped':'answered',choiceId:skip?null:choiceId,correct:skip?null:choiceId===byId[id].answerId,elapsedMs:s.questionMs};
+      if(!skip)model.logAnswer(id,choiceId,{id:`c:${s.id}:${id}`,mode:'challenge',hints:null,durationMs:s.questionMs,isFirst:false});
       s.questionMs=0;s.selectedChoice=null;
       if(Object.keys(s.answers).length===s.ids.length){s.status='finished';s.reason='complete';model.data.activeChallengeId=null;anchor=null;}
       else {const next=s.ids.find(id=>!s.answers[id]);if(!s.seenIds.includes(next))s.seenIds.push(next);}

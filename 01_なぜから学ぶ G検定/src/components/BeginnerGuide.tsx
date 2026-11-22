@@ -95,7 +95,7 @@ export function BeginnerGuide({
   onLesson,
   initialSection,
 }: {
-  onLesson: (lesson: "L003" | "L004" | "L007") => void;
+  onLesson: (lesson: "L003" | "L004" | "L007" | "L008" | "L009") => void;
   initialSection?: string;
 }) {
   const heading = useRef<HTMLHeadingElement>(null);
@@ -235,6 +235,12 @@ export function BeginnerGuide({
           機械学習の一種です。ニューラルネットワークという仕組みを何層も重ね、画像などのデータから、見分けるための手がかりも学びます。たとえば、箱の写真から、へこみを見分ける手がかりを学ぶときに使えます。
         </p>
         <GuideIllustration name="dl-box-feature" />
+        <button onClick={() => onLesson("L009")}>
+          第7話で、画像とフィルタを動かす
+        </button>
+        <button onClick={() => onLesson("L008")}>
+          第6話で、間違いから学ぶ仕組みを試す
+        </button>
         <DeepDive title="なぜ、何層も重ねるの？">
           <p>
             箱の画像なら、輪郭などの単純な手がかりを組み合わせ、より複雑な模様や形を捉えていく、とイメージできます。何段階もの表現を、データから学びます。

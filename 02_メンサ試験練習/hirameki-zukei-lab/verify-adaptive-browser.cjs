@@ -45,8 +45,8 @@ async function runAdaptiveTests(browser,url,name){
     assert(await page.evaluate(()=>{const copy=LabDebug.adaptive();copy.ids[0]='Q999';return LabDebug.adaptive().ids[0]!=='Q999';}));
     await page.goto(url+'?debug=1');assert.equal(await page.locator('.result-list article').count(),8);
     assert.deepEqual(JSON.parse(await page.locator('.debug-reasons').textContent()).ids,ids);
-    fs.mkdirSync(path.join(__dirname,'screenshots','v0.3.0'),{recursive:true});
-    await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`adaptive-results-${name}.png`),fullPage:true});
+    fs.mkdirSync(path.join(__dirname,'screenshots','v0.5.0'),{recursive:true});
+    await page.screenshot({path:path.join(__dirname,'screenshots','v0.5.0',`adaptive-results-${name}.png`),fullPage:true});
     await click('adaptive-new');assert.notEqual((await state()).adaptiveSets.at(-1).id,set.id);
     await click('menu');await click('records');assert.equal(await page.locator('.learning-guide').count(),1);
     // 全回答済みと成熟データのおすすめ、再出題の案内。
@@ -69,7 +69,7 @@ async function runAdaptiveTests(browser,url,name){
     assert.equal((await state()).mastery['alternate-rotate-mirror'].level,2);
     assert(!(await state()).reviews.Q08);
     await click('menu');await click('review');
-    await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`mastery-review-${name}.png`),fullPage:true});
+    await page.screenshot({path:path.join(__dirname,'screenshots','v0.5.0',`mastery-review-${name}.png`),fullPage:true});
     // 新しい描画と多段階解説の保存画像。縮小／reduced-motionでも静止内容を維持。
     for(const width of [320,390])for(const id of ['Q41','Q42','Q45','Q56','Q63','Q64']){
       await page.setViewportSize({width,height:844});
@@ -79,15 +79,15 @@ async function runAdaptiveTests(browser,url,name){
       },{id,key:KEY});await page.reload();await click('practice');await page.selectOption('#practice-level','0');
       const category=await page.evaluate(id=>LabLearning.categories.indexOf(LabQuestions.find(q=>q.id===id).category),id);
       await page.locator(`[data-category="${category}"]`).click();assert((await page.locator('.question-heading').innerText()).includes(id));
-      await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`${id}-${width}-${name}.png`),fullPage:true});
+      await page.screenshot({path:path.join(__dirname,'screenshots','v0.5.0',`${id}-${width}-${name}.png`),fullPage:true});
       const a=await page.evaluate(id=>LabQuestions.find(q=>q.id===id).answerId,id);await page.locator(`[data-choice="${a}"]`).click();await click('grade');
       let stage=0;
       do{
-        if((id==='Q56'&&stage===0)||(id==='Q64'&&stage===4))await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`${id}-step-${stage+1}-${width}-${name}.png`),fullPage:true});
+        if((id==='Q56'&&stage===0)||(id==='Q64'&&stage===4))await page.screenshot({path:path.join(__dirname,'screenshots','v0.5.0',`${id}-step-${stage+1}-${width}-${name}.png`),fullPage:true});
         if(!await page.locator('[data-action="step"]:enabled').count())break;
         await click('step');stage++;
       }while(true);
-      await page.emulateMedia({reducedMotion:'reduce'});await page.screenshot({path:path.join(__dirname,'screenshots','v0.3.0',`${id}-explanation-${width}-${name}.png`),fullPage:true});
+      await page.emulateMedia({reducedMotion:'reduce'});await page.screenshot({path:path.join(__dirname,'screenshots','v0.5.0',`${id}-explanation-${width}-${name}.png`),fullPage:true});
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.emulateMedia({reducedMotion:'no-preference'});
     }
     assert.deepEqual(errors,[]);

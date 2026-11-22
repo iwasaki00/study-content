@@ -1,0 +1,310 @@
+{
+  "status": "failed",
+  "workers": "Configured single worker; timeout remains 45000ms",
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "390px story from actual initial mistake through training, separate evaluation and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "failed",
+      "durationMs": 36757,
+      "screenshotCount": 6,
+      "screenshotMs": 1955,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 891
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 187
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 117
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 271
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 197
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 292
+        }
+      ],
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.training-chart svg')\nExpected: \u001b[32m\"0.1704455542486066\u001b[7m3\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"0.1704455542486066\u001b[7m6\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.training-chart svg') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.training-chart svg')\u001b[22m\n\u001b[2m    13 × locator resolved to <svg role=\"img\" data-updates=\"100\" viewBox=\"0 0 310 195\" data-loss=\"0.17044555424860666\" aria-label=\"学習0回から100回までの損失。現在0.1704\">…</svg>\u001b[22m\n\u001b[2m       - unexpected value \"0.17044555424860666\"\u001b[22m\n"
+    },
+    {
+      "project": "chromium",
+      "title": "saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "failed",
+      "durationMs": 26366,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": [],
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    0.7721932457096486,\u001b[22m\n\u001b[32m-   -0.2449167630126604,\u001b[39m\n\u001b[31m+   -0.24491676301266038,\u001b[39m\n\u001b[2m    -0.5061266637849753,\u001b[22m\n\u001b[2m    -0.8854598031012896,\u001b[22m\n\u001b[2m    0.24791022274186109,\u001b[22m\n\u001b[2m    0.8268813916670614,\u001b[22m\n\u001b[32m-   0.029756212261585677,\u001b[39m\n\u001b[31m+   0.029756212261585674,\u001b[39m\n\u001b[2m    -0.04492340947605071,\u001b[22m\n\u001b[2m    -0.025091401627647683,\u001b[22m\n\u001b[2m    1.1684965631786701,\u001b[22m\n\u001b[2m    -0.31927524121768786,\u001b[22m\n\u001b[2m    -0.9521486493609073,\u001b[22m\n\u001b[32m-   0.07710317582945599,\u001b[39m\n\u001b[31m+   0.07710317582945601,\u001b[39m\n\u001b[2m  ]\u001b[22m"
+    },
+    {
+      "project": "chromium",
+      "title": "rapid clicks execute one accepted batch, real graph agrees, reset returns initial model without scrolling",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 13411,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "completion restart, old state, real JSON backup and replacement restore stay compatible",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 22627,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "five optional deep dives persist their open state after reload and close back to original item",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5748,
+      "screenshotCount": 1,
+      "screenshotMs": 125,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 125
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "all five optional questions and all explanations grade, retain wrong/retake history and old records",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8654,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "320px story, graph and expanded parameters / enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7460,
+      "screenshotCount": 1,
+      "screenshotMs": 175,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 175
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "320px story, graph and expanded parameters / enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 7756,
+      "screenshotCount": 1,
+      "screenshotMs": 394,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 394
+        }
+      ]
+    },
+    {
+      "project": "chromium",
+      "title": "offline all four new images, whole real training, saved details and completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 6711,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "chromium",
+      "title": "L007 ending explicitly opens L008 without replacing existing L007 progress",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4209,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "390px story from actual initial mistake through training, separate evaluation and optional-free completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "failed",
+      "durationMs": 23297,
+      "screenshotCount": 6,
+      "screenshotMs": 3864,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 607
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 1276
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 316
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 587
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 480
+        },
+        {
+          "title": "Screenshot",
+          "milliseconds": 598
+        }
+      ],
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.training-chart svg')\nExpected: \u001b[32m\"0.1704455542486066\u001b[7m3\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"0.1704455542486066\u001b[7m6\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.training-chart svg') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.training-chart svg')\u001b[22m\n\u001b[2m    12 × locator resolved to <svg role=\"img\" data-updates=\"100\" viewBox=\"0 0 310 195\" data-loss=\"0.17044555424860666\" aria-label=\"学習0回から100回までの損失。現在0.1704\">…</svg>\u001b[22m\n\u001b[2m       - unexpected value \"0.17044555424860666\"\u001b[22m\n"
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "saved weights/history resume, additional updates, guide detour and home latest preserve all five old lessons",
+      "repeat": 0,
+      "retry": 0,
+      "status": "failed",
+      "durationMs": 11233,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": [],
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 4\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    0.7721932457096486,\u001b[22m\n\u001b[32m-   -0.2449167630126604,\u001b[39m\n\u001b[31m+   -0.24491676301266038,\u001b[39m\n\u001b[2m    -0.5061266637849753,\u001b[22m\n\u001b[2m    -0.8854598031012896,\u001b[22m\n\u001b[2m    0.24791022274186109,\u001b[22m\n\u001b[2m    0.8268813916670614,\u001b[22m\n\u001b[32m-   0.02975621226158567,\u001b[39m\n\u001b[31m+   0.029756212261585667,\u001b[39m\n\u001b[2m    -0.04492340947605071,\u001b[22m\n\u001b[32m-   -0.02509140162764769,\u001b[39m\n\u001b[31m+   -0.025091401627647683,\u001b[39m\n\u001b[2m    1.1684965631786701,\u001b[22m\n\u001b[2m    -0.31927524121768786,\u001b[22m\n\u001b[2m    -0.9521486493609073,\u001b[22m\n\u001b[32m-   0.07710317582945599,\u001b[39m\n\u001b[31m+   0.07710317582945601,\u001b[39m\n\u001b[2m  ]\u001b[22m"
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "rapid clicks execute one accepted batch, real graph agrees, reset returns initial model without scrolling",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 5026,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "completion restart, old state, real JSON backup and replacement restore stay compatible",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 9492,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "five optional deep dives persist their open state after reload and close back to original item",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 12400,
+      "screenshotCount": 1,
+      "screenshotMs": 415,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 415
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "all five optional questions and all explanations grade, retain wrong/retake history and old records",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 13436,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px story, graph and expanded parameters / enlarged=false",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 15220,
+      "screenshotCount": 1,
+      "screenshotMs": 511,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 511
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "320px story, graph and expanded parameters / enlarged=true",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 15301,
+      "screenshotCount": 1,
+      "screenshotMs": 1161,
+      "screenshots": [
+        {
+          "title": "Screenshot",
+          "milliseconds": 1161
+        }
+      ]
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "offline all four new images, whole real training, saved details and completion",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 8408,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    },
+    {
+      "project": "webkit-mobile",
+      "title": "L007 ending explicitly opens L008 without replacing existing L007 progress",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "durationMs": 4540,
+      "screenshotCount": 0,
+      "screenshotMs": 0,
+      "screenshots": []
+    }
+  ]
+}

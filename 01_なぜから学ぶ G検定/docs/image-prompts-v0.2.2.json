@@ -1,0 +1,18 @@
+[
+  {
+    "name": "shadowed-photo",
+    "prompt": "Use case: illustration-story. New landscape pixel art, reference character/style only. Same animal-shelter worker short brown bob, cream shirt, teal apron, same warm cream and muted sage room, ginger cat and tan dog. She thoughtfully examines a newly arrived photo of a ginger cat's face which is a little shadowed on one side, holding it near a computer. Concerned-curious expression, not an AI verdict scene. Clear large photo face, staff and desk, natural uncluttered composition different from reference. Chunky square pixels, stepped dark outlines, limited cream sage ochre palette. No text, numbers, labels, judgments, graph, logo or watermark."
+  },
+  {
+    "name": "filter-investigation",
+    "prompt": "Use case: illustration-story. Original landscape pixel art, same short brown bob shelter worker cream shirt teal apron as reference, same cream sage room, ginger cat and tan dog. Close view of worker and computer showing a coarse blocky ginger cat face and a small empty square inspection frame over part of it; separate small 3-by-3 grid card with blank cells lies on desk, her finger points between picture and frame. This is exploring a small sliding filter, no recognition verdict. Do not draw numerical coefficients, text or arrows. Match chunky stepped square-pixel outlines, muted ochre cream sage, clear subjects readable on mobile. Not a precise computation diagram: app supplies exact grids and coefficients in HTML. No logo watermark."
+  },
+  {
+    "name": "pattern-comparison",
+    "prompt": "Use case: illustration-story. New original landscape pixel art. Same shelter worker short brown bob, cream shirt teal apron, ginger cat and tan floppy-eared dog, cream sage room. Staff compares two prints of the SAME ginger cat: one emphasizes dark vertical boundaries, the other horizontal stripe-like brightness changes. No actual recognition result, no checkmark. Prints large, faces still recognizable as same cat, worker attentive holding them side-by-side at desk. Three-quarter side view near shelf, different composition from other scenes. Chunky square pixels and dark stepped outlines, limited ochre cream muted sage palette. No text, digits, labels, numbers, arrows, logos or watermark. The exact maps will be calculated and shown separately in the app."
+  },
+  {
+    "name": "image-lab-ending",
+    "prompt": "Use case: illustration-story. Original landscape pixel-art ending. Same short brown bob shelter woman, cream shirt muted teal apron, same warm cream sage room with ginger cat and tan dog. Staff calmly explains at desk with magnifying glass and cat print, computer displays several abstract small tiled image maps, no classification verdict. She looks pleased at understanding the image-analysis mechanism, not celebrating perfect recognition. Different composition facing viewer near window, animals resting, desk tidy. Match chunky square-pixel stepped dark outlines and muted ochre sage cream palette. No text, digits, numbers, labels, arrows, ticks, graph values, logo or watermark. App shows exact calculated maps separately."
+  }
+]

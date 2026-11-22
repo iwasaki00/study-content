@@ -4,8 +4,25 @@ window.LabExplanations = (() => {
   const answer = q => q.choices.find(c => c.id === q.answerId).shape;
   const value = (q, index) => index === 'answer' ? answer(q) : q.board[index];
   const tile = (s, caption = '') => `<div class="demo-tile">${svg(s)}${caption ? `<span>${caption}</span>` : ''}</div>`;
+  const turnTile=(s,t,direction)=>`<div class="demo transform-demo transform-${direction}"><div class="transform-stage">${svg(t,'target')}${svg(s,'motion-source whole-rotation')}</div>${tile(t,'回転後の静止画')}</div>`;
+  function shiftTile(before,after){
+    let source=svg(before).replace(/class="single-mark" data-cell="(\d+)"/g,(_,raw)=>`class="single-mark ${Number(raw)%3===2?'insight-wrap-old':'insight-shift-mark'}" data-cell="${raw}"`);
+    const wrapped=before.cells.filter(i=>i%3===2).map(i=>{const y=22.5+Math.floor(i/3)*27.5;return before.mark==='square'?`<rect class="insight-wrap-new" x="15.5" y="${y-7}" width="14" height="14" rx="1" fill="currentColor"/>`:`<circle class="insight-wrap-new" cx="22.5" cy="${y}" r="7" fill="currentColor"/>`;}).join('');
+    source=source.replace('</svg>',wrapped+'</svg>');
+    return `<div class="demo insight-shift"><div class="demo-tile">${source}<span>右へ１マス・右端は左端へ</span></div>${tile(after,'移動後の静止画')}</div>`;
+  }
   function render(q, explanation) {
     const correct = answer(q);
+    if(explanation.demo==='three-intersection'){
+      const start=explanation.row*4,a=q.board[start],b=q.board[start+1],c=q.board[start+2],ab=setResult(a,b,'intersection');
+      return render({...q,board:explanation.part?[ab,c,null]:[a,b,null]},{demo:'overlay',row:0,operation:'intersection'});
+    }
+    if(explanation.demo==='component-turn')return render({...q,board:q.board.map(s=>s?{...s,kind:'flag',landmark:true}:null)},{...explanation,demo:'transform'});
+    if(explanation.demo==='component-move'){
+      const a=value(q,explanation.from),b=value(q,explanation.to),plain={kind:'flag',direction:0,mirror:false,paint:'outline',count:0};
+      const frames=Array.from({length:3},(_,i)=>`<rect x="${2+i*60}" y="5" width="56" height="90" rx="3" fill="none" stroke="currentColor" stroke-width="1"/>`).join('');
+      return `<div class="insight-frame-motion"><svg class="shape" viewBox="0 0 180 100" role="img" aria-label="形と塗りを固定し、枠の位置だけを移す" style="--frame-dx:${(b.position-a.position)*60}px">${frames}<g class="insight-frame-glyph"><svg x="${a.position*60}" y="5" width="60" height="90">${svg(plain)}</svg></g></svg><p class="demo-caption">位置だけの比較。形・向き・塗りは固定表示。</p><div class="demo">${tile({...a,direction:0,mirror:false,paint:'outline'},'移動する前')}${tile({...b,direction:0,mirror:false,paint:'outline'},'移動したあと')}</div></div>`;
+    }
     if(explanation.demo==='recipe'){
       const r=q.recipe,n=r.inputs||2,start=explanation.row*q.columns;
       const inputs=q.board.slice(start,start+n),prepared=inputs.map((s,i)=>i===1&&r.preRotate?rotateMarks(s,r.preRotate):s);
@@ -13,6 +30,13 @@ window.LabExplanations = (() => {
       let rotated=r.rotation?rotateMarks(merged,r.rotation):merged;
       let result=r.shift?{...rotated,cells:rotated.cells.map(i=>Math.floor(i/3)*3+(i%3+1)%3).sort((a,b)=>a-b)}:rotated;
       if(r.keep)result={...result,cells:result.cells.filter(i=>i>=3&&i<=5)};
+      if(explanation.animate&&explanation.stage==='pre')return turnTile(inputs[1],prepared[1],'cw');
+      if(explanation.animate&&explanation.stage==='rotate')return turnTile(merged,rotated,'cw');
+      if(explanation.animate&&explanation.stage==='shift')return shiftTile(rotated,result);
+      if(explanation.animate&&r.keep&&explanation.stage==='post'){
+        const source=svg(rotated).replace(/class="single-mark" data-cell="(\d+)"/g,(_,raw)=>`class="single-mark ${Number(raw)>=3&&Number(raw)<=5?'insight-retain':'insight-discard'}" data-cell="${raw}"`).replace('</svg>','<rect x="9" y="36.3" width="82" height="27.4" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/></svg>');
+        return `<div class="demo insight-filter"><div class="demo-tile">${source}<span>中央の段だけ残す</span></div>${tile(result,'条件を適用した静止画')}</div>`;
+      }
       if(explanation.stage==='pre')return `<div class="demo recipe-demo">${tile(inputs[1],'２番目だけ')}<b>↻</b>${tile(prepared[1],'時計回り90°')}</div>`;
       if(explanation.stage==='rotate')return `<div class="demo recipe-demo">${tile(merged,'重ねた結果')}<b>↻</b>${tile(rotated,'時計回り90°')}</div>`;
       if(['post','shift'].includes(explanation.stage))return `<div class="demo recipe-demo">${tile(rotated,'変化する前')}<b>→</b>${tile(result,r.keep?'中央の段だけ':'右へ１マス')}</div>`;

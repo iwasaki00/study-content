@@ -17,6 +17,8 @@
   const answer = q => q.choices.find(c => c.id === q.answerId).shape;
   const notice = () => !model.persistent ? '<p class="storage-note" role="status">この環境では記録を保存できません。この画面では続けて練習できます。閉じると記録は残りません。</p>' : model.recovered ? '<p class="storage-note" role="status">保存データの一部を復旧し、利用できる記録で続けています。</p>' : '';
   const menuButton = (text = 'メニューへ') => `<button class="text-button" data-action="menu">${text}</button>`;
+  const reasoningUI=window.LabReasoningUI.create({app,model,questions,onMenu:showMenu,onRelated:id=>start('practice',[{questionId:id}],'似た考え方の問題'),notice,
+    onStart(){timed.pause();practiceClock.pause();view='reasoning';model.data.resumeChallengeId=null;model.data.resumeAdaptiveId=null;model.leaveDaily();model.save();}});
   function focusHeading() {
     app.querySelector('h2')?.focus({ preventScroll: true });
     window.scrollTo(0, 0);
@@ -54,8 +56,15 @@
       ${graded?`<p class="board-note">${explanation.text}</p>`:''}
       ${!graded&&hintCount?`<p class="hint-note" role="status">ヒント ${hintCount}：${q.hints[hintCount-1].text}</p>`:''}
       <fieldset class="choices" ${graded?'disabled':''}><legend>図形を１つ選んでください</legend>${q.choices.map((c,i) => `<button type="button" class="choice ${selected===c.id?'selected':''} ${graded&&c.id===q.answerId?'correct':''}" data-choice="${c.id}" aria-label="選択肢${i+1}、${label(c.shape)}" aria-pressed="${selected===c.id}"><span class="choice-number">${i+1}</span>${svg(c.shape)}<span class="choice-state">${graded&&c.id===q.answerId?'✓ 正解':selected===c.id?'✓ 選択':''}</span></button>`).join('')}</fieldset>
-      ${graded?`<section class="explanation" aria-label="解説"><p class="feedback" role="status">${feedback(q,q.choices.find(c=>c.id===selected))}</p><div class="explanation-heading"><h3>見るポイント</h3><span>${step+1} / ${q.explanations.length}</span></div><p class="explanation-text" aria-live="polite">${explanation.text}</p><div class="focus-${explanation.focus}">${window.LabExplanations.render(q,explanation)}</div><nav class="explanation-controls" aria-label="解説の操作"><button data-action="prev" ${step===0?'disabled':''}>前へ</button><button data-action="replay">もう一度見る</button><button data-action="step" ${step===q.explanations.length-1?'disabled':''}>次へ</button></nav></section><button class="primary next-question" data-action="next" ${!reviewed?'disabled':''}>${session.index===session.entries.length-1?'結果を見る':'次の問題'}</button>${!reviewed?'<p class="quiet">解説の「次へ」で、最後のポイントまで確認しよう。</p>':''}`
+      ${graded?`<section class="explanation" aria-label="解説"><p class="feedback" role="status">${feedback(q,q.choices.find(c=>c.id===selected))}</p>${window.LabReasoningUI.ruleHeader(q,step)}<div class="explanation-heading"><h3>見るポイント</h3><span>${step+1} / ${q.explanations.length}</span></div><p class="explanation-text" aria-live="polite">${explanation.text}</p><div class="focus-${explanation.focus}">${window.LabExplanations.render(q,explanation)}</div><nav class="explanation-controls" aria-label="解説の操作"><button data-action="prev" ${step===0?'disabled':''}>前へ</button><button data-action="replay">もう一度見る</button><button data-action="step" ${step===q.explanations.length-1?'disabled':''}>次へ</button></nav></section><button class="primary next-question" data-action="next" ${!reviewed?'disabled':''}>${session.index===session.entries.length-1?'結果を見る':'次の問題'}</button>${!reviewed?'<p class="quiet">解説の「次へ」で、最後のポイントまで確認しよう。</p>':''}`
       :`<div class="actions"><button class="primary" data-action="grade" ${!selected?'disabled':''}>答え合わせ</button>${q.hints.length?`<button class="secondary" data-action="hint" ${hintCount===q.hints.length?'disabled':''}>${hintCount===q.hints.length?'ヒント表示済み':`ヒント ${hintCount+1} / ${q.hints.length}`}</button>`:''}</div><p class="quiet">${q.practice?'操作練習は学習記録に含めません。':'選んだあと「答え合わせ」で確定します。'}</p>`}`;
+    if(graded&&q.insight&&selected!==q.answerId)app.querySelector('.feedback').insertAdjacentHTML('afterend',window.LabInsightsContent.feedback(q,q.choices.find(c=>c.id===selected)));
+    if(graded&&reviewed)appendRelated(q);
+  }
+  function appendRelated(q){
+    if(!window.LabReasoning.guidedIds.includes(q.id)&&!q.insight)return;
+    const next=window.LabReasoning.related(questions,q,model.data);
+    app.insertAdjacentHTML('beforeend',next?`<button class="secondary restart" data-action="reasoning-related" data-question="${next.id}">似た考え方の問題へ · ${next.id}</button>`:'<p class="quiet">同じ規則の別問題は、まだありません。</p>');
   }
   function resetQuestion() {
     selected=null; graded=false; hintCount=0; step=0; reviewed=false;
@@ -67,6 +76,7 @@
   function start(mode, entries, name, date) {
     timed.pause();model.data.resumeChallengeId=null;
     if(mode!=='adaptive')model.data.resumeAdaptiveId=null;
+    model.data.reasoning.resumeId=null;
     if(mode!=='daily')model.leaveDaily();
     model.save();
     session = { mode, entries, name, date, index:0, results:[] };
@@ -76,7 +86,7 @@
   function tutorial() { start('tutorial',['Q01','Q02','Q03'].map(questionId=>({questionId})),'チュートリアル'); }
   function showMenu() {
     timed.pause();practiceClock.pause();model.data.resumeChallengeId=null;model.data.resumeAdaptiveId=null;
-    model.leaveDaily();
+    model.leaveDaily();model.data.reasoning.resumeId=null;
     model.onboard(); view='menu';
     const today = learning.jstDate();
     const set = model.data.daily[today];
@@ -84,7 +94,7 @@
     const pending = Object.keys(model.data.reviews).length;
     app.innerHTML = `<span class="eyebrow">YOUR FIGURE LAB</span><h2 tabindex="-1">今日は、どこから始める？</h2><p class="menu-intro">見る場所を変えると、規則が見えてくる。</p>${notice()}
       <button class="daily-button" data-action="daily"><span>毎日５問</span><small>${today.replaceAll('-',' / ')} · ${done===5?'今日の５問は完了 · 結果を見る':done?`${done} / 5 問 回答済み · 続きから`:'未回答を優先した、今日のセット'}</small></button>
-      <button class="adaptive-button" data-action="adaptive"><strong>おまかせ練習</strong><span>８問 · 記録に合わせて、４分野から</span></button><div class="menu-options"><button data-action="practice"><strong>じっくり練習</strong><span>分野を選んで、時間制限なし</span></button><button data-action="challenge"><strong>時間制限チャレンジ</strong><span>${timed.active?'一時停止中のチャレンジがあります':'５問／５分・10問／10分'}</span></button><button data-action="review"><strong>苦手の復習</strong><span>${pending?`${pending}件の見るポイントを、別の問題で`:'いま復習する問題はありません'}</span></button><button data-action="records"><strong>学習記録</strong><span>通常練習・復習 ${Object.keys(model.data.records).length} / ${questions.length-1}問</span></button></div>
+      <button class="adaptive-button" data-action="adaptive"><strong>おまかせ練習</strong><span>８問 · 記録に合わせて、４分野から</span></button><div class="menu-options"><button data-action="reasoning"><strong>解き方を学ぶ</strong><span>４レッスンとガイド付き８問</span></button><button data-action="practice"><strong>じっくり練習</strong><span>分野を選んで、時間制限なし</span></button><button data-action="challenge"><strong>時間制限チャレンジ</strong><span>${timed.active?'一時停止中のチャレンジがあります':'５問／５分・10問／10分'}</span></button><button data-action="review"><strong>苦手の復習</strong><span>${pending?`${pending}件の見るポイントを、別の問題で`:'いま復習する問題はありません'}</span></button><button data-action="records"><strong>学習記録</strong><span>通常練習・復習 ${Object.keys(model.data.records).length} / ${questions.length-1}問</span></button></div>
       <button class="text-button tutorial-link" data-action="tutorial">チュートリアルをもう一度</button><p class="app-note">オリジナル64問による非公式の練習用です。実試験の再現、合格見込み、IQ換算は行いません。記録はこの端末内に保存します。</p>`;
     focusHeading();
   }
@@ -103,23 +113,12 @@
     app.insertAdjacentHTML('beforeend',`<section class="analysis-card mastery-list"><h3>習熟確認と次の挑戦</h3><p>ヒントなしで確認済み：${Object.keys(model.data.mastery).length}規則。高難度の誤答で確認済み記録は消えません。</p>${Object.entries(model.data.mastery).map(([family,m])=>`<p>${m.questionId||""} ${escapeHTML(byId[m.questionId]?.title||family)} · LEVEL ${m.level} 確認済み</p>`).join('')}${higher.map(e=>`<button class="history-button" data-action="higher" data-question="${e.questionId}" data-origin="${e.originId}">${e.questionId} · LEVEL ${byId[e.questionId].difficulty}の類題に挑戦</button>`).join('')}</section>`);
     focusHeading();
   }
-  function showRecords() {
-    view='records';
-    const records=Object.values(model.data.records).filter(r=>r.first.source==='practice');
-    const analysis=window.LabAnalytics.summarize(questions,model.data,learning.categories);
-    const guide=window.LabAdaptive.guide(questions,model.data);
-    const labels=['初見でヒントなし正解','初見でヒントあり正解','初見で不正解'];
-    const rate=(n,d)=>d?`${Math.round(n/d*100)}%（${n} / ${d}問）`:'未集計（0問）';
-    const firstLabel=a=>a.source==='practice'?learning.firstStatus(a):!a.source?`旧版：${learning.firstStatus(a)}`:`${a.source==='review'?'復習での初回':'チャレンジ後の練習'}：${learning.status(a.correct,a.hints)}`;
-    app.innerHTML=`${menuButton()}<h2 tabindex="-1">学習記録・分野別分析</h2><p class="menu-intro">通常練習の初見と、復習・チャレンジは分けて表示します。初見結果は解き直しても変わりません。</p>${notice()}<div class="record-summary">${labels.map(text=>`<div><strong>${records.filter(r=>learning.firstStatus(r.first)===text).length}</strong><span>${text}</span></div>`).join('')}</div><p class="weakest-note">${analysis.weakest?`練習上の目安：${analysis.weakest}（通常初見の正答率が単独で最も低い分野）`:analysis.enough?'今の記録では、最も苦手な分野を１つに絞れません。':'データ不足のため、最も苦手な分野は断定しません。各分野５問以上の通常初見結果が必要です。'}</p>
-      <div class="analysis-list">${analysis.rows.map(r=>`<article class="analysis-card"><h3>${r.category}</h3><dl><div><dt>初見正答率</dt><dd>${rate(r.correct,r.denominator)}</dd></div><div><dt>初見ヒント使用率</dt><dd>${rate(r.hinted,r.denominator)}</dd></div><div><dt>通常練習の平均回答時間</dt><dd>${r.averageMs===null?'未計測':`${(r.averageMs/1000).toFixed(1)}秒`}（計測${r.timedCount}回答）</dd></div><div><dt>練習問題数・復習待ち</dt><dd>${r.practiced} / ${r.total}問・${r.pending}件</dd></div></dl><p>復習の回答：${r.reviewAnswers}回${r.reviewTimedCount?`・平均${(r.reviewTotalMs/r.reviewTimedCount/1000).toFixed(1)}秒（${r.reviewTimedCount}回答）`:''}</p>${r.legacyCount?`<p class="legacy-note">旧版初見：正解${r.legacyCorrect} / ${r.legacyCount}問。モード・時間が未記録のため、上の率・平均時間には混ぜていません。</p>`:''}</article>`).join('')}</div>
-      <section class="analysis-card"><h3>終了したチャレンジ（別集計）</h3><p>${analysis.challenge.sessions}回・正解${analysis.challenge.correct} / ${analysis.challenge.answered}回答</p><p>回答済みの平均：${analysis.challenge.averageMs===null?'未計測':`${(analysis.challenge.averageMs/1000).toFixed(1)}秒`}</p><p>スキップ${analysis.challenge.skipped}問・時間切れ${analysis.challenge.timeout}問・中断${analysis.challenge.interrupted}問</p></section>
-      <details class="analysis-policy"><summary>成績が変化する条件</summary><p>初見の率は、通常練習で新しい問題を初めて確定したときだけ増えます。初回が復習、または先にチャレンジで見た問題は初見集計に含めません。平均時間はv0.2.0以降の通常練習で確定した回答の前面表示時間で更新し、ヒントを読む時間も含めます。未回答・解説・背景・復習・チャレンジの時間は混ぜません。旧版の初見結果は保持し、情報不足のため別枠で表示します。</p></details>
-      <p class="quiet">通常・復習 ${Object.keys(model.data.records).length} / ${questions.length-1} 問 回答済み · Q01は集計対象外</p><div class="record-list">${questions.filter(q=>!q.practice).map(q=>{const r=model.data.records[q.id];return `<article><div><span class="eyebrow">${q.id} · ${q.category}</span><h3>${q.title}</h3></div><p>${r?firstLabel(r.first):'未回答'}</p></article>`;}).join('')}</div>`;
-    const guideSection=document.createElement('section');guideSection.className='analysis-card learning-guide';
-    guideSection.innerHTML=`<h3>次のおすすめ練習</h3><p>${guide.text}</p><p>${guide.reason}</p><button class="secondary" data-action="guide" data-category="${guide.category?learning.categories.indexOf(guide.category):-1}" data-level="${guide.level}">おすすめを練習する</button>`;
-    app.querySelector('.record-summary').before(guideSection);
-    focusHeading();
+  let insightDays=7,insightMode='practice';
+  function showRecords(preserve=false) {
+    const y=window.scrollY;view='records';
+    const firstLabel=a=>a.source==='practice'?learning.firstStatus(a):!a.source?`旧版：${learning.firstStatus(a)}`:`${a.source==='review'?'復習での初回':a.source==='practice-after-reasoning'?'レッスン後の練習':'チャレンジ後の練習'}：${learning.status(a.correct,a.hints)}`;
+    app.innerHTML=`${menuButton()}<h2 tabindex="-1">学習ダッシュボード</h2><p class="menu-intro">初見・復習・チャレンジ・ガイドを分けて確認します。</p>${notice()}${Object.values(model.data.records).some(r=>!r.first.source)?'<p class="legacy-note">旧版初見の集計対象が不明な記録は、通常の初見正答率から除外しています。</p>':''}${window.LabInsightsUI.render(questions,model.data,insightDays,insightMode)}${reasoningUI.recordPanel()}<details class="all-question-records"><summary>問題別の初回記録（63問）</summary><div class="record-list">${questions.filter(q=>!q.practice).map(q=>{const r=model.data.records[q.id];return `<article><div><span class="eyebrow">${q.id} · ${q.category}</span><h3>${q.title}</h3></div><p>${r?firstLabel(r.first):'未回答'}</p></article>`;}).join('')}</div></details>`;
+    if(preserve)window.scrollTo(0,y);else focusHeading();
   }
   function startAdaptive(id){
     const set=id?model.data.adaptiveSets.find(s=>s.id===id):model.adaptive();if(!set)return;
@@ -187,7 +186,9 @@
     if(!s.seenIds.includes(questionId)){s.seenIds.push(questionId);model.save();}
     view='challenge-detail';challengeDetail={id,questionId,step:explanationStep};
     const q=byId[questionId],a=s.answers[questionId],e=q.explanations[explanationStep];
-    app.innerHTML=`<button class="text-button" data-action="challenge-result" data-result="${id}">結果に戻る</button><span class="eyebrow">${q.id} · ${outcomeText(a)}</span><h2 tabindex="-1">${q.prompt}</h2>${board(q,e.focus,e.focus==='combine')}<p class="board-note">${e.text}</p><div class="choices detail-choices">${q.choices.map((c,i)=>`<div class="choice ${c.id===q.answerId?'correct':''} ${c.id===a.choiceId?'selected':''}"><span class="choice-number">${i+1}</span>${svg(c.shape)}<span class="choice-state">${c.id===q.answerId?'✓ 正解':c.id===a.choiceId?'あなたの回答':''}</span></div>`).join('')}</div><section class="explanation"><p class="feedback">${a.state==='answered'?feedback(q,q.choices.find(c=>c.id===a.choiceId)):`${outcomeText(a)}。規則を１つずつ確かめましょう。`}</p><div class="explanation-heading"><h3>見るポイント</h3><span>${explanationStep+1} / ${q.explanations.length}</span></div><p class="explanation-text" aria-live="polite">${e.text}</p><div class="focus-${e.focus}">${window.LabExplanations.render(q,e)}</div><nav class="explanation-controls" aria-label="解説の操作"><button data-action="detail-prev" ${explanationStep===0?'disabled':''}>前へ</button><button data-action="detail-replay">もう一度見る</button><button data-action="detail-step" ${explanationStep===q.explanations.length-1?'disabled':''}>次へ</button></nav></section>`;
+    app.innerHTML=`<button class="text-button" data-action="challenge-result" data-result="${id}">結果に戻る</button><span class="eyebrow">${q.id} · ${outcomeText(a)}</span><h2 tabindex="-1">${q.prompt}</h2>${board(q,e.focus,e.focus==='combine')}<p class="board-note">${e.text}</p><div class="choices detail-choices">${q.choices.map((c,i)=>`<div class="choice ${c.id===q.answerId?'correct':''} ${c.id===a.choiceId?'selected':''}"><span class="choice-number">${i+1}</span>${svg(c.shape)}<span class="choice-state">${c.id===q.answerId?'✓ 正解':c.id===a.choiceId?'あなたの回答':''}</span></div>`).join('')}</div><section class="explanation"><p class="feedback">${a.state==='answered'?feedback(q,q.choices.find(c=>c.id===a.choiceId)):`${outcomeText(a)}。規則を１つずつ確かめましょう。`}</p>${window.LabReasoningUI.ruleHeader(q,explanationStep)}<div class="explanation-heading"><h3>見るポイント</h3><span>${explanationStep+1} / ${q.explanations.length}</span></div><p class="explanation-text" aria-live="polite">${e.text}</p><div class="focus-${e.focus}">${window.LabExplanations.render(q,e)}</div><nav class="explanation-controls" aria-label="解説の操作"><button data-action="detail-prev" ${explanationStep===0?'disabled':''}>前へ</button><button data-action="detail-replay">もう一度見る</button><button data-action="detail-step" ${explanationStep===q.explanations.length-1?'disabled':''}>次へ</button></nav></section>`;
+    if(q.insight&&a.state==='answered'&&!a.correct)app.querySelector('.feedback').insertAdjacentHTML('afterend',window.LabInsightsContent.feedback(q,q.choices.find(c=>c.id===a.choiceId)));
+    if(explanationStep===q.explanations.length-1)appendRelated(q);
     if(!explanationStep)focusHeading();
   }
   function changeStep(delta) {
@@ -201,6 +202,7 @@
   app.addEventListener('click',event=>{
     const button=event.target.closest('button');
     if(!button||button.disabled)return;
+    if(reasoningUI.handle(button))return;
     if(button.dataset.choice&&view==='challenge'){
       const s=timed.active,id=s?.ids.find(id=>!s.answers[id]);
       if(id!==button.dataset.question||!timed.select(button.dataset.choice)){if(timed.last?.status==='finished')showChallengeResults(timed.last.id);return;}
@@ -214,6 +216,8 @@
     }
     switch(button.dataset.action){
       case 'menu': showMenu();break;
+      case 'reasoning': reasoningUI.hub();break;
+      case 'reasoning-related': start('practice',[{questionId:button.dataset.question}],'似た考え方の問題');break;
       case 'tutorial': tutorial();break;
       case 'practice': showPractice();break;
       case 'category': {const category=learning.categories[Number(button.dataset.category)];start('practice',model.practice(category,practiceLevel).map(questionId=>({questionId})),category);break;}
@@ -227,6 +231,15 @@
       case 'review': showReview();break;
       case 'start-review': start('review',model.reviewPlan(),'苦手の復習');break;
       case 'records': showRecords();break;
+      case 'insight-range': insightDays=Number(button.dataset.days)===30?30:7;showRecords(true);app.querySelector('[data-action=insight-range][aria-pressed=true]').focus({preventScroll:true});break;
+      case 'insight-recommend': {
+        const rec=window.LabInsights.recommendations(questions,model.data)[Number(button.dataset.index)];if(!rec)break;
+        if(rec.kind==='lesson')reasoningUI.openLesson(rec.lessonId);
+        if(rec.kind==='practice')start('practice',model.practice(rec.category,rec.level).map(questionId=>({questionId})),rec.title);
+        if(rec.kind==='review')start('review',model.reviewPlan().filter(e=>byId[e.originId].ruleFamily===rec.family),'おすすめの復習');
+        if(rec.kind==='question')start('practice',[{questionId:rec.questionId}],rec.title);
+        break;
+      }
       case 'challenge': showChallengeChooser();break;
       case 'challenge-start': timed.begin(Number(button.dataset.count));renderChallenge();break;
       case 'challenge-pause': timed.pause();renderChallenge();break;
@@ -261,7 +274,7 @@
       case 'next': if(view==='question'&&graded&&reviewed){if(session.index<session.entries.length-1){session.index++;resetQuestion();}else showResults();}break;
     }
   });
-  app.addEventListener('change',event=>{if(event.target.id==='practice-level'){practiceLevel=Number(event.target.value);showPractice();app.querySelector('#practice-level').focus();}});
+  app.addEventListener('change',event=>{if(event.target.id==='insight-mode'){insightMode=event.target.value;showRecords(true);app.querySelector('#insight-mode').focus({preventScroll:true});}if(event.target.id==='practice-level'){practiceLevel=Number(event.target.value);showPractice();app.querySelector('#practice-level').focus();}});
   function startDaily(date) {
     const set=model.daily(date);
     model.activateDaily(date);
@@ -282,6 +295,7 @@
   window.addEventListener('pageshow',event=>{if(event.persisted){suspend();if(view==='question'&&!graded&&!document.hidden)practiceClock.resume();}});
   const resumedChallenge=model.data.challenges.find(c=>c.id===model.data.resumeChallengeId);
   if(resumedChallenge){if(resumedChallenge.status==='finished')showChallengeResults(resumedChallenge.id);else renderChallenge();}
+  else if(model.data.reasoning.resumeId)reasoningUI.resume();
   else if(!model.data.onboarded)tutorial();
   else if(model.data.resumeAdaptiveId)startAdaptive(model.data.resumeAdaptiveId);
   else if(model.data.activeDaily===learning.jstDate()&&model.data.daily[model.data.activeDaily])startDaily(model.data.activeDaily);

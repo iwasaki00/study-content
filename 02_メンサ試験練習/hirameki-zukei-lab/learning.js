@@ -2,9 +2,9 @@
 window.LabLearning = (() => {
   const KEY = 'hirameki-zukei-lab:v1';
   const categories = ['回転・反転', '移動・個数', '重ね合わせ', '複数ルール'];
-  const blank = () => ({ version: 3, onboarded: false, records: {}, reviews: {}, daily: {}, lastSeen: {}, activeDaily: null, challenges: [], activeChallengeId: null, resumeChallengeId: null, adaptiveSets:[],resumeAdaptiveId:null,mastery:{} });
-  const status = (correct, hints) => !correct ? '解説で確認' : hints ? 'ヒントを使って正解' : '自力で正解';
-  const firstStatus = attempt => !attempt.correct ? '初見で不正解' : attempt.hints ? '初見でヒントあり正解' : '初見でヒントなし正解';
+  const blank = () => ({ version: 5, onboarded: false, records: {}, reviews: {}, daily: {}, lastSeen: {}, activeDaily: null, challenges: [], activeChallengeId: null, resumeChallengeId: null, adaptiveSets:[],resumeAdaptiveId:null,mastery:{},reasoning:window.LabReasoning.blank() });
+  const status = (correct, hints) => !correct ? '解説で確認' : hints==null ? '正解（ヒント記録不明）' : hints ? 'ヒントを使って正解' : '自力で正解';
+  const firstStatus = attempt => !attempt.correct ? '初見で不正解' : attempt.hints==null ? '初見で正解（ヒント記録不明）' : attempt.hints ? '初見でヒントあり正解' : '初見でヒントなし正解';
   const jstDate = (date = new Date()) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
   function create(questions, storage, now = () => new Date()) {
     const byId = Object.fromEntries(questions.map(q => [q.id, q]));
@@ -13,25 +13,27 @@ window.LabLearning = (() => {
     const number=n=>typeof n==='number'&&Number.isFinite(n)&&n>=0;
     const stats=raw=>{
       const answers=Number.isSafeInteger(raw?.answers)&&raw.answers>=0?raw.answers:0;
-      const timedCount=Math.min(answers,Number.isSafeInteger(raw?.timedCount)&&raw.timedCount>=0?raw.timedCount:0);
+      const timedCount=number(raw?.totalMs)?Math.min(answers,Number.isSafeInteger(raw?.timedCount)&&raw.timedCount>=0?raw.timedCount:0):0;
       return {answers,timedCount,totalMs:timedCount&&number(raw?.totalMs)?Math.min(raw.totalMs,Number.MAX_SAFE_INTEGER):0};
     };
     function attempt(raw,q) {
-      if(!obj(raw)||typeof raw.correct!=='boolean'||!Number.isInteger(raw.hints)||raw.hints<0||raw.hints>q.hints.length)return null;
+      if(!obj(raw)||typeof raw.correct!=='boolean'||raw.hints!=null&&(!Number.isInteger(raw.hints)||raw.hints<0||raw.hints>q.hints.length))return null;
       const a={...raw};
       if(a.durationMs!==undefined&&!number(a.durationMs))delete a.durationMs;
-      if(a.source!==undefined&&!['practice','review','practice-after-challenge'].includes(a.source))delete a.source;
+      if(a.source!==undefined&&!['practice','review','practice-after-challenge','practice-after-reasoning'].includes(a.source))delete a.source;
       return a;
     }
-    let data = blank(), persistent = true, recovered = false;
+    let data = blank(), persistent = true, recovered = false, loadedRoot=null;
     try {
       const raw = storage.getItem(KEY);
       if (raw) {
         let loaded;
         try{loaded=JSON.parse(raw);}catch{loaded={};recovered=true;}
         if(!obj(loaded)){loaded={};recovered=true;}
-        if(![1,2,3].includes(loaded.version))recovered=true;
+        if(![1,2,3,4,5].includes(loaded.version))recovered=true;
         for(const key of ['records','reviews','daily','lastSeen'])if(!obj(loaded[key])){loaded[key]={};recovered=true;}
+        loadedRoot=loaded;
+        data.reasoning=window.LabReasoning.sanitize(loaded.reasoning,questions);
         data.onboarded = loaded.onboarded === true;
         data.activeDaily = /^\d{4}-\d{2}-\d{2}$/.test(loaded.activeDaily) ? loaded.activeDaily : null;
         for (const q of pool) {
@@ -50,12 +52,12 @@ window.LabLearning = (() => {
           const answers = {};
           for (const id of set.ids) {
             const a = set.answers && set.answers[id];
-            if (obj(a) && byId[id].choices.some(c => c.id === a.choiceId) && Number.isInteger(a.hints) && a.hints >= 0 && a.hints<=byId[id].hints.length) {
+            if (obj(a) && byId[id].choices.some(c => c.id === a.choiceId) && (a.hints==null||Number.isInteger(a.hints) && a.hints >= 0 && a.hints<=byId[id].hints.length)) {
               const correct = a.choiceId === byId[id].answerId;
-              const clean={choiceId:a.choiceId,correct,hints:a.hints,status:status(correct,a.hints)};
+              const clean={choiceId:a.choiceId,correct,hints:a.hints??null,status:status(correct,a.hints)};
               if(number(a.at))clean.at=a.at;
               if(number(a.durationMs))clean.durationMs=a.durationMs;
-              if(['practice','review','practice-after-challenge'].includes(a.source))clean.source=a.source;
+              if(['practice','review','practice-after-challenge','practice-after-reasoning'].includes(a.source))clean.source=a.source;
               answers[id] = clean;
             }
           }
@@ -76,7 +78,7 @@ window.LabLearning = (() => {
         if(Array.isArray(loaded.adaptiveSets))for(const s of loaded.adaptiveSets){
           if(!obj(s)||typeof s.id!=='string'||s.id.length>100||data.adaptiveSets.some(x=>x.id===s.id)||!Array.isArray(s.ids)||s.ids.length!==8||new Set(s.ids).size!==8||!s.ids.every(id=>byId[id]&&!byId[id].practice)){recovered=true;continue;}
           const answers={};
-          for(const id of s.ids){const a=s.answers?.[id];if(obj(a)&&byId[id].choices.some(c=>c.id===a.choiceId)&&Number.isInteger(a.hints)&&a.hints>=0&&a.hints<=byId[id].hints.length){const correct=a.choiceId===byId[id].answerId;answers[id]={choiceId:a.choiceId,correct,hints:a.hints,status:status(correct,a.hints),...(number(a.at)?{at:a.at}:{}),...(number(a.durationMs)?{durationMs:a.durationMs}:{})};}}
+          for(const id of s.ids){const a=s.answers?.[id];if(obj(a)&&byId[id].choices.some(c=>c.id===a.choiceId)&&Number.isInteger(a.hints)&&a.hints>=0&&a.hints<=byId[id].hints.length){const correct=a.choiceId===byId[id].answerId;answers[id]={choiceId:a.choiceId,correct,hints:a.hints??null,status:status(correct,a.hints),...(number(a.at)?{at:a.at}:{}),...(number(a.durationMs)?{durationMs:a.durationMs}:{})};}}
           // 理由は表示時にもテキストとして扱い、保存内容をHTMLにしない。
           const entries=s.ids.map(id=>{const raw=Array.isArray(s.entries)?s.entries.find(e=>e?.questionId===id):null;return {questionId:id,category:byId[id].category,level:byId[id].difficulty,repeated:raw?.repeated===true,reasons:Array.isArray(raw?.reasons)?raw.reasons.filter(x=>typeof x==='string').map(x=>x.slice(0,200)):['保存済みセットを再開']};});
           data.adaptiveSets.push({id:s.id,algorithm:typeof s.algorithm==='string'?s.algorithm:'adaptive-1',seed:typeof s.seed==='string'?s.seed.slice(0,100):'',ids:[...s.ids],entries,answers,profiles:Array.isArray(s.profiles)?s.profiles.filter(obj).map(r=>({category:categories.includes(r.category)?r.category:'',n:number(r.n)?r.n:0,correct:number(r.correct)?r.correct:0,hinted:number(r.hinted)?r.hinted:0,unaided:number(r.unaided)?r.unaided:0,level:[1,2,3].includes(r.level)?r.level:1,need:number(r.need)?Math.min(1.5,r.need):1})):[],enough:s.enough===true});
@@ -87,6 +89,7 @@ window.LabLearning = (() => {
         }
       }
     } catch { persistent = false; }
+    data.history=window.LabHistory.restore(loadedRoot?.history,data,questions,loadedRoot||{});
     function save() {
       try { storage.setItem(KEY, JSON.stringify(data)); persistent = true; } catch { persistent = false; }
       return persistent;
@@ -151,11 +154,12 @@ window.LabLearning = (() => {
       hints=Number.isInteger(hints)?Math.max(0,Math.min(hints,q.hints.length)):0;
       const correct = choiceId === q.answerId;
       const exposed=data.challenges.some(c=>c.seenIds.includes(questionId));
-      const source=context.originId?'review':exposed?'practice-after-challenge':'practice';
+      const source=context.originId?'review':data.reasoning.exposedIds.includes(questionId)?'practice-after-reasoning':exposed?'practice-after-challenge':'practice';
       const attempt = { choiceId, correct, hints, status: status(correct, hints), at: now().getTime(), source };
       if(number(context.durationMs))attempt.durationMs=context.durationMs;
       if (!q.practice) {
         const previous = data.records[questionId];
+        logAnswer(questionId,choiceId,{mode:context.originId?'review':'practice',hints,at:attempt.at,durationMs:attempt.durationMs,isFirst:!previous&&source==='practice'});
         const record={ first: previous ? previous.first : { ...attempt }, attempts: (previous ? previous.attempts : 0) + 1, last: { ...attempt },practiceStats:stats(previous?.practiceStats),reviewStats:stats(previous?.reviewStats) };
         const aggregate=context.originId?record.reviewStats:record.practiceStats;
         aggregate.answers++;
@@ -177,6 +181,9 @@ window.LabLearning = (() => {
       if(adaptive)adaptive.answers[questionId]=attempt;
       save(); return attempt;
     }
+    function logAnswer(questionId,choiceId,details={}){
+      return window.LabHistory.append(data.history,questions,{...details,questionId,choiceId,at:details.at??now().getTime()});
+    }
     function adaptive(force=false){
       let s=!force&&data.adaptiveSets.slice().reverse().find(s=>s.ids.some(id=>!s.answers[id]));
       if(!s){s={id:`a-${now().getTime()}-${data.adaptiveSets.length}`, ...window.LabAdaptive.select(questions,data,String(now().getTime()))};data.adaptiveSets.push(s);s.ids.forEach(id=>data.lastSeen[id]=now().getTime());}
@@ -190,7 +197,7 @@ window.LabLearning = (() => {
     }
     return {
       get data() { return data; }, get persistent() { return persistent; }, get recovered(){return recovered;},
-      daily, practice, challengeSet, reviewPlan, record, save, adaptive,higherPlan,
+      daily, practice, challengeSet, reviewPlan, record, save, adaptive,higherPlan, logAnswer,
       onboard() { data.onboarded = true; save(); },
       activateDaily(date) { data.activeDaily = date; save(); },
       leaveDaily() { if (data.activeDaily) { data.activeDaily = null; save(); } },
