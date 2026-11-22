@@ -173,6 +173,7 @@ async function run(engine,name){
     await require('./verify-adaptive-browser.cjs').runAdaptiveTests(browser,url,name);
     await require('./verify-reasoning-browser.cjs').runReasoningTests(browser,url,name);
     await require('./verify-insights-browser.cjs').runInsightsTests(browser,url,name);
+    await require('./verify-quality-browser.cjs').runQualityTests(browser,url,name);
     console.log(`${name} ${browser.version()}: tutorial regression, review/fallback/first record, daily auto resume/results/JST rollover, reduced motion, blocked storage PASS`);
   }finally{await browser.close();}
 }

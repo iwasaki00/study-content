@@ -292,6 +292,13 @@
   }
   document.addEventListener('visibilitychange',()=>{if(document.hidden)suspend();else if(view==='question'&&!graded)practiceClock.resume();});
   window.addEventListener('pagehide',()=>{practiceClock.pause();timed.pause();});
+  // 別タブが学習記録を更新したら、古いスナップショットで上書きしないよう即座に読み直す。
+  // 実行中チャレンジは再読込時に既存の復元処理で「一時停止」へ移る。
+  window.addEventListener('storage',event=>{
+    if(event.storageArea===window.localStorage&&event.key===learning.KEY&&event.newValue!==null){
+      practiceClock.pause();timed.pause();window.location.reload();
+    }
+  });
   window.addEventListener('pageshow',event=>{if(event.persisted){suspend();if(view==='question'&&!graded&&!document.hidden)practiceClock.resume();}});
   const resumedChallenge=model.data.challenges.find(c=>c.id===model.data.resumeChallengeId);
   if(resumedChallenge){if(resumedChallenge.status==='finished')showChallengeResults(resumedChallenge.id);else renderChallenge();}
